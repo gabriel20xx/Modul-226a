@@ -46,6 +46,9 @@ public class Space extends World
             Border border = new Border();
             addObject(border, i*this.getWidth()/3, this.getHeight()/2);
         }
+        Border border = new Border();
+        addObject(border, this.getWidth()/2, 0);
+        border.setRotation(90);
     }
     
     /**
