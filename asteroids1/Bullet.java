@@ -38,7 +38,7 @@ public class Bullet extends Mover
         } 
         else {
             move();
-            Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+            Ball asteroid = (Ball) getOneIntersectingObject(Ball.class);
             if (asteroid != null) {
                 getWorld().removeObject(this);
                 asteroid.hit(damage);

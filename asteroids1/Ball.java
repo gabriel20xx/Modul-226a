@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
  * 
  * @version 2.0
  */
-public class Asteroid extends Mover
+public class Ball extends Mover
 {
     /** Größe dieses Asteroiden */
     private int size;
@@ -19,7 +19,7 @@ public class Asteroid extends Mover
     /**
      * Erzeugt einen Asteroiden mit einer Standardgröße und -geschwindigkeit.
      */
-    public Asteroid()
+    public Ball()
     {
         this(64);
     }
@@ -27,7 +27,7 @@ public class Asteroid extends Mover
     /**
      * Erzeugt einen Asteroiden mit einer gegebenen Größe, zufälligen Bewegungsrichtung und Standardgeschwindigkeit.
      */
-    public Asteroid(int size)
+    public Ball(int size)
     {
         this(size, new Vector(Greenfoot.getRandomNumber(360), 2));
     }
@@ -35,7 +35,7 @@ public class Asteroid extends Mover
     /**
      * Erzeugt einen Asteroiden mit einer gegebenen Größe, Richtung und Geschwindigkeit.
      */
-    private Asteroid(int size, Vector speed)
+    private Ball(int size, Vector speed)
     {
         super(speed);
         setSize(size);
@@ -100,8 +100,8 @@ public class Asteroid extends Mover
             double l = getMovement().getLength();
             Vector speed1 = new Vector(r + 60, l * 1.2);
             Vector speed2 = new Vector(r - 60, l * 1.2);        
-            Asteroid a1 = new Asteroid(size/2, speed1);
-            Asteroid a2 = new Asteroid(size/2, speed2);
+            Ball a1 = new Ball(size/2, speed1);
+            Ball a2 = new Ball(size/2, speed2);
             getWorld().addObject(a1, getX(), getY());
             getWorld().addObject(a2, getX(), getY());        
             a1.move();

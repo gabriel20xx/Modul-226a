@@ -14,12 +14,13 @@ public class Space extends World
      */
     public Space() 
     {
-        super(800, 600, 1);
+        super(854, 480, 1);
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
         background.fill();
         createStars(300);
-        Explosion.initialiseImages();
+        createLeiste();
+        createBricks();
     }
     
     /**
@@ -34,5 +35,22 @@ public class Space extends World
              int color = 150 - Greenfoot.getRandomNumber(120);
              background.setColorAt(x, y, new Color(color,color,color));
         }
+    }
+    
+    /**
+     * Erzeugt Leiste.
+     */
+    private void createLeiste()
+    {
+        Leiste leiste = new Leiste();
+        addObject(leiste, this.getWidth()/2, 300);
+    }
+    
+    /**
+     * Erzeugt Bricks.
+     */
+    private void createBricks()
+    {
+        // Code um Bricks zu erzeugen
     }
 }
