@@ -19,8 +19,10 @@ public class Space extends World
         background.setColor(Color.BLACK);
         background.fill();
         createStars(300);
+        createBorders();
         createLeiste();
         createBricks();
+        createBall();
     }
     
     /**
@@ -37,13 +39,28 @@ public class Space extends World
         }
     }
     
+    private void createBorders()
+    {
+        for (int i = 1; i < 3; i++)
+        {
+            Border border = new Border();
+            addObject(border, i*this.getWidth()/3, this.getHeight()/2);
+        }
+    }
+    
     /**
      * Erzeugt Leiste.
      */
     private void createLeiste()
     {
         Leiste leiste = new Leiste();
-        addObject(leiste, this.getWidth()/2, 300);
+        addObject(leiste, this.getWidth()/2, this.getHeight() - this.getHeight()/5);
+    }
+    
+    private void createBall()
+    {
+        Ball ball = new Ball(90, 1); // Direction, Speed
+        addObject(ball, this.getWidth()/2, this.getHeight()/2);
     }
     
     /**
@@ -51,6 +68,15 @@ public class Space extends World
      */
     private void createBricks()
     {
-        // Code um Bricks zu erzeugen
+        int Rows = 3; // Row Count
+        int Columns = 8; // Column Count
+        for (int y = 0; y < Rows; y++)
+        {
+            for (int x = 0; x < Columns; x++)
+            {
+                Brick brick = new Brick();
+                addObject(brick, (x*22)+(this.getWidth()/2)-(Columns*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/5));
+            }
+        }
     }
 }

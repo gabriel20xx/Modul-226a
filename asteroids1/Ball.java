@@ -8,37 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
  * 
  * @version 2.0
  */
-public class Ball extends Mover
-{
-    /** Größe dieses Asteroiden */
-    private int size;
-
-    /** Wenn die Stabilität 0 erreicht ist, explodiert der Asteroid */
-    private int stability;
-
-    /**
-     * Erzeugt einen Asteroiden mit einer Standardgröße und -geschwindigkeit.
-     */
-    public Ball()
-    {
-        this(64);
-    }
-    
-    /**
-     * Erzeugt einen Asteroiden mit einer gegebenen Größe, zufälligen Bewegungsrichtung und Standardgeschwindigkeit.
-     */
-    public Ball(int size)
-    {
-        this(size, new Vector(Greenfoot.getRandomNumber(360), 2));
-    }
-    
+public class Ball extends Mover {
+    private Vector speed;
+    private int currentAngle;
     /**
      * Erzeugt einen Asteroiden mit einer gegebenen Größe, Richtung und Geschwindigkeit.
      */
-    private Ball(int size, Vector speed)
-    {
-        super(speed);
-        setSize(size);
+    public Ball(int angle, int speed) {
+        super(new Vector(angle, speed));
+        this.speed = new Vector(angle, speed);
+        int currentAngle = angle;
     }
     
     /**
@@ -47,66 +26,29 @@ public class Ball extends Mover
     public void act()
     {         
         move();
-    }
-
-    /**
-     * Setzt die Größe dieses Asteroiden. Beachte, dass die Stabilität im direkten
-     * Zusammenhang mit der Größe steht. Kleinere Asteroide sind weniger stabil.
-     */
-    public void setSize(int size) 
-    {
-        this.size = size;
-        stability = size;
-        GreenfootImage image = getImage();
-        image.scale(size, size);
-    }
-
-    /**
-     * Liefert die aktuelle Stabilität dieses Asteroiden. (Wenn dieser Wert null wird,
-     * zerfällt der Asteroid.)
-     */
-    public int getStability() 
-    {
-        return stability;
+        turnOnTouch();
     }
     
-    /**
-     * Trifft diesen Asteroiden und richtet den angegebenen Schaden an.
-     */
-    public void hit(int damage) 
+    public void turnOnTouch()
     {
-        stability = stability - damage;
-        if (stability <= 0) {
-            breakUp();       
+        int negativeOrPositive = Greenfoot.getRandomNumber(2); // Generates 0 or 1
+        int randomDirection;
+    
+        if (negativeOrPositive == 0) {
+            randomDirection = Greenfoot.getRandomNumber(45);
+        } else {
+            randomDirection = Greenfoot.getRandomNumber(45);
         }
-    }
-    
-    /**
-     * Zerbricht diesen Asteroiden in zwei kleinere Asteroide (oder falls er schon  
-     * sehr klein ist, verschwindet er einfach).
-     */
-    private void breakUp() 
-    {
-        Greenfoot.playSound("Explosion.wav");
         
-        if (size <= 16) {
-            // wenn schon sehr klein, einfach verschwinden 
+        if ( isTouching(Leiste.class) || isTouching(Brick.class) || isTouching(Border.class))
+        {
+            getWorld().addObject(new Ball(currentAngle-90-randomDirection, (int) speed.getLength()), this.getX(), this.getY());
             getWorld().removeObject(this);
-            return;
         }
-        else {
-            // ansonsten erzeuge zwei Asteroiden mit der halben Größe
-            int r = getMovement().getDirection() + Greenfoot.getRandomNumber(45);
-            double l = getMovement().getLength();
-            Vector speed1 = new Vector(r + 60, l * 1.2);
-            Vector speed2 = new Vector(r - 60, l * 1.2);        
-            Ball a1 = new Ball(size/2, speed1);
-            Ball a2 = new Ball(size/2, speed2);
-            getWorld().addObject(a1, getX(), getY());
-            getWorld().addObject(a2, getX(), getY());        
-            a1.move();
-            a2.move();
         
+        else if ( isAtEdge())
+        {
+            getWorld().addObject(new Ball(currentAngle+90+randomDirection, (int) speed.getLength()), this.getX(), this.getY());
             getWorld().removeObject(this);
         }
     }

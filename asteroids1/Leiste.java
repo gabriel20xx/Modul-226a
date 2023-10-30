@@ -15,7 +15,6 @@ import java.util.*;
  */
 public class Leiste extends Mover
 {
-    private GreenfootImage rocket = new GreenfootImage("rocket.png");
     private int moveAmount = 2;
     /**
      * Initialisiert diese Leiste.
@@ -32,7 +31,6 @@ public class Leiste extends Mover
     public void act()
     {
         checkKeys();
-        checkCollision();
     }
     
     /**
@@ -52,15 +50,4 @@ public class Leiste extends Mover
             setLocation(getX() + moveAmount, getY());
         }
     }  
-    
-    /**
-     * Prüft, ob wir mit einem Ball kollidieren.
-     */
-    private void checkCollision() 
-    {
-        Ball a = (Ball) getOneIntersectingObject(Ball.class);
-        if (a != null) {
-            getWorld().removeObject(this);
-        }
-    }      
 }

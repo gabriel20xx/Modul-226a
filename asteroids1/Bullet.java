@@ -33,19 +33,6 @@ public class Bullet extends Mover
      */
     public void act()
     {
-        if(life <= 0) {
-            getWorld().removeObject(this);
-        } 
-        else {
-            move();
-            Ball asteroid = (Ball) getOneIntersectingObject(Ball.class);
-            if (asteroid != null) {
-                getWorld().removeObject(this);
-                asteroid.hit(damage);
-            }
-            else {
-                life--;
-            }
-        }
+
     }
 }
