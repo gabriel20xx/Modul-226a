@@ -10,7 +10,7 @@ import java.util.*;
 public class Space extends World
 {
     private int timePassed = 0;
-    private double marbleSpeed = 1;
+    private double ballSpeed = 1;
     /**
      * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
      */
@@ -22,14 +22,14 @@ public class Space extends World
         background.fill();
         createStars(300);
         createBorders();
-        createLeiste();
+        createPaddle();
         createBricks();
-        createMarble();
+        createBall();
     }
     
     public void act() {
         checkBricks();
-        checkMarbles();
+        checkBalls();
         updateTime();
         increaseSpeed();
     }
@@ -62,19 +62,19 @@ public class Space extends World
     /**
      * Erzeugt Leiste.
      */
-    private void createLeiste()
+    private void createPaddle()
     {
-        Leiste leiste = new Leiste();
-        addObject(leiste, this.getWidth()/2, this.getHeight() - this.getHeight()/5);
+        Paddle paddle = new Paddle();
+        addObject(paddle, this.getWidth()/2, this.getHeight() - this.getHeight()/5);
     }
     
     /**
      * Erzeugt eine Murmel.
      */
-    private void createMarble()
+    private void createBall()
     {
-        Marble marble = new Marble(340,marbleSpeed); // Direction in Degrees and Speed
-        addObject(marble,this.getWidth()/2, this.getHeight()/2);
+        Ball ball = new Ball(340,ballSpeed); // Direction in Degrees and Speed
+        addObject(ball,this.getWidth()/2, this.getHeight()/2);
     }
     
     /**
@@ -102,9 +102,9 @@ public class Space extends World
         }
     }
     
-    private void checkMarbles() {
-        List<Marble> marbles = getObjects(Marble.class);
-        if (marbles.isEmpty()) {
+    private void checkBalls() {
+        List<Ball> balls = getObjects(Ball.class);
+        if (balls.isEmpty()) {
             showText("You Lost!", getWidth()/2, getHeight()/2);
             Greenfoot.stop();
         }
@@ -117,10 +117,10 @@ public class Space extends World
     
     private void increaseSpeed() {
         if (timePassed % 60 == 0) {
-            List<Marble> marbles = getObjects(Marble.class);
-            marbleSpeed+=0.01; // Faster every second
-            for (Marble marble : marbles) {
-                marble.speed = marbleSpeed;
+            List<Ball> balls = getObjects(Ball.class);
+            ballSpeed+=0.01; // Faster every second
+            for (Ball ball : balls) {
+                ball.speed = ballSpeed;
             }
         }
     }

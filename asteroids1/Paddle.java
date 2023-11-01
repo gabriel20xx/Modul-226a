@@ -8,13 +8,13 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Leiste extends Mover
+public class Paddle extends Mover
 {
     private int moveAmount = 2;
     /**
      * Initialisiert diese Leiste.
      */
-    public Leiste()
+    public Paddle()
     {
         // Code
     }

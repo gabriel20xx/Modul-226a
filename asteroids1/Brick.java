@@ -13,7 +13,7 @@ public class Brick extends Static {
     }
 
     public void act() {
-        if (isTouching(Marble.class)) {
+        if (isTouching(Ball.class)) {
             getWorld().removeObject(this);
         }
         }

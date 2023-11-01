@@ -1,20 +1,11 @@
-        Asteroids1
-        ==========
+Breakthrough
+============
         
-This scenario is part of the book 
+This game is made by:
 
-    "Introduction to Programming with Greenfoot"
-    (2nd edition)
-    by Michael Kölling
-    ISBN: 0134054296
+    Gabriel Franz
+    Cornel Forster
 
-This scenario is discussed in detail in that book.
-
-Copyright (c) Michael Kölling, Poul Henriksen.
-
-
-Use the arrow keys to control the rocket:
- * up: accelerate
- * left: rotate rocket left
- * right: rotate rocket right
- * space: fire the gun
+Use the arrow keys to control the paddle:
+ * left: move paddle left
+ * right: move paddle right

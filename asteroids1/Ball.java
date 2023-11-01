@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Marble extends Actor {
+public class Ball extends Mover {
     private double direction; // Direction in degrees
     public double speed; // Speed of the object
     private double fractionalDistanceX = 0.0; // Accumulate fractional distance for X
@@ -16,10 +16,10 @@ public class Marble extends Actor {
     private int interval = 5;
     private int blockedsideborder = 0;
     private int blockedtopborder = 0;
-    private int blockedleiste = 0;
+    private int blockedpaddle = 0;
     private int blockedbrick = 0;
 
-    public Marble(double direction, double speed) {
+    public Ball(double direction, double speed) {
         this.direction = direction;
         this.speed = speed;
     }
@@ -58,8 +58,8 @@ public class Marble extends Actor {
             //getWorld().showText("Height: "+height, 100, 350);
             //getWorld().showText("Width: "+width, 100, 400);
             
-            int marblePosX = this.getX();
-            int marblePosY = this.getY();
+            int ballPosX = this.getX();
+            int ballPosY = this.getY();
             
             int xOffset = brick.getImage().getWidth()/2 + this.getImage().getWidth()/2;
             int yOffset = brick.getImage().getHeight()/2 + this.getImage().getHeight()/2;
@@ -71,8 +71,8 @@ public class Marble extends Actor {
             for (Brick bricks : bricksInRadius) {
                 int objX = bricks.getX();
                 int objY = bricks.getY();
-                int DiffX = objX - marblePosX;
-                int DiffY = objY - marblePosY;
+                int DiffX = objX - ballPosX;
+                int DiffY = objY - ballPosY;
        
                 if (Math.abs(DiffX) <= width / 2) {
                     //getWorld().showText("Reach 1: "+DiffY, 700, 400);
@@ -104,7 +104,7 @@ public class Marble extends Actor {
                 if (Math.abs(DiffY) <= height / 2) {
                     if (DiffX == xOffset || DiffX == -xOffset) {
                         //getWorld().showText("Found Horizontal Object", 700, 100);
-                        // Change direction of marble like sideborders
+                        // Change direction of ball like sideborders
                         // Left Edge
                         if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
                             //getWorld().showText("Brick", 100, 150);
@@ -127,27 +127,27 @@ public class Marble extends Actor {
             //getWorld().showText("NotTouching", 100, 100);
         }
         
-        if (isTouching(Leiste.class) && blockedleiste == 0) {
+        if (isTouching(Paddle.class) && blockedpaddle == 0) {
             //getWorld().showText("Touching", 100, 100);
             if (direction > 0 && direction < 180) {
                 // Implement Callculation
-                Leiste leiste = new Leiste();
-                int width = leiste.getImage().getWidth();
-                List<Leiste> leistes = getObjectsInRange(width, Leiste.class);
+                Paddle paddle = new Paddle();
+                int width = paddle.getImage().getWidth();
+                List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
             
-                if (!leistes.isEmpty()) {
-                    Leiste closestLeiste = leistes.get(0); // Assume the first Leiste is the only one
-                    int distance = getX() - closestLeiste.getX();
+                if (!paddles.isEmpty()) {
+                    Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
+                    int distance = getX() - closestPaddle.getX();
                     
                     // left edge = -12
                     // right edge = 12
                     direction = 270 + (distance*(90/(width/2)));
                 }
             }
-            blockedleiste = interval;
+            blockedpaddle = interval;
         } else {
-            if (blockedleiste != 0) {
-                blockedleiste--;
+            if (blockedpaddle != 0) {
+                blockedpaddle--;
             }
             //getWorld().showText("NotTouching", 100, 100);
         }
