@@ -1,20 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
+/**
+ * Write a description of class Brick here.
+ * 
+ * @author Gabriel Franz
+ * @author Cornel Forster
+ */
 public class Brick extends Static {
-    private int actCounter = 0;
-
     public Brick() {
         // Constructor
     }
 
     public void act() {
         if (isTouching(Marble.class)) {
-            actCounter++;
-            if (actCounter >= 4) {
-                // Remove the object after two act cycles
-                getWorld().removeObject(this);
-            }
+            getWorld().removeObject(this);
+        }
         }
     }
-}

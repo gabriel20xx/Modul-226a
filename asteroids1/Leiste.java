@@ -5,13 +5,8 @@ import java.util.*;
  * Eine Rakete, die mit den Pfeiltasten gesteuert werden kann: hoch, runter, links, rechts. 
  * Durch Drücken der Leerzeichentaste wird ein Schuss abgefeuert. 
  * 
- * @author Poul Henriksen
- * @author Michael Kölling
- * @author KEL
- * 
- * @version 2.0
- * @version 2.1
- * Parameter verändern
+ * @author Gabriel Franz
+ * @author Cornel Forster
  */
 public class Leiste extends Mover
 {

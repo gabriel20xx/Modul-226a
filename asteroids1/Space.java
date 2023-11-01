@@ -1,11 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
-
+import java.util.*;
 
 /**
- * Weltraum. Etwas, in dem Raketen fliegen ...
+ * Ein Weltraum mit Sternen
  * 
- * @author Michael Kölling
- * @version 2.0
+ * @author Gabriel Franz
+ * @author Cornel Forster
  */
 public class Space extends World
 {
@@ -23,6 +23,11 @@ public class Space extends World
         createLeiste();
         createBricks();
         createMarble();
+    }
+    
+    public void act() {
+        checkBricks();
+        checkMarbles();
     }
     
     /**
@@ -64,7 +69,7 @@ public class Space extends World
      */
     private void createMarble()
     {
-        Marble marble = new Marble(350,1); // Direction in Degrees and Speed
+        Marble marble = new Marble(340,1); // Direction in Degrees and Speed
         addObject(marble,this.getWidth()/2, this.getHeight()/2);
     }
     
@@ -82,6 +87,22 @@ public class Space extends World
                 Brick brick = new Brick();
                 addObject(brick, (x*22)+(this.getWidth()/2)-(Columns*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/5));
             }
+        }
+    }
+    
+    private void checkBricks() {
+        List<Brick> bricks = getObjects(Brick.class);
+        if (bricks.isEmpty()) {
+            showText("You Won!", getWidth()/2, getHeight()/2);
+            Greenfoot.stop();
+        }
+    }
+    
+    private void checkMarbles() {
+        List<Marble> marbles = getObjects(Marble.class);
+        if (marbles.isEmpty()) {
+            showText("You Lost!", getWidth()/2, getHeight()/2);
+            Greenfoot.stop();
         }
     }
 }

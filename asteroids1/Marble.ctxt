@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Marble
-comment0.text=\r\n\ Ein\ Gesteinsbrocken\ im\ Weltraum.\r\n\ \ \r\n\ @author\ Poul\ Henriksen\r\n\ @author\ Michael\ K\u00F6lling\r\n\ \r\n\ @version\ 2.0\r\n
+comment0.text=\r\n\ Eine\ Murmel\ im\ Weltraum.\r\n\ \ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=direction\ speed
 comment1.target=Marble(double,\ int)
 comment2.params=
@@ -9,7 +9,6 @@ comment3.params=
 comment3.target=void\ moveInDirection()
 comment4.params=
 comment4.target=void\ checkCollisions()
-comment4.text=public\ void\ setDirection(double\ newDirection)\ {\r\n\ \ \ \ \ \ \ \ direction\ \=\ newDirection;\r\n}
-comment5.params=collisionObject
-comment5.target=void\ calculateDirection(greenfoot.Actor)
+comment5.params=
+comment5.target=void\ checkBottomBorder()
 numComments=6

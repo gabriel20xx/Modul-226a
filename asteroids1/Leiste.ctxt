@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Leiste
-comment0.text=\r\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \r\n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \r\n\ \r\n\ @author\ Poul\ Henriksen\r\n\ @author\ Michael\ K\u00F6lling\r\n\ @author\ KEL\r\n\ \r\n\ @version\ 2.0\r\n\ @version\ 2.1\r\n\ Parameter\ ver\u00E4ndern\r\n
+comment0.text=\r\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \r\n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=
 comment1.target=Leiste()
 comment1.text=\r\n\ Initialisiert\ diese\ Leiste.\r\n
