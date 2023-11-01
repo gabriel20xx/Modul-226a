@@ -20,6 +20,7 @@ public class Space extends World
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
         background.fill();
+        Greenfoot.setSpeed(50);
         createStars(300);
         createBorders();
         createPaddle();
@@ -30,8 +31,8 @@ public class Space extends World
     public void act() {
         checkBricks();
         checkBalls();
-        updateTime();
         increaseSpeed();
+        updateTime();
     }
     
     /**
@@ -110,11 +111,6 @@ public class Space extends World
         }
     }
     
-    private void updateTime() {
-        timePassed++;
-        showText("Time: " + timePassed/60, 100, 50);
-    }
-    
     private void increaseSpeed() {
         if (timePassed % 60 == 0) {
             List<Ball> balls = getObjects(Ball.class);
@@ -123,5 +119,10 @@ public class Space extends World
                 ball.speed = ballSpeed;
             }
         }
+    }
+    
+    private void updateTime() {
+        timePassed++;
+        showText("Time: " + timePassed/50, 100, 50);
     }
 }
