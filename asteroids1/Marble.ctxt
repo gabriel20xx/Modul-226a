@@ -2,7 +2,7 @@
 comment0.target=Marble
 comment0.text=\r\n\ Eine\ Murmel\ im\ Weltraum.\r\n\ \ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=direction\ speed
-comment1.target=Marble(double,\ int)
+comment1.target=Marble(double,\ double)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=

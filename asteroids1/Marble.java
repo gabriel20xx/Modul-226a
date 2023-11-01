@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Marble extends Actor {
     private double direction; // Direction in degrees
-    private int speed; // Speed of the object
+    public double speed; // Speed of the object
     private double fractionalDistanceX = 0.0; // Accumulate fractional distance for X
     private double fractionalDistanceY = 0.0; // Accumulate fractional distance for Y
     
@@ -19,7 +19,7 @@ public class Marble extends Actor {
     private int blockedleiste = 0;
     private int blockedbrick = 0;
 
-    public Marble(double direction, int speed) {
+    public Marble(double direction, double speed) {
         this.direction = direction;
         this.speed = speed;
     }
@@ -130,11 +130,19 @@ public class Marble extends Actor {
         if (isTouching(Leiste.class) && blockedleiste == 0) {
             //getWorld().showText("Touching", 100, 100);
             if (direction > 0 && direction < 180) {
-                //getWorld().showText("Leiste", 100, 150);
-                double difference = 0;
-    
-                difference = 90 - direction;
-                direction = 270 + difference;
+                // Implement Callculation
+                Leiste leiste = new Leiste();
+                int width = leiste.getImage().getWidth();
+                List<Leiste> leistes = getObjectsInRange(width, Leiste.class);
+            
+                if (!leistes.isEmpty()) {
+                    Leiste closestLeiste = leistes.get(0); // Assume the first Leiste is the only one
+                    int distance = getX() - closestLeiste.getX();
+                    
+                    // left edge = -12
+                    // right edge = 12
+                    direction = 270 + (distance*(90/(width/2)));
+                }
             }
             blockedleiste = interval;
         } else {

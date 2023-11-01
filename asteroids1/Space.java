@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class Space extends World
 {
+    private int timePassed = 0;
+    private double marbleSpeed = 1;
     /**
      * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
      */
@@ -28,6 +30,8 @@ public class Space extends World
     public void act() {
         checkBricks();
         checkMarbles();
+        updateTime();
+        increaseSpeed();
     }
     
     /**
@@ -69,7 +73,7 @@ public class Space extends World
      */
     private void createMarble()
     {
-        Marble marble = new Marble(340,1); // Direction in Degrees and Speed
+        Marble marble = new Marble(340,marbleSpeed); // Direction in Degrees and Speed
         addObject(marble,this.getWidth()/2, this.getHeight()/2);
     }
     
@@ -103,6 +107,21 @@ public class Space extends World
         if (marbles.isEmpty()) {
             showText("You Lost!", getWidth()/2, getHeight()/2);
             Greenfoot.stop();
+        }
+    }
+    
+    private void updateTime() {
+        timePassed++;
+        showText("Time: " + timePassed/60, 100, 50);
+    }
+    
+    private void increaseSpeed() {
+        if (timePassed % 60 == 0) {
+            List<Marble> marbles = getObjects(Marble.class);
+            marbleSpeed+=0.01; // Faster every second
+            for (Marble marble : marbles) {
+                marble.speed = marbleSpeed;
+            }
         }
     }
 }
