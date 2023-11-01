@@ -22,7 +22,7 @@ public class Space extends World
         createBorders();
         createLeiste();
         createBricks();
-        createBall();
+        createMarble();
     }
     
     /**
@@ -43,12 +43,11 @@ public class Space extends World
     {
         for (int i = 1; i < 3; i++)
         {
-            Border border = new Border();
+            Sideborder border = new Sideborder();
             addObject(border, i*this.getWidth()/3, this.getHeight()/2);
         }
-        Border border = new Border();
-        addObject(border, this.getWidth()/2, 0);
-        border.setRotation(90);
+        Topborder border = new Topborder();
+        addObject(border, this.getWidth()/2, 1);
     }
     
     /**
@@ -60,10 +59,13 @@ public class Space extends World
         addObject(leiste, this.getWidth()/2, this.getHeight() - this.getHeight()/5);
     }
     
-    private void createBall()
+    /**
+     * Erzeugt eine Murmel.
+     */
+    private void createMarble()
     {
-        Ball ball = new Ball(90, 1); // Direction, Speed
-        addObject(ball, this.getWidth()/2, this.getHeight()/2);
+        Marble marble = new Marble(350,1); // Direction in Degrees and Speed
+        addObject(marble,this.getWidth()/2, this.getHeight()/2);
     }
     
     /**

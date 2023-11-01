@@ -43,11 +43,33 @@ public class Leiste extends Mover
         } else {
             moveAmount = 2;
         }
-        if(Greenfoot.isKeyDown("left")) {
-            setLocation(getX() - moveAmount, getY());
-        }        
+        if (Greenfoot.isKeyDown("left")) {
+            if (isTouching(Sideborder.class)) {
+                // Find the first 'Border' object this object is touching
+                Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                if (border != null) {
+                    int xCoordinateBorder = border.getX();
+                    if (getX() < xCoordinateBorder) {
+                        setLocation(getX() - moveAmount, getY());
+                    }
+                }
+            } else {
+                setLocation(getX() - moveAmount, getY());
+            }
+        }      
         if(Greenfoot.isKeyDown("right")) {
-            setLocation(getX() + moveAmount, getY());
+            if (isTouching(Sideborder.class)) {
+                // Find the first 'Border' object this object is touching
+                Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                if (border != null) {
+                    int xCoordinateBorder = border.getX();
+                    if (getX() > xCoordinateBorder) {
+                        setLocation(getX() + moveAmount, getY());
+                    }
+                }
+            } else {
+                setLocation(getX() + moveAmount, getY());
+            }
         }
     }  
 }
