@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Paddle
+comment0.text=\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment1.params=
+comment1.target=Paddle()
+comment1.text=\n\ Initialisiert\ diese\ Leiste.\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Tut,\ was\ eie\ Leiste\ so\ macht.\ (Das\ hei\u00DFt\:\ meistens\ herumfliegen\ und\ wenden,\n\ beschleunigen\ und\ schie\u00DFen,\ wenn\ die\ entsprechenden\ Tasten\ gedr\u00FCckt\ werden.)\n
+comment3.params=
+comment3.target=void\ checkKeys()
+comment3.text=\n\ Pr\u00FCft,\ ob\ irgendeine\ Taste\ gedr\u00FCckt\ wurde,\ und\ reagiert\ darauf.\n
+numComments=4

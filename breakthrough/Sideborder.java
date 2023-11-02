@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Sideborder extends Static
+public class Sideborder extends Border
 {
     /**
      * Act - do whatever the Border wants to do. This method is called whenever

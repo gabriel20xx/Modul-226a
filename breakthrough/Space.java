@@ -11,20 +11,62 @@ public class Space extends World
 {
     private int timePassed = 0;
     private double ballSpeed = 1;
+    private int score;
+    private int amountLives;
     /**
      * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
      */
     public Space() 
     {
         super(854, 480, 1);
+        setBackground();
+        GreenfootImage background = getBackground();
+        background.setColor(Color.BLACK);
+        background.fill();
+        Greenfoot.setSpeed(50);
+        //createStars(300);
+        createBorders();
+        createPaddle();
+        // createBricks();
+        createBall();
+    }
+    
+    /**
+     * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
+     */
+    public Space(int gameNumber) 
+    {
+        super(854, 480, 1);
+        setBackground();
+        initializeGame();
+        if (gameNumber == 1) {
+            playGameOne();
+        }
+        else if (gameNumber == 2) {
+            playGameTwo();
+        }
+        else  {
+            playGameThree();
+        }
+    }
+    
+    /**
+     * Set the background of the world.
+     */
+    private void setBackground() {
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
         background.fill();
         Greenfoot.setSpeed(50);
         createStars(300);
+    }
+    
+    /**
+     * Initialize the actors which are always the same
+     */
+    private void initializeGame() {
         createBorders();
         createPaddle();
-        createBricks();
         createBall();
     }
     
@@ -49,6 +91,53 @@ public class Space extends World
         }
     }
     
+    private void playGameOne() {
+        int rowCount = 4;
+        int columnCount = 8; 
+        for (int y = 0; y < rowCount; y++)
+        {
+            for (int x = 0; x < columnCount; x++)
+            {
+                Brick brick = new Brick();
+                addObject(brick, (x*22)+(this.getWidth()/2)-(columnCount*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/8));
+            }
+        }
+    }
+    
+    private void playGameTwo() {
+        int counter = 0;
+        int brickRange = getWidth() / 3;
+        int height = getHeight();
+        int minusHeight = getHeight() / 7;
+        while (counter < 20) {
+            Brick brick = new Brick();
+            addObject(brick, Greenfoot.getRandomNumber(brickRange) + brickRange, Greenfoot.getRandomNumber(height) - minusHeight);
+            if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
+                removeObject(brick);
+            }
+            else {
+                counter++;
+            }
+        }
+    }
+    
+    private void playGameThree() {
+        int xPostionLeft = getWidth() / 3 + 50;
+        int xPositionRight = getWidth() / 3 * 2 - 50;
+        int middlePosition = (xPostionLeft + xPositionRight) / 2;
+        for (int x=0; x < 8; x++) {
+            addObject(new Brick(), xPostionLeft, 50 + 15 * (x + 1));
+        }
+        
+        for (int x=0; x < 8; x++) {
+            addObject(new Brick(), xPositionRight, 50 + 15 * (x + 1));
+        }
+        
+        for (int x=0; x < 8; x++) {
+            addObject(new Brick(), middlePosition, 50 + 15 * (x + 1));
+        }
+    }
+    
     private void createBorders()
     {
         for (int i = 1; i < 3; i++)
@@ -66,7 +155,7 @@ public class Space extends World
     private void createPaddle()
     {
         Paddle paddle = new Paddle();
-        addObject(paddle, this.getWidth()/2, this.getHeight() - this.getHeight()/5);
+        addObject(paddle, this.getWidth()/2, this.getHeight() - this.getHeight()/ 9);
     }
     
     /**

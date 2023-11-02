@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Ball extends Mover {
+public class Ball extends Actor {
     private double direction; // Direction in degrees
     public double speed; // Speed of the object
     private double fractionalDistanceX = 0.0; // Accumulate fractional distance for X

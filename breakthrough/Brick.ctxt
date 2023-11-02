@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Brick
+comment0.text=\n\ Write\ a\ description\ of\ class\ Brick\ here.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment1.params=
+comment1.target=Brick()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=boolean\ isTouchingAnotherBrick()
+comment3.text=\n\ Check\ if\ brick\ is\ touching\ another\ brick-\n
+comment4.params=
+comment4.target=boolean\ isTouchingBorder()
+comment4.text=\n\ Check\ if\ brick\ is\ touching\ another\ brick-\n
+numComments=5
