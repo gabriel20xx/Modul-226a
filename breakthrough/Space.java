@@ -12,7 +12,6 @@ public class Space extends World
     private int timePassed = 0;
     private double ballSpeed = 1;
     private int score;
-    private int amountLives;
     /**
      * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
      */
@@ -75,6 +74,7 @@ public class Space extends World
         checkBalls();
         increaseSpeed();
         updateTime();
+        showScore();
     }
     
     /**
@@ -212,6 +212,16 @@ public class Space extends World
     
     private void updateTime() {
         timePassed++;
-        showText("Time: " + timePassed/50, 100, 50);
+        updateScore(1);
+        showText("Time: " + timePassed / 50, 100, 50);
+    }
+    
+    private void showScore() {
+        showText("Score: " + score, 100, 80);
+    }
+    
+    public void updateScore(int amount) {
+        score = score + amount;
+        showScore();
     }
 }

@@ -51,6 +51,8 @@ public class Ball extends Actor {
     private void checkCollisions() {
         if (isTouching(Brick.class)) {
             //getWorld().showText("Touching", 100, 150);
+            Space space = (Space) getWorld();
+            space.updateScore(35);
             Brick brick = new Brick();
             int height = brick.getImage().getHeight();
             int width = brick.getImage().getWidth();
