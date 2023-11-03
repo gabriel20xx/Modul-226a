@@ -10,7 +10,7 @@ import java.util.*;
 public class Space extends World
 {
     private int timePassed = 0;
-    private double ballSpeed = 1;
+    private double ballSpeed = 3;
     private int score;
     private int gameNumber;
     
@@ -143,7 +143,7 @@ public class Space extends World
     private void createPaddle()
     {
         Paddle paddle = new Paddle();
-        addObject(paddle, 450, this.getHeight() - this.getHeight()/ 9);
+        addObject(paddle, 450, this.getHeight() - this.getHeight()/ 24);
     }
     
     /**

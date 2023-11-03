@@ -25,10 +25,7 @@ public class Ball extends Actor {
 
     public void act() {
         moveInDirection();
-        checkBrickCollision();
-        checkPaddleCollision();
-        checkSideborderCollision();
-        checkTopborderCollision();
+        checkCollision();
         normalizeDirection();
         checkBottomBorder();
     }
@@ -50,70 +47,111 @@ public class Ball extends Actor {
         fractionalDistanceY -= wholePixelsY; // Subtract the whole pixels from Y
     }
     
+    private void checkCollision() {
+        // Check for collision with two objects
+        if ((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) {
+            direction += 180;
+        } else {
+            checkBrickCollision();
+            checkPaddleCollision();
+            checkSideborderCollision();
+            checkTopborderCollision();
+        }
+    }
+    
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
-            Brick brick = new Brick(1);
+            Brick brickSize = new Brick(1);
+            int brickHeight = brickSize.getImage().getHeight();
+            int brickWidth = brickSize.getImage().getWidth();
+            int brickPosX;
+            int brickPosY;
             
-            int brickHeight = brick.getImage().getHeight();
-            int brickWidth = brick.getImage().getWidth();
             int ballHeight = this.getImage().getHeight();
             int ballWidth = this.getImage().getWidth();
+            int ballPosX = this.getX();
+            int ballPosY = this.getY();
             
             int xOffset = brickWidth/2 + ballWidth/2;
             int yOffset = brickHeight/2 + ballHeight/2;
             
-            List<Brick> bricksInRadius = getObjectsInRange(yOffset*2, Brick.class);
+            List<Brick> bricksInRadius = getObjectsInRange(yOffset + 2, Brick.class);
             if (bricksInRadius.isEmpty()) {
-                bricksInRadius = getObjectsInRange(xOffset*2, Brick.class);
+                bricksInRadius = getObjectsInRange(xOffset + 2, Brick.class);
             }
             
-            for (Brick bricks : bricksInRadius) {
-                int ballPosX = this.getX();
-                int ballPosY = this.getY();
-                int brickPosX = bricks.getX();
-                int brickPosY = bricks.getY();
-                
-                int DiffX = brickPosX - ballPosX;
-                int DiffY = brickPosY - ballPosY;
-                
-                if (Math.abs(DiffY) <= yOffset) {
-                    if (DiffX <= xOffset + 1 || DiffX >= -xOffset - 1) {
-                        // Ball comming from right
-                        if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
-                            double difference = 0;
-                            difference = 360 - direction;
-                            direction = 180 + difference;
-                        }
-                        // Ball comming from left
-                        else if (direction > 90 && direction < 270) {
-                            double difference = 0;
-                            difference = 180 - direction;
-                            direction = 360 + difference;
-                        }
-                    } 
+            Brick closestBrick = null;
+            int minDiffX = Integer.MAX_VALUE;
+            int minDiffY = Integer.MAX_VALUE;
+            
+            // Calculate closest brick
+            for (Brick brick : bricksInRadius) {
+                brickPosX = brick.getX();
+                brickPosY = brick.getY();
+            
+                int DiffXx = brickPosX - ballPosX;
+                int DiffYy = brickPosY - ballPosY;
+            
+                if (DiffXx < minDiffX) {
+                    minDiffX = DiffXx;
+                    closestBrick = brick;
                 }
-       
-                if (Math.abs(DiffX) <= xOffset) {
-                    if (Math.abs(DiffY) <= yOffset*2) {
-                        // Ball comming from top
-                        if (direction > 180 && direction < 360) {
-                            double difference = 0;
-                            difference = 270 - direction;
-                            direction = 90 + difference;
-                        }
-                        // Ball comming from bottom
-                        else if (direction > 0 && direction < 180){
-                            double difference = 0;
-                            difference = 90 - direction;
-                            direction = 270 + difference;
-                        }
-                    } 
+                
+                if (DiffYy < minDiffY) {
+                    minDiffY = DiffYy;
+                    closestBrick = brick;
                 }
             }
-            // Update Score
-            Space space = (Space) getWorld();
-            space.updateScore(35);
-            blockedbrick = true;
+            
+            if (closestBrick != null) {
+                brickPosX = closestBrick.getX();
+                brickPosY = closestBrick.getY();
+                
+                int DiffX = ballPosX - brickPosX;
+                int DiffY = ballPosY - brickPosY;
+                
+                // Calculate Difference from DiffY to yOffset and DiffX to xOffset
+                int xDiffOffset = Math.abs(DiffX - xOffset);
+                int yDiffOffset = Math.abs(DiffY - yOffset);
+                
+                getWorld().showText("DiffX: "+xDiffOffset, 1000, 500);
+                getWorld().showText("DiffY: "+yDiffOffset, 1000, 550);
+                
+                if (xDiffOffset < yDiffOffset) {
+                    // Ball comming from right
+                    if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
+                        double difference = 0;
+                        difference = 360 - direction;
+                        direction = 180 + difference;
+                    }
+                    // Ball comming from left
+                    else if (direction > 90 && direction < 270) {
+                        double difference = 0;
+                        difference = 180 - direction;
+                        direction = 360 + difference;
+                    }
+                } else if (yDiffOffset < xDiffOffset) {
+                    // Ball comming from bottom
+                    if (direction > 180 && direction < 360) {
+                        double difference = 0;
+                        difference = 270 - direction;
+                        direction = 90 + difference;
+                    }
+                    // Ball comming from top
+                    else if (direction > 0 && direction < 180){
+                        double difference = 0;
+                        difference = 90 - direction;
+                        direction = 270 + difference;
+                    }
+                } else {
+                    direction += 180;
+                }
+    
+                // Update Score
+                Space space = (Space) getWorld();
+                space.updateScore(35);
+                blockedbrick = true;
+            }
         } else {
             blockedbrick = false;
         }

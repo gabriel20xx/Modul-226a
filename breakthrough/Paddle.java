@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Paddle extends Mover
 {
-    private int moveAmount = 2;
+    private int moveAmount = 6;
     /**
      * Initialisiert diese Leiste.
      */
@@ -34,9 +34,9 @@ public class Paddle extends Mover
     private void checkKeys() 
     {   
         if(Greenfoot.isKeyDown("shift")) {
-            moveAmount = 6;
+            moveAmount = 18;
         } else {
-            moveAmount = 2;
+            moveAmount = 6;
         }
         if (Greenfoot.isKeyDown("left")) {
             if (isTouching(Sideborder.class)) {
