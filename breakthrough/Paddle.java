@@ -34,7 +34,7 @@ public class Paddle extends Mover
     private void checkKeys() 
     {   
         if(Greenfoot.isKeyDown("shift")) {
-            moveAmount = 8;
+            moveAmount = 6;
         } else {
             moveAmount = 2;
         }

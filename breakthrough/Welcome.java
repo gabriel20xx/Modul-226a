@@ -86,6 +86,4 @@ public class Welcome extends World
         showText("2: RANDOMIZE", 400, 270);
         showText("3: OLD FASHION ", 400, 290);
     }
-    
-
 }

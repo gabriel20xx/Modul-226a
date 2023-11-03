@@ -13,11 +13,10 @@ public class Ball extends Actor {
     private double fractionalDistanceX = 0.0; // Accumulate fractional distance for X
     private double fractionalDistanceY = 0.0; // Accumulate fractional distance for Y
     
-    private int interval = 5;
-    private int blockedsideborder = 0;
-    private int blockedtopborder = 0;
-    private int blockedpaddle = 0;
-    private int blockedbrick = 0;
+    private boolean blockedsideborder = false;
+    private boolean blockedtopborder = false;
+    private boolean blockedpaddle = false;
+    private boolean blockedbrick = false;
 
     public Ball(double direction, double speed) {
         this.direction = direction;
@@ -26,7 +25,10 @@ public class Ball extends Actor {
 
     public void act() {
         moveInDirection();
-        checkCollisions();
+        checkBrickCollision();
+        checkPaddleCollision();
+        checkSideborderCollision();
+        checkTopborderCollision();
         normalizeDirection();
         checkBottomBorder();
     }
@@ -48,10 +50,8 @@ public class Ball extends Actor {
         fractionalDistanceY -= wholePixelsY; // Subtract the whole pixels from Y
     }
     
-    private void checkCollisions() {
+    private void checkBrickCollision() {
         if (isTouching(Brick.class)) {
-            Space space = (Space) getWorld();
-            space.updateScore(35);
             Brick brick = new Brick();
             int height = brick.getImage().getHeight();
             int width = brick.getImage().getWidth();
@@ -103,9 +103,14 @@ public class Ball extends Actor {
                     } 
                 }
             }
+            // Update Score
+            Space space = (Space) getWorld();
+            space.updateScore(35);
         }
-        
-        if (isTouching(Paddle.class) && blockedpaddle == 0) {
+    }
+    
+    private void checkPaddleCollision() {
+        if (isTouching(Paddle.class) && blockedpaddle == false) {
             if (direction > 0 && direction < 180) {
                 // Implement Callculation
                 Paddle paddle = new Paddle();
@@ -118,14 +123,14 @@ public class Ball extends Actor {
                     direction = 270 + (distance*(90/(width/2)));
                 }
             }
-            blockedpaddle = interval;
+            blockedpaddle = true;
         } else {
-            if (blockedpaddle != 0) {
-                blockedpaddle--;
-            }
+            blockedpaddle = false;
         }
-        
-        if (isTouching(Sideborder.class) && blockedsideborder == 0) {
+    }
+    
+    private void checkSideborderCollision() {
+        if (isTouching(Sideborder.class) && blockedsideborder == false) {
             // Right Sideboarder
             if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
                 double difference = 0;
@@ -138,24 +143,22 @@ public class Ball extends Actor {
                 difference = 180 - direction;
                 direction = 360 + difference;
             }
-            blockedsideborder = interval;
+            blockedsideborder = true;
         } else {
-            if (blockedsideborder != 0) {
-                blockedsideborder--;
-            }
+            blockedsideborder = false;
         }
-        
-        if (isTouching(Topborder.class)) {
+    }
+    
+    private void checkTopborderCollision() {
+        if (isTouching(Topborder.class) && blockedtopborder == false) {
             if (direction > 180 && direction < 360) {
                 double difference = 0;
                 difference = 270 - direction;
                 direction = 90 + difference;
             }
-            blockedtopborder = interval;
+            blockedtopborder = true;
         } else {
-            if (blockedtopborder != 0) {
-                blockedtopborder--;
-            }
+            blockedtopborder = false;
         }
     }
     

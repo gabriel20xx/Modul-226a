@@ -47,6 +47,7 @@ public class Space extends World
         else  {
             playGameThree();
         }
+        showText("Level "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
     }
     
     /**
@@ -212,7 +213,7 @@ public class Space extends World
     
     private void updateTime() {
         timePassed++;
-        updateScore(1);
+        updateScore(1); // Why increase score with one on every act? Shouldn't it only increase by touching Brick and decrease on live lost?
         showText("Time: " + timePassed / 50, 100, 50);
     }
     
