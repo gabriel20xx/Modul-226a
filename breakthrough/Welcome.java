@@ -15,7 +15,7 @@ public class Welcome extends World
      */
     public Welcome() 
     {
-        super(800, 600, 1);
+        super(1280, 720, 1);
         setBackground();
         animationEnded = false;
     }
@@ -71,10 +71,10 @@ public class Welcome extends World
     private void welcomeText() {
         String welcome = "Breakthrough";
         for(int x = 0; x < welcome.length() + 1; x++) {
-            showText(welcome.substring(0,x), 400, 150);
+            showText(welcome.substring(0,x), this.getWidth()/2, this.getHeight()/4);
             Greenfoot.delay(4);
         }
-        showText("Press the number of the game you want to play", 400, 200);
+        showText("Press the number of the game you want to play", this.getWidth()/2, this.getHeight()/8*3);
         animationEnded = true;
     }
     
@@ -82,8 +82,8 @@ public class Welcome extends World
      * Display the different games.
      */
     private void showGames() {
-        showText("1: THE CLASSIC", 400, 250);
-        showText("2: RANDOMIZE", 400, 270);
-        showText("3: OLD FASHION ", 400, 290);
+        showText("1: THE CLASSIC", this.getWidth()/2, this.getHeight()/8*4);
+        showText("2: RANDOMIZE", this.getWidth()/2, this.getHeight()/8*5);
+        showText("3: OLD FASHION ", this.getWidth()/2, this.getHeight()/8*6);
     }
 }

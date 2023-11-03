@@ -52,36 +52,39 @@ public class Ball extends Actor {
     
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
-            Brick brick = new Brick();
-            int height = brick.getImage().getHeight();
-            int width = brick.getImage().getWidth();
+            Brick brick = new Brick(1);
             
-            int ballPosX = this.getX();
-            int ballPosY = this.getY();
+            int brickHeight = brick.getImage().getHeight();
+            int brickWidth = brick.getImage().getWidth();
+            int ballHeight = this.getImage().getHeight();
+            int ballWidth = this.getImage().getWidth();
             
-            int xOffset = brick.getImage().getWidth()/2 + this.getImage().getWidth()/2;
-            int yOffset = brick.getImage().getHeight()/2 + this.getImage().getHeight()/2;
+            int xOffset = brickWidth/2 + ballWidth/2;
+            int yOffset = brickHeight/2 + ballHeight/2;
             
-            List<Brick> bricksInRadius = getObjectsInRange(height / 2, Brick.class);
+            List<Brick> bricksInRadius = getObjectsInRange(yOffset*2, Brick.class);
             if (bricksInRadius.isEmpty()) {
-                bricksInRadius = getObjectsInRange(width / 2, Brick.class);
+                bricksInRadius = getObjectsInRange(xOffset*2, Brick.class);
             }
             
             for (Brick bricks : bricksInRadius) {
-                int objX = bricks.getX();
-                int objY = bricks.getY();
-                int DiffX = objX - ballPosX;
-                int DiffY = objY - ballPosY;
+                int ballPosX = this.getX();
+                int ballPosY = this.getY();
+                int brickPosX = bricks.getX();
+                int brickPosY = bricks.getY();
                 
-                if (Math.abs(DiffY) <= height / 2) {
-                    if (DiffX == xOffset || DiffX == -xOffset) {
-                        // Left Edge
+                int DiffX = brickPosX - ballPosX;
+                int DiffY = brickPosY - ballPosY;
+                
+                if (Math.abs(DiffY) <= yOffset) {
+                    if (DiffX <= xOffset + 1 || DiffX >= -xOffset - 1) {
+                        // Ball comming from right
                         if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
                             double difference = 0;
                             difference = 360 - direction;
                             direction = 180 + difference;
                         }
-                        // Right Edge
+                        // Ball comming from left
                         else if (direction > 90 && direction < 270) {
                             double difference = 0;
                             difference = 180 - direction;
@@ -90,15 +93,15 @@ public class Ball extends Actor {
                     } 
                 }
        
-                else if (Math.abs(DiffX) <= width / 2) {
-                    if (Math.abs(DiffY) <= yOffset + 1) {
-                        // Top Edge
+                if (Math.abs(DiffX) <= xOffset) {
+                    if (Math.abs(DiffY) <= yOffset*2) {
+                        // Ball comming from top
                         if (direction > 180 && direction < 360) {
                             double difference = 0;
                             difference = 270 - direction;
                             direction = 90 + difference;
                         }
-                        // Bottom Edge
+                        // Ball comming from bottom
                         else if (direction > 0 && direction < 180){
                             double difference = 0;
                             difference = 90 - direction;

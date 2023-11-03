@@ -12,12 +12,13 @@ public class Space extends World
     private int timePassed = 0;
     private double ballSpeed = 1;
     private int score;
+    private int gameNumber;
     /**
      * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
      */
     public Space() 
     {
-        super(854, 480, 1);
+        super(1280, 720, 1);
         setBackground();
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
@@ -35,9 +36,10 @@ public class Space extends World
      */
     public Space(int gameNumber) 
     {
-        super(854, 480, 1);
+        super(1280, 720, 1);
         setBackground();
         initializeGame();
+        this.gameNumber = gameNumber;
         if (gameNumber == 1) {
             playGameOne();
         }
@@ -47,7 +49,6 @@ public class Space extends World
         else  {
             playGameThree();
         }
-        showText("Level "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
     }
     
     /**
@@ -75,7 +76,9 @@ public class Space extends World
         checkBalls();
         increaseSpeed();
         updateTime();
+        showTitle();
         showScore();
+        showLevel(gameNumber);
     }
     
     /**
@@ -93,14 +96,18 @@ public class Space extends World
     }
     
     private void playGameOne() {
-        int rowCount = 4;
-        int columnCount = 8; 
-        for (int y = 0; y < rowCount; y++)
+        int rows = 16;
+        int columns = 10;
+        int startWidth = 50;
+        int startHeight = 120;
+        int brickWidth = 80;
+        int brickHeight = 24;
+        for (int y = 0; y < rows; y++)
         {
-            for (int x = 0; x < columnCount; x++)
+            for (int x = 0; x < columns; x++)
             {
-                Brick brick = new Brick();
-                addObject(brick, (x*22)+(this.getWidth()/2)-(columnCount*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/8));
+                Brick brick = new Brick(1);
+                addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
             }
         }
     }
@@ -111,7 +118,7 @@ public class Space extends World
         int height = getHeight();
         int minusHeight = getHeight() / 7;
         while (counter < 20) {
-            Brick brick = new Brick();
+            Brick brick = new Brick(1);
             addObject(brick, Greenfoot.getRandomNumber(brickRange) + brickRange, Greenfoot.getRandomNumber(height) - minusHeight);
             if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
                 removeObject(brick);
@@ -127,27 +134,26 @@ public class Space extends World
         int xPositionRight = getWidth() / 3 * 2 - 50;
         int middlePosition = (xPostionLeft + xPositionRight) / 2;
         for (int x=0; x < 8; x++) {
-            addObject(new Brick(), xPostionLeft, 50 + 15 * (x + 1));
+            addObject(new Brick(1), xPostionLeft, 50 + 15 * (x + 1));
         }
         
         for (int x=0; x < 8; x++) {
-            addObject(new Brick(), xPositionRight, 50 + 15 * (x + 1));
+            addObject(new Brick(1), xPositionRight, 50 + 15 * (x + 1));
         }
         
         for (int x=0; x < 8; x++) {
-            addObject(new Brick(), middlePosition, 50 + 15 * (x + 1));
+            addObject(new Brick(1), middlePosition, 50 + 15 * (x + 1));
         }
     }
     
     private void createBorders()
     {
-        for (int i = 1; i < 3; i++)
-        {
-            Sideborder border = new Sideborder();
-            addObject(border, i*this.getWidth()/3, this.getHeight()/2);
-        }
-        Topborder border = new Topborder();
-        addObject(border, this.getWidth()/2, 1);
+        Sideborder leftborder = new Sideborder();
+        addObject(leftborder, 40, 410);
+        Sideborder rightborder = new Sideborder();
+        addObject(rightborder, 860, 410);
+        Topborder topborder = new Topborder();
+        addObject(topborder, 450, 110);
     }
     
     /**
@@ -156,7 +162,7 @@ public class Space extends World
     private void createPaddle()
     {
         Paddle paddle = new Paddle();
-        addObject(paddle, this.getWidth()/2, this.getHeight() - this.getHeight()/ 9);
+        addObject(paddle, 450, this.getHeight() - this.getHeight()/ 9);
     }
     
     /**
@@ -164,8 +170,9 @@ public class Space extends World
      */
     private void createBall()
     {
-        Ball ball = new Ball(340,ballSpeed); // Direction in Degrees and Speed
-        addObject(ball,this.getWidth()/2, this.getHeight()/2);
+        // 340 = Direction in Degrees, ballSpeed = Speed
+        Ball ball = new Ball(340,ballSpeed);
+        addObject(ball, 450, this.getHeight()/4*3);
     }
     
     /**
@@ -173,14 +180,18 @@ public class Space extends World
      */
     private void createBricks()
     {
-        int Rows = 3; // Row Count
-        int Columns = 8; // Column Count
-        for (int y = 0; y < Rows; y++)
+        int rows = 16;
+        int columns = 10;
+        int startWidth = 50;
+        int startHeight = 120;
+        int brickWidth = 80;
+        int brickHeight = 24;
+        for (int y = 0; y < rows; y++)
         {
-            for (int x = 0; x < Columns; x++)
+            for (int x = 0; x < columns; x++)
             {
-                Brick brick = new Brick();
-                addObject(brick, (x*22)+(this.getWidth()/2)-(Columns*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/5));
+                Brick brick = new Brick(1);
+                addObject(brick, x*brickWidth+startWidth, y*brickHeight+startHeight);
             }
         }
     }
@@ -214,11 +225,19 @@ public class Space extends World
     private void updateTime() {
         timePassed++;
         updateScore(1); // Why increase score with one on every act? Shouldn't it only increase by touching Brick and decrease on live lost?
-        showText("Time: " + timePassed / 50, 100, 50);
+        showText("Time: " + timePassed / 50, this.getWidth()/6*5, this.getHeight()/12*3);
     }
     
     private void showScore() {
-        showText("Score: " + score, 100, 80);
+        showText("Score: " + score, this.getWidth()/6*5, this.getHeight()/12*4);
+    }
+    
+    private void showLevel(int gameNumber) {
+        showText("Level "+ gameNumber, this.getWidth()/6*5, this.getHeight()/12*2);
+    }
+    
+    private void showTitle() {
+        showText("Breakthrough", this.getWidth()/12, this.getHeight()/12*1);
     }
     
     public void updateScore(int amount) {
