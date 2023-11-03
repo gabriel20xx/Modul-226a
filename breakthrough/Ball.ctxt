@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ball
-comment0.text=\n\ Eine\ Murmel\ im\ Weltraum.\n\ \ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment0.text=\r\n\ Eine\ Murmel\ im\ Weltraum.\r\n\ \ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=direction\ speed
 comment1.target=Ball(double,\ double)
 comment2.params=
@@ -10,5 +10,7 @@ comment3.target=void\ moveInDirection()
 comment4.params=
 comment4.target=void\ checkCollisions()
 comment5.params=
-comment5.target=void\ checkBottomBorder()
-numComments=6
+comment5.target=void\ normalizeDirection()
+comment6.params=
+comment6.target=void\ checkBottomBorder()
+numComments=7
