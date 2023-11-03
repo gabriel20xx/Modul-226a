@@ -98,7 +98,7 @@ public class Space extends World
         int[][] level1 = {
             {1, 2, 3},
             {4, 5, 6},
-            {7, 8, 9}
+            {7, 10, 9}
         };
         
         for (int i = 0; i < level1.length; i++) {

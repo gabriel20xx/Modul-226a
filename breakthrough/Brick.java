@@ -8,19 +8,36 @@ import java.util.*;
  * @author Cornel Forster
  */
 public class Brick extends Actor {
-    public Brick(int color) {
-        // Constructor
-        // Color codes: 1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold
-        setColor(color);
+    private int color;
+    private int count = 0;
+    private boolean blockedball = false;
+    
+    // Color codes: 1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold
+    public Brick(int colour) {
+        this.color = colour;
+        setColor();
     }
 
     public void act() {
-        if (isTouching(Ball.class)) {
-            getWorld().removeObject(this);
+        if (isTouching(Ball.class) && blockedball == false) {
+            if (color == 9) {
+                count++;
+                blockedball = true;
+                if (count >= 2) {
+                    getWorld().removeObject(this);
+                }
+            } 
+            else if (color == 10) {
+                // Do Nothing
+            } else {
+                getWorld().removeObject(this);
+            }
+        } else {
+            blockedball = false;
         }
     }
     
-    private void setColor(int color) {
+    private void setColor() {
         GreenfootImage Image;
         switch (color) {
             case 1:
@@ -56,10 +73,8 @@ public class Brick extends Actor {
             default:
                 Image = new GreenfootImage("Brick_White.png");
         }
-    
         setImage(Image);
     }
-
     
     /**
      * Check if brick is touching another brick-
