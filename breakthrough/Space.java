@@ -104,14 +104,12 @@ public class Space extends World
         for (int i = 0; i < level1.length; i++) {
             int x = level1[i][0];
             int y = level1[i][1];
-            int z = level1[i][2];
+            int color = level1[i][2];
     
             int brickX = x * brickWidth + startWidth + brickWidth / 2;
             int brickY = y * brickHeight + startHeight + brickHeight / 2;
     
-            // Create a brick with the specified color
-            Brick brick = new Brick(z);
-    
+            Brick brick = new Brick(color);
             addObject(brick, brickX, brickY);
         }
     }

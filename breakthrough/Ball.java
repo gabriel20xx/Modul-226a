@@ -114,8 +114,8 @@ public class Ball extends Actor {
                 int xDiffOffset = Math.abs(DiffX - xOffset);
                 int yDiffOffset = Math.abs(DiffY - yOffset);
                 
-                getWorld().showText("DiffX: "+xDiffOffset, 1000, 500);
-                getWorld().showText("DiffY: "+yDiffOffset, 1000, 550);
+                getWorld().showText("DiffX: "+xDiffOffset, getWorld().getWidth()/6*5, 500);
+                getWorld().showText("DiffY: "+yDiffOffset, getWorld().getWidth()/6*5, 550);
                 
                 if (xDiffOffset < yDiffOffset) {
                     // Ball comming from right
