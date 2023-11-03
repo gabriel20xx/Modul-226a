@@ -8,13 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class End extends World
 {
-    private final int score;
+    private final int score, lives;
     private final String statusMessage;
     private boolean animationAlreadyShowed;
-    public End(int score, String statusMessage) 
+    public End(int score, int lives,String statusMessage) 
     {
         super(800, 600, 1); 
         this.score = score;
+        this.lives = lives;
         this.statusMessage = statusMessage;
         animationAlreadyShowed = false;
     }
@@ -26,6 +27,8 @@ public class End extends World
             Greenfoot.delay(5);
         }
         showText(String.format("Score: %d", score), 600, 150);
+        showText(String.format("Lives: %d", lives), 600, 100);
+
         showText("Press enter to choose a new game", 400, 100);
         animationAlreadyShowed = !animationAlreadyShowed;
         }

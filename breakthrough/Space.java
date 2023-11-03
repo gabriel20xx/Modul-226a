@@ -11,8 +11,8 @@ public class Space extends World
 {
     private int timePassed = 0;
     private double ballSpeed = 1;
-    private int score;
-   
+    private int score, userLives;
+    
     /**
      * Constructor for the Space world.
      */
@@ -31,6 +31,7 @@ public class Space extends World
             playGameThree();
         }
         showText("Game "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
+        userLives = 3;
     }
     
     /**
@@ -53,16 +54,21 @@ public class Space extends World
         createBall();
     }
     
+    /**
+     * The worlds act.
+     */
     public void act() {
         checkBricks();
         checkBalls();
         increaseSpeed();
         updateTime();
         showScore();
+        showLives();
     }
     
     /**
-     * Erzeugt einige zufällige Sterne in der Welt.
+     * Create random stars.
+     * @param number The number of stars.
      */
     private void createStars(int number) 
     {
@@ -75,6 +81,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Brick places of game one.
+     */
     private void playGameOne() {
         int rowCount = 4;
         int columnCount = 8; 
@@ -88,6 +97,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Brick places of game two.
+     */
     private void playGameTwo() {
         int counter = 0;
         int brickRange = getWidth() / 3;
@@ -105,6 +117,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Brick places of game three.
+     */
     private void playGameThree() {
         int xPostionLeft = getWidth() / 3 + 50;
         int xPositionRight = getWidth() / 3 * 2 - 50;
@@ -122,6 +137,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Create the borders for the game.
+     */
     private void createBorders()
     {
         for (int i = 1; i < 3; i++)
@@ -134,7 +152,7 @@ public class Space extends World
     }
     
     /**
-     * Erzeugt Leiste.
+     * Create a paddle.
      */
     private void createPaddle()
     {
@@ -143,69 +161,95 @@ public class Space extends World
     }
     
     /**
-     * Erzeugt eine Murmel.
+     * Create a ball.
      */
     private void createBall()
     {
-        Ball ball = new Ball(340,ballSpeed); // Direction in Degrees and Speed
+        Ball ball = new Ball(340,ballSpeed);
         addObject(ball,this.getWidth()/2, this.getHeight()/2);
     }
     
     /**
-     * Erzeugt Bricks.
+     * Check if there are bricks left to hit.
      */
-    private void createBricks()
-    {
-        int Rows = 3; // Row Count
-        int Columns = 8; // Column Count
-        for (int y = 0; y < Rows; y++)
-        {
-            for (int x = 0; x < Columns; x++)
-            {
-                Brick brick = new Brick();
-                addObject(brick, (x*22)+(this.getWidth()/2)-(Columns*22/2)+(brick.getImage().getWidth()/2), (y*6)+(this.getHeight()/5));
-            }
-        }
-    }
-    
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
         if (bricks.isEmpty()) {
             Greenfoot.delay(25);
-            Greenfoot.setWorld(new End(score, "You lost"));
+            Greenfoot.setWorld(new End(score, userLives, "You lost"));
         }
     }
     
+    /**
+     * Check if the ball still exists.
+     */
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
-            Greenfoot.delay(25);
-            Greenfoot.setWorld(new End(score, "You lost"));
+            updateUserLive(-1);
+            updateScore(-500);
+            if(userLives == 0) {
+                Greenfoot.delay(25);
+                Greenfoot.setWorld(new End(score, userLives, "You lost"));
+            }
+            else {
+                createBall();
+            }
+
         }
     }
     
+    /**
+     * Increse the movement speed of the ball.
+     */
     private void increaseSpeed() {
         if (timePassed % 60 == 0) {
             List<Ball> balls = getObjects(Ball.class);
-            ballSpeed+=0.01; // Faster every second
+            ballSpeed+=0.01;
             for (Ball ball : balls) {
                 ball.speed = ballSpeed;
             }
         }
     }
     
+    /**
+     * Update the time of the game.
+     */
     private void updateTime() {
         timePassed++;
         updateScore(1); // Why increase score with one on every act? Shouldn't it only increase by touching Brick and decrease on live lost?
         showText("Time: " + timePassed / 50, 100, 50);
     }
     
+    /**
+     * Display the scoreboard.
+     */
     private void showScore() {
         showText("Score: " + score, 100, 80);
     }
     
+    /**
+     * Display the amount of lives the user has left.
+     */
+    private void showLives() {
+        showText("Lives: " + userLives, 100, 110);
+    }
+
+    /**
+     * Update the score of the game.
+     * @param amount The amount which should be added.
+     */
     public void updateScore(int amount) {
         score = score + amount;
         showScore();
+    }
+    
+    /**
+     * Update the amount of the uses's live
+     * @param amount The amount which should be added.
+     */
+    public void updateUserLive(int amount) {
+        userLives = userLives + amount;
+        showLives();
     }
 }
