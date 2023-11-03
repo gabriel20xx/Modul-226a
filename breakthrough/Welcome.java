@@ -63,6 +63,9 @@ public class Welcome extends World
         if (Greenfoot.isKeyDown("3")) {
             Greenfoot.setWorld(new Space(3));
         }
+        if (Greenfoot.isKeyDown("4")) {
+            Greenfoot.setWorld(new Space(4));
+        }
     }
     
     /**
@@ -85,5 +88,6 @@ public class Welcome extends World
         showText("1: THE CLASSIC", this.getWidth()/2, this.getHeight()/8*4);
         showText("2: RANDOMIZE", this.getWidth()/2, this.getHeight()/8*5);
         showText("3: OLD FASHION ", this.getWidth()/2, this.getHeight()/8*6);
+        showText("4: COLORS ", this.getWidth()/2, this.getHeight()/8*7);
     }
 }

@@ -37,8 +37,11 @@ public class Space extends World
         else if (gameNumber == 2) {
             playGameTwo();
         }
-        else  {
+        else if (gameNumber == 3) {
             playGameThree();
+        }
+        else if (gameNumber == 4) {
+            levelCreator();
         }
     }
     
@@ -83,6 +86,33 @@ public class Space extends World
              int y = Greenfoot.getRandomNumber( getHeight() );
              int color = 150 - Greenfoot.getRandomNumber(120);
              background.setColorAt(x, y, new Color(color,color,color));
+        }
+    }
+    
+    private void levelCreator() {
+        // Define the predefined level data
+        // The first value is the column number (between 1 and 10)
+        // The second value is the row number (between 1 and 16)
+        // The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold)
+        
+        int[][] level1 = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        for (int i = 0; i < level1.length; i++) {
+            int x = level1[i][0];
+            int y = level1[i][1];
+            int z = level1[i][2];
+    
+            int brickX = x * brickWidth + startWidth + brickWidth / 2;
+            int brickY = y * brickHeight + startHeight + brickHeight / 2;
+    
+            // Create a brick with the specified color
+            Brick brick = new Brick(z);
+    
+            addObject(brick, brickX, brickY);
         }
     }
     
@@ -154,27 +184,6 @@ public class Space extends World
         // 340 = Direction in Degrees, ballSpeed = Speed
         Ball ball = new Ball(340,ballSpeed);
         addObject(ball, 450, this.getHeight()/4*3);
-    }
-    
-    /**
-     * Erzeugt Bricks.
-     */
-    private void createBricks()
-    {
-        int rows = 16;
-        int columns = 10;
-        int startWidth = 50;
-        int startHeight = 120;
-        int brickWidth = 80;
-        int brickHeight = 24;
-        for (int y = 0; y < rows; y++)
-        {
-            for (int x = 0; x < columns; x++)
-            {
-                Brick brick = new Brick(1);
-                addObject(brick, x*brickWidth+startWidth, y*brickHeight+startHeight);
-            }
-        }
     }
     
     private void checkBricks() {
