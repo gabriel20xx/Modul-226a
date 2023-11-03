@@ -72,7 +72,7 @@ public class Welcome extends World
         String welcome = "Breakthrough";
         for(int x = 0; x < welcome.length() + 1; x++) {
             showText(welcome.substring(0,x), 400, 150);
-            Greenfoot.delay(4);
+            Greenfoot.delay(3);
         }
         showText("Press the number of the game you want to play", 400, 200);
         animationEnded = true;

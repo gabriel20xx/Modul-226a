@@ -12,30 +12,13 @@ public class Space extends World
     private int timePassed = 0;
     private double ballSpeed = 1;
     private int score;
+   
     /**
-     * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
-     */
-    public Space() 
-    {
-        super(854, 480, 1);
-        setBackground();
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.fill();
-        Greenfoot.setSpeed(50);
-        //createStars(300);
-        createBorders();
-        createPaddle();
-        // createBricks();
-        createBall();
-    }
-    
-    /**
-     * Erzeugt die Weltraum-Welt mit schwarzem Hintergrund und Sternen.
+     * Constructor for the Space world.
      */
     public Space(int gameNumber) 
     {
-        super(854, 480, 1);
+        super(800, 600, 1);
         setBackground();
         initializeGame();
         if (gameNumber == 1) {
@@ -47,7 +30,7 @@ public class Space extends World
         else  {
             playGameThree();
         }
-        showText("Level "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
+        showText("Game "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
     }
     
     /**
@@ -188,16 +171,16 @@ public class Space extends World
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
         if (bricks.isEmpty()) {
-            showText("You Won!", getWidth()/2, getHeight()/2);
-            Greenfoot.stop();
+            Greenfoot.delay(25);
+            Greenfoot.setWorld(new End(score, "You lost"));
         }
     }
     
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
-            showText("You Lost!", getWidth()/2, getHeight()/2);
-            Greenfoot.stop();
+            Greenfoot.delay(25);
+            Greenfoot.setWorld(new End(score, "You lost"));
         }
     }
     
