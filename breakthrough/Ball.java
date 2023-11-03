@@ -51,7 +51,7 @@ public class Ball extends Actor {
     }
     
     private void checkBrickCollision() {
-        if (isTouching(Brick.class)) {
+        if (isTouching(Brick.class) && blockedbrick == false) {
             Brick brick = new Brick();
             int height = brick.getImage().getHeight();
             int width = brick.getImage().getWidth();
@@ -62,29 +62,16 @@ public class Ball extends Actor {
             int xOffset = brick.getImage().getWidth()/2 + this.getImage().getWidth()/2;
             int yOffset = brick.getImage().getHeight()/2 + this.getImage().getHeight()/2;
             
-            List<Brick> bricksInRadius = getObjectsInRange(width, Brick.class);
+            List<Brick> bricksInRadius = getObjectsInRange(height / 2, Brick.class);
+            if (bricksInRadius.isEmpty()) {
+                bricksInRadius = getObjectsInRange(width / 2, Brick.class);
+            }
+            
             for (Brick bricks : bricksInRadius) {
                 int objX = bricks.getX();
                 int objY = bricks.getY();
                 int DiffX = objX - ballPosX;
                 int DiffY = objY - ballPosY;
-       
-                if (Math.abs(DiffX) <= width / 2) {
-                    if (Math.abs(DiffY) <= yOffset + 1) {
-                        // Top Edge
-                        if (direction > 180 && direction < 360) {
-                            double difference = 0;
-                            difference = 270 - direction;
-                            direction = 90 + difference;
-                        }
-                        // Bottom Edge
-                        else if (direction > 0 && direction < 180){
-                            double difference = 0;
-                            difference = 90 - direction;
-                            direction = 270 + difference;
-                        }
-                    } 
-                }
                 
                 if (Math.abs(DiffY) <= height / 2) {
                     if (DiffX == xOffset || DiffX == -xOffset) {
@@ -102,10 +89,30 @@ public class Ball extends Actor {
                         }
                     } 
                 }
+       
+                else if (Math.abs(DiffX) <= width / 2) {
+                    if (Math.abs(DiffY) <= yOffset + 1) {
+                        // Top Edge
+                        if (direction > 180 && direction < 360) {
+                            double difference = 0;
+                            difference = 270 - direction;
+                            direction = 90 + difference;
+                        }
+                        // Bottom Edge
+                        else if (direction > 0 && direction < 180){
+                            double difference = 0;
+                            difference = 90 - direction;
+                            direction = 270 + difference;
+                        }
+                    } 
+                }
             }
             // Update Score
             Space space = (Space) getWorld();
             space.updateScore(35);
+            blockedbrick = true;
+        } else {
+            blockedbrick = false;
         }
     }
     

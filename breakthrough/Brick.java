@@ -16,7 +16,7 @@ public class Brick extends Actor {
         if (isTouching(Ball.class)) {
             getWorld().removeObject(this);
         }
-        }
+    }
     
     /**
      * Check if brick is touching another brick-
