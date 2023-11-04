@@ -10,4 +10,6 @@ comment2.text=\r\n\ Tut,\ was\ eie\ Leiste\ so\ macht.\ (Das\ hei\u00DFt\:\ meis
 comment3.params=
 comment3.target=void\ checkKeys()
 comment3.text=\r\n\ Pr\u00FCft,\ ob\ irgendeine\ Taste\ gedr\u00FCckt\ wurde,\ und\ reagiert\ darauf.\r\n
-numComments=4
+comment4.params=
+comment4.target=void\ checkBallTouching()
+numComments=5

@@ -26,6 +26,7 @@ public class Paddle extends Mover
     public void act()
     {
         checkKeys();
+        checkBallTouching();
     }
     
     /**
@@ -67,4 +68,11 @@ public class Paddle extends Mover
             }
         }
     }  
+    
+    private void checkBallTouching() {
+        if (isTouching(Ball.class)) {
+            Space space = (Space) getWorld();
+            space.updateScore(10);
+        }
+    }
 }

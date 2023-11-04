@@ -10,7 +10,7 @@ import java.util.*;
 public class Space extends World
 {
     private int timePassed = 0;
-    private double ballSpeed = 3;
+    private double ballSpeed = 4;
     private int score, userLives;
     private int gameNumber;
     
@@ -31,18 +31,7 @@ public class Space extends World
         setBackground();
         initializeGame();
         this.gameNumber = gameNumber;
-        if (gameNumber == 1) {
-            playGameOne();
-        }
-        else if (gameNumber == 2) {
-            playGameTwo();
-        }
-        else if (gameNumber == 3) {
-            playGameThree();
-        }
-        else if (gameNumber == 4) {
-            levelCreator();
-        }
+        levelCreator(gameNumber);
         showText("Game "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
         userLives = 3;
     }
@@ -96,77 +85,107 @@ public class Space extends World
         }
     }
     
-    private void levelCreator() {
+    private void levelCreator(int level) {
         // Define the predefined level data
         // The first value is the column number (between 1 and 10)
         // The second value is the row number (between 1 and 16)
         // The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold)
+        // Level 1
+        if (level == 1) {
+            int[][] level1 = {
+                {1, 2, 1},
+                {10, 2, 1},
+                {2, 3, 1},
+                {9, 3, 1},
+                {3, 4, 1},
+                {8, 4, 1},
+                {4, 3, 1},
+                {7, 3, 1},
+                {4, 5, 5},
+                {7, 5, 5},
+                {5, 5, 6},
+                {6, 5, 6},
+                {2, 6, 2},
+                {9, 6, 2},
+                {3, 6, 3},
+                {8, 6, 3},
+                {2, 7, 2},
+                {9, 7, 2},
+                {5, 7, 7},
+                {6, 7, 7},
+                {2, 8, 2},
+                {9, 8, 2},
+                {3, 8, 3},
+                {8, 8, 3},
+                {4, 9, 5},
+                {7, 9, 5},
+                {5, 9, 6},
+                {6, 9, 6},
+                {3, 10, 4},
+                {8, 10, 4},
+                {5, 10, 4},
+                {6, 10, 4},
+                {1, 11, 1},
+                {2, 11, 1},
+                {3, 11, 1},
+                {4, 11, 1},
+                {7, 11, 1},
+                {8, 11, 1},
+                {9, 11, 1},
+                {10, 11, 1},
+            };
+            
+            for (int i = 0; i < level1.length; i++) {
+                int x = level1[i][0]-1;
+                int y = level1[i][1]-1;
+                int color = level1[i][2];
         
-        int[][] level1 = {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 10, 9}
-        };
+                int brickX = x * brickWidth + startWidth + brickWidth / 2;
+                int brickY = y * brickHeight + startHeight + brickHeight / 2;
         
-        for (int i = 0; i < level1.length; i++) {
-            int x = level1[i][0];
-            int y = level1[i][1];
-            int color = level1[i][2];
-    
-            int brickX = x * brickWidth + startWidth + brickWidth / 2;
-            int brickY = y * brickHeight + startHeight + brickHeight / 2;
-    
-            Brick brick = new Brick(color);
-            addObject(brick, brickX, brickY);
-        }
-    }
-    
-    /**
-     * Brick places of game one.
-     */
-    private void playGameOne() {
-        for (int y = 0; y < rows; y++)
-        {
-            for (int x = 0; x < columns; x++)
+                Brick brick = new Brick(color);
+                addObject(brick, brickX, brickY);
+            }
+        } 
+        // Level 2
+        else if (level == 2) {
+            for (int y = 0; y < rows; y++)
             {
+                for (int x = 0; x < columns; x++)
+                {
+                    Brick brick = new Brick(1);
+                    addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+        } 
+        // Level 3
+        else if (level == 3) {
+            int counter = 0;
+            while (counter < 20) {
                 Brick brick = new Brick(1);
-                addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                addObject(brick, (Greenfoot.getRandomNumber(columns) * brickWidth) + startWidth + (brickWidth / 2), (Greenfoot.getRandomNumber(rows) * brickHeight) + startHeight + (brickHeight / 2));
+                if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
+                    removeObject(brick);
+                }
+                else {
+                    counter++;
+                }
             }
-        }
-    }
-    
-    /**
-     * Brick places of game two.
-     */
-    private void playGameTwo() {
-        int counter = 0;
-        while (counter < 20) {
-            Brick brick = new Brick(1);
-            addObject(brick, (Greenfoot.getRandomNumber(columns) * brickWidth) + startWidth + (brickWidth / 2), (Greenfoot.getRandomNumber(rows) * brickHeight) + startHeight + (brickHeight / 2));
-            if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
-                removeObject(brick);
+        } 
+        // Level 4
+        else if (level == 4) {
+            // Generating left half
+            for (int x = 0+1; x < columns/2; x += 3) {
+                for (int y = 0; y < rows; y++) {
+                    addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
             }
-            else {
-                counter++;
-            }
-        }
-    }
-    
-    /**
-     * Brick places of game three.
-     */
-    private void playGameThree() {
-        // Generating left half
-        for (int x = 0+1; x < columns/2; x += 3) {
-            for (int y = 0; y < rows; y++) {
-                addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-            }
-        }
-        
-        // Generating right half
-        for (int x = columns/2; x < columns; x += 3) {
-            for (int y = 0; y < rows; y++) {
-                addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+            
+            // Generating right half
+            for (int x = columns/2; x < columns; x += 3) {
+                for (int y = 0; y < rows; y++) {
+                    addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
             }
         }
     }
@@ -221,6 +240,7 @@ public class Space extends World
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
             updateUserLive(-1);
+            ballSpeed = 4;
             updateScore(-500);
             if(userLives == 0) {
                 Greenfoot.delay(25);
@@ -229,7 +249,6 @@ public class Space extends World
             else {
                 createBall();
             }
-
         }
     }
     
@@ -239,20 +258,11 @@ public class Space extends World
     private void increaseSpeed() {
         if (timePassed % 60 == 0) {
             List<Ball> balls = getObjects(Ball.class);
-            ballSpeed+=0.01;
+            ballSpeed+=0.1;
             for (Ball ball : balls) {
                 ball.speed = ballSpeed;
             }
         }
-    }
-    
-    /**
-     * Update the time of the game.
-     */
-    private void updateTime() {
-        timePassed++;
-        updateScore(1); // Why increase score with one on every act? Shouldn't it only increase by touching Brick and decrease on live lost?
-        showText("Time: " + timePassed / 50, this.getWidth()/6*5, this.getHeight()/12*3);
     }
     
     /**
@@ -262,10 +272,16 @@ public class Space extends World
         showText("Score: " + score, this.getWidth()/6*5, this.getHeight()/12*4);
     }
     
+    /**
+     * Display the level.
+     */
     private void showLevel(int gameNumber) {
         showText("Level "+ gameNumber, this.getWidth()/6*5, this.getHeight()/12*2);
     }
     
+    /**
+     * Display the title.
+     */
     private void showTitle() {
         showText("Breakthrough", this.getWidth()/12, this.getHeight()/12*1);
     }
@@ -274,9 +290,17 @@ public class Space extends World
      * Display the amount of lives the user has left.
      */
     private void showLives() {
-        showText("Lives: " + userLives, 100, 110);
+        showText("Lives: " + userLives, this.getWidth()/6*5, this.getHeight()/12*5);
     }
-
+    
+    /**
+     * Update the time of the game.
+     */
+    private void updateTime() {
+        timePassed++;
+        showText("Time: " + timePassed / 50, this.getWidth()/6*5, this.getHeight()/12*3);
+    }
+    
     /**
      * Update the score of the game.
      * @param amount The amount which should be added.

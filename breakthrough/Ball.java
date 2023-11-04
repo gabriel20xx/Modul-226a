@@ -8,11 +8,12 @@ import java.util.*;
  * @author Cornel Forster
  */
 public class Ball extends Actor {
-    private double direction; // Direction in degrees
-    public double speed; // Speed of the object
-    private double fractionalDistanceX = 0.0; // Accumulate fractional distance for X
-    private double fractionalDistanceY = 0.0; // Accumulate fractional distance for Y
+    private double direction;
+    public double speed;
+    private double fractionalDistanceX = 0.0;
+    private double fractionalDistanceY = 0.0;
     
+    private boolean first = true;
     private boolean blockedsideborder = false;
     private boolean blockedtopborder = false;
     private boolean blockedpaddle = false;
@@ -24,10 +25,15 @@ public class Ball extends Actor {
     }
 
     public void act() {
+        firstInitialize();
         moveInDirection();
         checkCollision();
         normalizeDirection();
         checkBottomBorder();
+    }
+    
+    private void firstInitialize() {
+        first = true;
     }
 
     private void moveInDirection() {
@@ -146,10 +152,6 @@ public class Ball extends Actor {
                 } else {
                     direction += 180;
                 }
-    
-                // Update Score
-                Space space = (Space) getWorld();
-                space.updateScore(35);
                 blockedbrick = true;
             }
         } else {

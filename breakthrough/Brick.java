@@ -24,12 +24,16 @@ public class Brick extends Actor {
                 count++;
                 blockedball = true;
                 if (count >= 2) {
+                    Space space = (Space) getWorld();
+                    space.updateScore(50);
                     getWorld().removeObject(this);
                 }
             } 
             else if (color == 10) {
                 // Do Nothing
             } else {
+                Space space = (Space) getWorld();
+                space.updateScore(50);
                 getWorld().removeObject(this);
             }
         } else {

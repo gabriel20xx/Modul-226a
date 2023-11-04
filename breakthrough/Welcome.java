@@ -85,9 +85,9 @@ public class Welcome extends World
      * Display the different games.
      */
     private void showGames() {
-        showText("1: THE CLASSIC", this.getWidth()/2, this.getHeight()/8*4);
-        showText("2: RANDOMIZE", this.getWidth()/2, this.getHeight()/8*5);
-        showText("3: OLD FASHION ", this.getWidth()/2, this.getHeight()/8*6);
-        showText("4: COLORS ", this.getWidth()/2, this.getHeight()/8*7);
+        showText("1: COLORS", this.getWidth()/2, this.getHeight()/8*4);
+        showText("2: THE CLASSIC", this.getWidth()/2, this.getHeight()/8*5);
+        showText("3: RANDOMIZE", this.getWidth()/2, this.getHeight()/8*6);
+        showText("4: OLD FASHION", this.getWidth()/2, this.getHeight()/8*7);
     }
 }
