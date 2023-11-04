@@ -1,7 +1,7 @@
 #Greenfoot project file
 class.Ball.image=Ball.png
 class.Brick.image=Brick_White.png
-class.Paddle.image=Leiste.png
+class.Paddle.image=Paddle.png
 class.Sideborder.image=Sideborder.png
 class.Space.image=space.jpg
 class.Topborder.image=Topborder.png
@@ -51,10 +51,10 @@ dependency8.type=UsesDependency
 dependency9.from=Ball
 dependency9.to=Paddle
 dependency9.type=UsesDependency
-editor.fx.0.height=873
-editor.fx.0.width=1263
-editor.fx.0.x=435
-editor.fx.0.y=131
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
 height=905
 package.numDependencies=15
 package.numTargets=11
