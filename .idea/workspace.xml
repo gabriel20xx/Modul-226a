@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7f4ce31f-712a-44ae-af3f-856d51d89820" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/breakthrough/End.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/breakthrough/End.ctxt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/breakthrough/End.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/breakthrough/images/End.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Brick.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Brick.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Space.class" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Space.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Space.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Space.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Welcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Welcome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Welcome.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Welcome.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/Welcome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/breakthrough/project.greenfoot" beforeDir="false" afterPath="$PROJECT_DIR$/breakthrough/project.greenfoot" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2XiUpu1yFGRRLiTUCDJFWeD9UjR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging master",
+    "last_opened_file_path": "C:/Users/gabri/OneDrive/School/Informatiker/Berufsschule/Modul 226/Projekt/Modul-226a"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f4ce31f-712a-44ae-af3f-856d51d89820" name="Changes" comment="" />
+      <created>1699111581659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699111581659</updated>
+    </task>
+    <servers />
+  </component>
+</project>
