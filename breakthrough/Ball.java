@@ -8,12 +8,12 @@ import java.util.*;
  * @author Cornel Forster
  */
 public class Ball extends Actor {
+    private int delayTimer = 100;
     private double direction;
     public double speed;
     private double fractionalDistanceX = 0.0;
     private double fractionalDistanceY = 0.0;
     
-    private boolean first = true;
     private boolean blockedsideborder = false;
     private boolean blockedtopborder = false;
     private boolean blockedpaddle = false;
@@ -25,15 +25,14 @@ public class Ball extends Actor {
     }
 
     public void act() {
-        firstInitialize();
-        moveInDirection();
-        checkCollision();
-        normalizeDirection();
-        checkBottomBorder();
-    }
-    
-    private void firstInitialize() {
-        first = true;
+        if (delayTimer > 0) {
+            delayTimer--;
+        } else {
+            moveInDirection();
+            checkCollision();
+            normalizeDirection();
+            checkBottomBorder();
+        }
     }
 
     private void moveInDirection() {
