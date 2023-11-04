@@ -162,7 +162,7 @@ public class Space extends World
         else if (level == 3) {
             int counter = 0;
             while (counter < 20) {
-                Brick brick = new Brick(1);
+                Brick brick = new Brick(Greenfoot.getRandomNumber(10)+1);
                 addObject(brick, (Greenfoot.getRandomNumber(columns) * brickWidth) + startWidth + (brickWidth / 2), (Greenfoot.getRandomNumber(rows) * brickHeight) + startHeight + (brickHeight / 2));
                 if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
                     removeObject(brick);
