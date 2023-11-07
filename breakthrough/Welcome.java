@@ -79,6 +79,7 @@ public class Welcome extends World
             Greenfoot.delay(3);
         }
         showText("Press the number of the mode you want to play", this.getWidth()/2, this.getHeight()/8*3);
+        showText("Made by Gabriel Franz and Cornel Forster", this.getWidth()/2, this.getHeight()/16*15);
         animationEnded = true;
     }
     
