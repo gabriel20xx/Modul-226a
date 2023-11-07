@@ -8,7 +8,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Paddle extends Mover
+public class Paddle extends Actor
 {
     private int moveAmount = 6;
     private int type;

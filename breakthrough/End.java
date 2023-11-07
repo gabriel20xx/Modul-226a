@@ -24,13 +24,12 @@ public class End extends World
     public void act() {
         if (!animationAlreadyShowed) {
         for(int x = 0; x < statusMessage.length() + 1; x++) {
-            showText(statusMessage.substring(0,x), 200, 150);
+            showText(statusMessage.substring(0,x), this.getWidth()/2, this.getHeight()/5*1);
             Greenfoot.delay(5);
         }
-        showText(String.format("Score: %d", score), 600, 150);
-        showText(String.format("Lives: %d", lives), 600, 100);
+        showText(String.format("Your Score: %d", score), this.getWidth()/2, this.getHeight()/5*2);
 
-        showText("Press enter to choose a new game", 400, 100);
+        showText("Press enter to choose a new game", this.getWidth()/2, this.getHeight()/5*4);
         animationAlreadyShowed = !animationAlreadyShowed;
         }
         if(Greenfoot.isKeyDown("enter")) {
