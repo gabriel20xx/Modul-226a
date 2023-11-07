@@ -218,7 +218,7 @@ public class Space extends World
     private void createBall()
     {
         // 340 = Direction in Degrees, ballSpeed = Speed
-        Ball ball = new Ball(340,ballSpeed);
+        Ball ball = new Ball(315,ballSpeed);
         addObject(ball, 450, this.getHeight()/4*3);
     }
     
