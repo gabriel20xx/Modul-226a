@@ -10,6 +10,7 @@ import java.util.*;
 public class Welcome extends World
 {
     private boolean animationEnded;
+    public static int mode;
     /**
      * Constructor to create a world.
      */
@@ -55,17 +56,17 @@ public class Welcome extends World
             showGames();
         }
         if (Greenfoot.isKeyDown("1")) {
+            mode = 1;
             Greenfoot.setWorld(new Menu());
         }
-        /*if (Greenfoot.isKeyDown("2")) {
-            Greenfoot.setWorld(new Space(2));
+        if (Greenfoot.isKeyDown("2")) {
+            mode = 2;
+            Greenfoot.setWorld(new Menu());
         }
         if (Greenfoot.isKeyDown("3")) {
-            Greenfoot.setWorld(new Space(3));
+            mode = 3;
+            Greenfoot.setWorld(new Menu());
         }
-        if (Greenfoot.isKeyDown("4")) {
-            Greenfoot.setWorld(new Space(4));
-        }*/
     }
     
     /**

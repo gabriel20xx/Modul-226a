@@ -181,7 +181,7 @@ public class Ball extends Actor {
         if (isTouching(Paddle.class) && blockedpaddle == false) {
             if (direction > 0 && direction < 180) {
                 // Implement Callculation
-                Paddle paddle = new Paddle();
+                Paddle paddle = new Paddle(1);
                 int width = paddle.getImage().getWidth();
                 List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
             

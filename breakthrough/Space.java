@@ -208,8 +208,14 @@ public class Space extends World
      */
     private void createPaddle()
     {
-        Paddle paddle = new Paddle();
-        addObject(paddle, 450, this.getHeight() - this.getHeight()/ 24);
+        int mode = Welcome.mode;
+        if (mode == 2) {
+            Paddle paddle2 = new Paddle(2);
+            addObject(paddle2, 450, this.getHeight() - this.getHeight()/ 12);
+        }
+        
+        Paddle paddle1 = new Paddle(1);
+        addObject(paddle1, 450, this.getHeight() - this.getHeight()/ 24);
     }
     
     /**
