@@ -14,6 +14,7 @@ public class Ball extends Actor {
     private double fractionalDistanceX = 0.0;
     private double fractionalDistanceY = 0.0;
     
+    private int blockedborderpaddle = 5;
     private boolean blockedsideborder = false;
     private boolean blockedtopborder = false;
     private boolean blockedpaddle = false;
@@ -73,9 +74,11 @@ public class Ball extends Actor {
     
     private void checkCollision() {
         // Check for collision with two objects
-        if ((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) {
+        if (((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) && blockedborderpaddle <= 0) {
             direction += 180;
+            blockedborderpaddle = this.blockedborderpaddle;
         } else {
+            blockedborderpaddle--;
             checkBrickCollision();
             checkPaddleCollision();
             checkSideborderCollision();

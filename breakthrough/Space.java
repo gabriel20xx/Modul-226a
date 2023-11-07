@@ -11,8 +11,7 @@ public class Space extends World
 {
     private int timePassed = 0;
     private double ballSpeed = 4;
-    private int score, userLives;
-    private int gameNumber;
+    private int gameNumber, score, userLives;
     
     // For level creation
     private static final int rows = 16;
@@ -246,11 +245,11 @@ public class Space extends World
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
+            Greenfoot.delay(100);
             updateUserLive(-1);
-            ballSpeed = 4;
+            ballSpeed = this.ballSpeed;
             updateScore(-500);
             if(userLives == 0) {
-                Greenfoot.delay(25);
                 Greenfoot.setWorld(new End(score, userLives, "You lost"));
             }
             else {
