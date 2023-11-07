@@ -25,15 +25,16 @@ public class Space extends World
     /**
      * Constructor for the Space world.
      */
-    public Space(int gameNumber) 
+    public Space(int gameNumber, int score, int userLives) 
     {
         super(1280, 720, 1);
         setBackground();
         initializeGame();
         this.gameNumber = gameNumber;
+        this.score = score;
+        this.userLives = userLives;
         levelCreator(gameNumber);
         showText("Game "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
-        userLives = 3;
     }
     
     /**
@@ -208,8 +209,14 @@ public class Space extends World
      */
     private void createPaddle()
     {
-        Paddle paddle = new Paddle();
-        addObject(paddle, 450, this.getHeight() - this.getHeight()/ 24);
+        Paddle paddle1 = new Paddle(1);
+        addObject(paddle1, 450, this.getHeight() - this.getHeight()/ 12);
+        
+        int mode = Welcome.mode;
+        if (mode == 2) {
+            Paddle paddle2 = new Paddle(2);
+            addObject(paddle2, 450, this.getHeight() - this.getHeight()/ 24);
+        }
     }
     
     /**
@@ -229,7 +236,7 @@ public class Space extends World
         List<Brick> bricks = getObjects(Brick.class);
         if (bricks.isEmpty()) {
             Greenfoot.delay(25);
-            Greenfoot.setWorld(new End(score, userLives, "You lost"));
+            Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
         }
     }
     

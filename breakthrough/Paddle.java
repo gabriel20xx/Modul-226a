@@ -11,12 +11,15 @@ import java.util.*;
 public class Paddle extends Mover
 {
     private int moveAmount = 6;
+    private int type;
+    private int mode;
     /**
      * Initialisiert diese Leiste.
      */
-    public Paddle()
+    public Paddle(int type)
     {
-        // Code
+        this.type = type;
+        mode = Welcome.mode;
     }
 
     /**
@@ -34,37 +37,111 @@ public class Paddle extends Mover
      */
     private void checkKeys() 
     {   
-        if(Greenfoot.isKeyDown("shift")) {
-            moveAmount = 18;
-        } else {
-            moveAmount = 6;
-        }
-        if (Greenfoot.isKeyDown("left")) {
-            if (isTouching(Sideborder.class)) {
-                // Find the first 'Border' object this object is touching
-                Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
-                if (border != null) {
-                    int xCoordinateBorder = border.getX();
-                    if (getX() < xCoordinateBorder) {
+        if (mode == 1) {
+            if(Greenfoot.isKeyDown("shift")||Greenfoot.isKeyDown("space")) {
+                    moveAmount = 18;
+                } else {
+                    moveAmount = 6;
+                }
+            if (Greenfoot.isKeyDown("a")||Greenfoot.isKeyDown("left")) {
+                if (isTouching(Sideborder.class)) {
+                    // Find the first 'Border' object this object is touching
+                    Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                    if (border != null) {
+                        int xCoordinateBorder = border.getX();
+                        if (getX() < xCoordinateBorder) {
+                            setLocation(getX() - moveAmount, getY());
+                        }
+                    }
+                } else {
+                    setLocation(getX() - moveAmount, getY());
+                }
+            }      
+            if(Greenfoot.isKeyDown("d")||Greenfoot.isKeyDown("right")) {
+                if (isTouching(Sideborder.class)) {
+                    // Find the first 'Border' object this object is touching
+                    Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                    if (border != null) {
+                        int xCoordinateBorder = border.getX();
+                        if (getX() > xCoordinateBorder) {
+                            setLocation(getX() + moveAmount, getY());
+                        }
+                    }
+                } else {
+                    setLocation(getX() + moveAmount, getY());
+                }
+            }
+        } 
+        else if (mode == 2) {
+            if (type == 1) {
+                if(Greenfoot.isKeyDown("shift")) {
+                    moveAmount = 18;
+                } else {
+                    moveAmount = 6;
+                }
+                if (Greenfoot.isKeyDown("a")) {
+                    if (isTouching(Sideborder.class)) {
+                        // Find the first 'Border' object this object is touching
+                        Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                        if (border != null) {
+                            int xCoordinateBorder = border.getX();
+                            if (getX() < xCoordinateBorder) {
+                                setLocation(getX() - moveAmount, getY());
+                            }
+                        }
+                    } else {
                         setLocation(getX() - moveAmount, getY());
                     }
-                }
-            } else {
-                setLocation(getX() - moveAmount, getY());
-            }
-        }      
-        if(Greenfoot.isKeyDown("right")) {
-            if (isTouching(Sideborder.class)) {
-                // Find the first 'Border' object this object is touching
-                Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
-                if (border != null) {
-                    int xCoordinateBorder = border.getX();
-                    if (getX() > xCoordinateBorder) {
+                }      
+                if(Greenfoot.isKeyDown("d")) {
+                    if (isTouching(Sideborder.class)) {
+                        // Find the first 'Border' object this object is touching
+                        Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                        if (border != null) {
+                            int xCoordinateBorder = border.getX();
+                            if (getX() > xCoordinateBorder) {
+                                setLocation(getX() + moveAmount, getY());
+                            }
+                        }
+                    } else {
                         setLocation(getX() + moveAmount, getY());
                     }
                 }
-            } else {
-                setLocation(getX() + moveAmount, getY());
+            } 
+            else if (type == 2) {
+                if(Greenfoot.isKeyDown("space")) {
+                    moveAmount = 18;
+                } else {
+                    moveAmount = 6;
+                }
+                if (Greenfoot.isKeyDown("left")) {
+                    if (isTouching(Sideborder.class)) {
+                        // Find the first 'Border' object this object is touching
+                        Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                        if (border != null) {
+                            int xCoordinateBorder = border.getX();
+                            if (getX() < xCoordinateBorder) {
+                                setLocation(getX() - moveAmount, getY());
+                            }
+                        }
+                    } else {
+                        setLocation(getX() - moveAmount, getY());
+                    }
+                }      
+                if(Greenfoot.isKeyDown("right")) {
+                    if (isTouching(Sideborder.class)) {
+                        // Find the first 'Border' object this object is touching
+                        Sideborder border = (Sideborder) getOneIntersectingObject(Sideborder.class);
+                        if (border != null) {
+                            int xCoordinateBorder = border.getX();
+                            if (getX() > xCoordinateBorder) {
+                                setLocation(getX() + moveAmount, getY());
+                            }
+                        }
+                    } else {
+                        setLocation(getX() + moveAmount, getY());
+                    }
+                }
             }
         }
     }  

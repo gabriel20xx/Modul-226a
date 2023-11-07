@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Space
 comment0.text=\r\n\ Ein\ Weltraum\ mit\ Sternen\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
-comment1.params=gameNumber
-comment1.target=Space(int)
+comment1.params=gameNumber\ score\ userLives
+comment1.target=Space(int,\ int,\ int)
 comment1.text=\r\n\ Constructor\ for\ the\ Space\ world.\r\n
 comment10.params=
 comment10.target=void\ checkBricks()

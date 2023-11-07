@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Paddle
 comment0.text=\r\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \r\n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
-comment1.params=
-comment1.target=Paddle()
+comment1.params=type
+comment1.target=Paddle(int)
 comment1.text=\r\n\ Initialisiert\ diese\ Leiste.\r\n
 comment2.params=
 comment2.target=void\ act()

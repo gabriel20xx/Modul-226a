@@ -181,14 +181,14 @@ public class Ball extends Actor {
         if (isTouching(Paddle.class) && blockedpaddle == false) {
             if (direction > 0 && direction < 180) {
                 // Implement Callculation
-                Paddle paddle = new Paddle();
+                Paddle paddle = new Paddle(1);
                 int width = paddle.getImage().getWidth();
                 List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
             
                 if (!paddles.isEmpty()) {
                     Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
                     int distance = getX() - closestPaddle.getX();
-                    direction = 270 + (distance*(90/(width/2)));
+                    direction = 270 + (distance*(90/(width/1.5)));
                 }
             }
             blockedpaddle = true;
