@@ -188,7 +188,7 @@ public class Ball extends Actor {
                 if (!paddles.isEmpty()) {
                     Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
                     int distance = getX() - closestPaddle.getX();
-                    direction = 270 + (distance*(90/(width/2)));
+                    direction = 270 + (distance*(90/(width/1.5)));
                 }
             }
             blockedpaddle = true;

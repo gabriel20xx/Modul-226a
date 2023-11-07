@@ -136,7 +136,7 @@ public class Menu extends World
                         
                         
                         if (selectorX == x && selectorY == y) {
-                        Greenfoot.setWorld(new Space(level));
+                        Greenfoot.setWorld(new Space(level, 0, 3));
                         } else {
                             level++;
                         }
