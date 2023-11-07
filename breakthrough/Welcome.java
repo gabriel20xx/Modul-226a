@@ -88,6 +88,6 @@ public class Welcome extends World
     private void showGames() {
         showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*4);
         showText("2: COOP", this.getWidth()/2, this.getHeight()/8*5);
-        showText("3: PVP", this.getWidth()/2, this.getHeight()/8*6);
+        showText("3: PVP (Work in progress)", this.getWidth()/2, this.getHeight()/8*6);
     }
 }
