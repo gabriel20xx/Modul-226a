@@ -12,6 +12,7 @@ public class Space extends World
     private int timePassed = 0;
     private double ballSpeed = 4;
     private int gameNumber, score, userLives;
+    private int lastGame = 4;
     
     // For level creation
     private static final int rows = 16;
@@ -234,8 +235,12 @@ public class Space extends World
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
         if (bricks.isEmpty()) {
-            Greenfoot.delay(25);
-            Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
+            if (gameNumber <= lastGame) {
+                Greenfoot.delay(25);
+                Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
+            } else {
+                Greenfoot.setWorld(new End(score, userLives, "You Won"));
+            }
         }
     }
     
