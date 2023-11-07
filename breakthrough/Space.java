@@ -247,7 +247,7 @@ public class Space extends World
         if (balls.isEmpty()) {
             Greenfoot.delay(100);
             updateUserLive(-1);
-            ballSpeed = this.ballSpeed;
+            ballSpeed = 4;
             updateScore(-500);
             if(userLives == 0) {
                 Greenfoot.setWorld(new End(score, userLives, "You lost"));
