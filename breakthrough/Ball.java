@@ -51,8 +51,6 @@ public class Ball extends Actor {
             int foundPaddleX = foundPaddle.getX();
             int foundPaddleY = foundPaddle.getY();
             setLocation(foundPaddleX + foundPaddle.getImage().getWidth()/4, foundPaddleY - foundPaddle.getImage().getHeight());
-        } else {
-            // The actor of the desired class was not found.
         }
     }
 

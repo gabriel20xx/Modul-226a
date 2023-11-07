@@ -55,9 +55,9 @@ public class Welcome extends World
             showGames();
         }
         if (Greenfoot.isKeyDown("1")) {
-            Greenfoot.setWorld(new Space(1));
+            Greenfoot.setWorld(new Menu());
         }
-        if (Greenfoot.isKeyDown("2")) {
+        /*if (Greenfoot.isKeyDown("2")) {
             Greenfoot.setWorld(new Space(2));
         }
         if (Greenfoot.isKeyDown("3")) {
@@ -65,7 +65,7 @@ public class Welcome extends World
         }
         if (Greenfoot.isKeyDown("4")) {
             Greenfoot.setWorld(new Space(4));
-        }
+        }*/
     }
     
     /**
@@ -77,7 +77,7 @@ public class Welcome extends World
             showText(welcome.substring(0,x), this.getWidth()/2, 150);
             Greenfoot.delay(3);
         }
-        showText("Press the number of the game you want to play", this.getWidth()/2, this.getHeight()/8*3);
+        showText("Press the number of the mode you want to play", this.getWidth()/2, this.getHeight()/8*3);
         animationEnded = true;
     }
     
@@ -85,9 +85,8 @@ public class Welcome extends World
      * Display the different games.
      */
     private void showGames() {
-        showText("1: COLORS", this.getWidth()/2, this.getHeight()/8*4);
-        showText("2: THE CLASSIC", this.getWidth()/2, this.getHeight()/8*5);
-        showText("3: RANDOMIZE", this.getWidth()/2, this.getHeight()/8*6);
-        showText("4: OLD FASHION", this.getWidth()/2, this.getHeight()/8*7);
+        showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*4);
+        showText("2: COOP", this.getWidth()/2, this.getHeight()/8*5);
+        showText("3: PVP", this.getWidth()/2, this.getHeight()/8*6);
     }
 }
