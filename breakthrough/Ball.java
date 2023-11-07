@@ -26,12 +26,33 @@ public class Ball extends Actor {
 
     public void act() {
         if (delayTimer > 0) {
+            initial();
             delayTimer--;
         } else {
             moveInDirection();
             checkCollision();
             normalizeDirection();
             checkBottomBorder();
+        }
+    }
+    
+    private void initial() {
+        Class<Paddle> actorClass = Paddle.class;
+        Paddle foundPaddle = null;
+        
+        for (Actor object : getWorld().getObjects(Paddle.class)) {
+            if (object.getClass() == actorClass) {
+                foundPaddle = (Paddle) object;
+                break;
+            }
+        }
+        
+        if (foundPaddle != null) {
+            int foundPaddleX = foundPaddle.getX();
+            int foundPaddleY = foundPaddle.getY();
+            setLocation(foundPaddleX + foundPaddle.getImage().getWidth()/4, foundPaddleY - foundPaddle.getImage().getHeight());
+        } else {
+            // The actor of the desired class was not found.
         }
     }
 
