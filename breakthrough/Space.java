@@ -269,7 +269,7 @@ public class Space extends World
         if (balls.isEmpty()) {
             updateUserLive(-1);
             ballSpeed = 4;
-            updateScore(-500);
+            //updateScore(-500);
             Greenfoot.playSound("Death.mp3");
             Greenfoot.delay(100);
             if(userLives == 0) {

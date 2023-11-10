@@ -29,9 +29,7 @@ public class Brick extends Actor {
                     getWorld().removeObject(this);
                 }
             } 
-            else if (color == 10) {
-                // Do Nothing
-            } else {
+            else if (color != 10) {
                 Space space = (Space) getWorld();
                 space.updateScore(50);
                 getWorld().removeObject(this);

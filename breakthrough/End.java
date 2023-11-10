@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class End here.
@@ -12,6 +13,8 @@ public class End extends World
     private final String statusMessage;
     private boolean animationAlreadyShowed;
     private boolean typePlayerShowed;
+    private List<PlayerScore> playerScores;
+    
     public End(int score, int lives,String statusMessage) 
     {
         super(1280, 720, 1);
@@ -27,17 +30,17 @@ public class End extends World
     public void act() {
         if (!animationAlreadyShowed) {
         for(int x = 0; x < statusMessage.length() + 1; x++) {
-            showText(statusMessage.substring(0,x), this.getWidth()/2, this.getHeight()/5*1);
+            showText(statusMessage.substring(0,x), this.getWidth()/2, this.getHeight()/10*2);
             Greenfoot.delay(5);
         }
-        showText(String.format("Your Score: %d", score), this.getWidth()/2, this.getHeight()/5*2);
+        showText(String.format("Your Score: %d", score), this.getWidth()/2, this.getHeight()/10*3);
 
-        showText("Press enter to choose a new game", this.getWidth()/2, this.getHeight()/5*4);
+        showText("Press enter to choose a new game", this.getWidth()/2, this.getHeight()/10*8);
         animationAlreadyShowed = !animationAlreadyShowed;
         }
         Greenfoot.delay(20);
         if (animationAlreadyShowed && !typePlayerShowed) {
-            typeInPlayerName();
+            showScoreboard();
             typePlayerShowed = true;
         }
         if(Greenfoot.isKeyDown("enter")) {
@@ -78,9 +81,24 @@ public class End extends World
     }
     
     /**
-     * Type in player name for save
+     * Scoreboard (Top 3)
      */
-    public void typeInPlayerName() {
-        Greenfoot.ask("What is your name?");
+    private void showScoreboard() {
+        String username = Greenfoot.ask("What is your name?");
+        
+        PlayerScore playerScore = new PlayerScore(username, score);       
+        
+        String topPlayer1Name = PlayerScore.getName1();
+        int topPlayer1Score = PlayerScore.getScore1();
+
+        String topPlayer2Name = PlayerScore.getName2();
+        int topPlayer2Score = PlayerScore.getScore2();
+
+        String topPlayer3Name = PlayerScore.getName3();
+        int topPlayer3Score = PlayerScore.getScore3();
+        
+        showText("1. Name: " + topPlayer1Name + " ; Score: " + topPlayer1Score, this.getWidth()/2, this.getHeight()/10*5);
+        showText("2. Name: " + topPlayer2Name + " ; Score: " + topPlayer2Score, this.getWidth()/2, this.getHeight()/10*6);
+        showText("3. Name: " + topPlayer3Name + " ; Score: " + topPlayer3Score, this.getWidth()/2, this.getHeight()/10*7);
     }
 }
