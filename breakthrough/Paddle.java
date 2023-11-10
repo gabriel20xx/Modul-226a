@@ -19,7 +19,7 @@ public class Paddle extends Actor
     public Paddle(int type)
     {
         this.type = type;
-        mode = Welcome.mode;
+        mode = Mode.mode;
     }
 
     /**
