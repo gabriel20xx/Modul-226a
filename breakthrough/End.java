@@ -11,6 +11,7 @@ public class End extends World
     private final int score, lives;
     private final String statusMessage;
     private boolean animationAlreadyShowed;
+    private boolean typePlayerShowed;
     public End(int score, int lives,String statusMessage) 
     {
         super(1280, 720, 1);
@@ -20,6 +21,7 @@ public class End extends World
         setBackground();
         playSound();
         animationAlreadyShowed = false;
+        typePlayerShowed = false;
     }
     
     public void act() {
@@ -32,6 +34,11 @@ public class End extends World
 
         showText("Press enter to choose a new game", this.getWidth()/2, this.getHeight()/5*4);
         animationAlreadyShowed = !animationAlreadyShowed;
+        }
+        Greenfoot.delay(20);
+        if (animationAlreadyShowed && !typePlayerShowed) {
+            typeInPlayerName();
+            typePlayerShowed = true;
         }
         if(Greenfoot.isKeyDown("enter")) {
             Greenfoot.setWorld(new Welcome());
@@ -68,5 +75,12 @@ public class End extends World
      */
     public void playSound() {
         Greenfoot.playSound("Game-Over.mp3");
+    }
+    
+    /**
+     * Type in player name for save
+     */
+    public void typeInPlayerName() {
+        Greenfoot.ask("What is your name?");
     }
 }
