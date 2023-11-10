@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=Welcome
-comment0.text=\r\n\ Welcome\ screen\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
+comment0.target=Mode
+comment0.text=\r\n\ Mode\ selector\ screen\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=
-comment1.target=Welcome()
+comment1.target=Mode()
 comment1.text=\r\n\ Constructor\ to\ create\ a\ world.\r\n
 comment2.params=
 comment2.target=void\ setBackground()
@@ -17,6 +17,6 @@ comment5.params=
 comment5.target=void\ welcomeText()
 comment5.text=\r\n\ Show\ the\ welcome\ text.\r\n
 comment6.params=
-comment6.target=void\ playSound()
-comment6.text=\r\n\ Plays\ the\ intro\ sound.\r\n
+comment6.target=void\ showGames()
+comment6.text=\r\n\ Display\ the\ different\ games.\r\n
 numComments=7

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Space
-comment0.text=\r\n\ Ein\ Weltraum\ mit\ Sternen\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
+comment0.text=\r\n\ The\ space.\ Here\ happens\ the\ main\ game.\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=gameNumber\ score\ userLives
 comment1.target=Space(int,\ int,\ int)
 comment1.text=\r\n\ Constructor\ for\ the\ Space\ world.\r\n
@@ -51,7 +51,7 @@ comment3.target=void\ initializeGame()
 comment3.text=\r\n\ Initialize\ the\ actors\ which\ are\ always\ the\ same\r\n
 comment4.params=
 comment4.target=void\ act()
-comment4.text=\r\n\ The\ worlds\ act.\r\n
+comment4.text=\r\n\ Act\ method\ which\ runs\ in\ endless\ loop.\r\n
 comment5.params=number
 comment5.target=void\ createStars(int)
 comment5.text=\r\n\ Create\ random\ stars.\r\n\ @param\ number\ The\ number\ of\ stars.\r\n
@@ -60,8 +60,10 @@ comment6.target=void\ createPerk()
 comment6.text=\r\n\ Create\ a\ Perk\ with\ a\ chance\ from\ 100\ to\ 1.\r\n
 comment7.params=level
 comment7.target=int[][]\ levels(int)
+comment7.text=\r\n\ Method\ for\ the\ level\ lists\r\n
 comment8.params=level
 comment8.target=void\ levelCreator(int)
+comment8.text=\r\n\ Creates\ all\ the\ bricks\ in\ the\ level\r\n
 comment9.params=
 comment9.target=void\ createBorders()
 comment9.text=\r\n\ Create\ the\ borders\ for\ the\ game.\r\n

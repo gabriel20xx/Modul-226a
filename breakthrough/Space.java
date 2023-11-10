@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
- * Ein Weltraum mit Sternen
+ * The space. Here happens the main game.
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
@@ -35,7 +35,7 @@ public class Space extends World
         this.score = score;
         this.userLives = userLives;
         levelCreator(gameNumber);
-        showText("Game "+gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
+        showText("Game " + gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
     }
     
     /**
@@ -59,7 +59,7 @@ public class Space extends World
     }
     
     /**
-     * The worlds act.
+     * Act method which runs in endless loop.
      */
     public void act() {
         checkBricks();
@@ -82,8 +82,8 @@ public class Space extends World
     {
         GreenfootImage background = getBackground();             
         for (int i=0; i < number; i++) {            
-             int x = Greenfoot.getRandomNumber( getWidth() );
-             int y = Greenfoot.getRandomNumber( getHeight() );
+             int x = Greenfoot.getRandomNumber(getWidth());
+             int y = Greenfoot.getRandomNumber(getHeight());
              int color = 150 - Greenfoot.getRandomNumber(120);
              background.setColorAt(x, y, new Color(color,color,color));
         }
@@ -99,6 +99,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Method for the level lists
+     */
     private int[][] levels(int level) {
         int[][] level1 = {
                 {1, 2, 1},
@@ -155,6 +158,9 @@ public class Space extends World
         }
     }
     
+    /**
+     * Creates all the bricks in the level
+     */
     private void levelCreator(int level) {
         // Define the predefined level data
         // The first value is the column number (between 1 and 10)
@@ -240,7 +246,7 @@ public class Space extends World
         Paddle paddle1 = new Paddle(1);
         addObject(paddle1, 450, this.getHeight() - this.getHeight()/ 12);
         
-        int mode = Welcome.mode;
+        int mode = Mode.mode;
         if (mode == 2) {
             Paddle paddle2 = new Paddle(2);
             addObject(paddle2, 450, this.getHeight() - this.getHeight()/ 24);
@@ -252,7 +258,7 @@ public class Space extends World
      */
     private void createBall()
     {
-        // 340 = Direction in Degrees, ballSpeed = Speed
+        // 315 = Direction in Degrees, ballSpeed = Speed
         Ball ball = new Ball(315,ballSpeed);
         addObject(ball, 450, this.getHeight()/4*3);
     }

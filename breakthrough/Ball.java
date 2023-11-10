@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot
 import java.util.*;
 
 /**
- * Eine Murmel im Weltraum.
+ * A ball in space.
  *  
  * @author Gabriel Franz
  * @author Cornel Forster
@@ -37,6 +37,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Runs on the first few seconds of the game
+     */
     private void initial() {
         Class<Paddle> actorClass = Paddle.class;
         Paddle foundPaddle = null;
@@ -54,24 +57,36 @@ public class Ball extends Actor {
             setLocation(foundPaddleX + foundPaddle.getImage().getWidth()/4, foundPaddleY - foundPaddle.getImage().getHeight());
         }
     }
-
+    
+    /**
+     * Moves the ball in a direction.
+     */
     private void moveInDirection() {
-        double radians = Math.toRadians(direction); // Convert degrees to radians
-        double dx = Math.cos(radians) * speed; // Calculate horizontal movement
-        double dy = Math.sin(radians) * speed; // Calculate vertical movement
+         // Convert degrees to radians
+        double radians = Math.toRadians(direction);
+        
+        // Convert to horizontal and vertical movement
+        double dx = Math.cos(radians) * speed;
+        double dy = Math.sin(radians) * speed;
 
-        fractionalDistanceX += dx; // Accumulate the fractional distance for X
-        fractionalDistanceY += dy; // Accumulate the fractional distance for Y
+        // Save fractional distance in variable
+        fractionalDistanceX += dx;
+        fractionalDistanceY += dy;
 
         int wholePixelsX = (int) fractionalDistanceX;
         int wholePixelsY = (int) fractionalDistanceY;
 
-        setLocation(getX() + wholePixelsX, getY() + wholePixelsY); // Update the position
+        // Update the position
+        setLocation(getX() + wholePixelsX, getY() + wholePixelsY); 
 
-        fractionalDistanceX -= wholePixelsX; // Subtract the whole pixels from X
-        fractionalDistanceY -= wholePixelsY; // Subtract the whole pixels from Y
+        // Substract full pixels from fractional one
+        fractionalDistanceX -= wholePixelsX;
+        fractionalDistanceY -= wholePixelsY; 
     }
     
+    /**
+     * Checks the collision of the ball with two other objects
+     */
     private void checkCollision() {
         // Check for collision with two objects
         if (((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) && blockedborderpaddle <= 0) {
@@ -97,6 +112,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if the ball hits a brick
+     */
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
             Greenfoot.playSound("Hit.mp3");
@@ -153,9 +171,6 @@ public class Ball extends Actor {
                 int xDiffOffset = Math.abs(DiffX - xOffset);
                 int yDiffOffset = Math.abs(DiffY - yOffset);
                 
-                getWorld().showText("DiffX: "+xDiffOffset, getWorld().getWidth()/6*5, 500);
-                getWorld().showText("DiffY: "+yDiffOffset, getWorld().getWidth()/6*5, 550);
-                
                 if (xDiffOffset < yDiffOffset) {
                     // Ball comming from right
                     if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
@@ -192,6 +207,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if the ball hits a paddle
+     */
     private void checkPaddleCollision() {
         if (isTouching(Paddle.class) && blockedpaddle == false) {
             if (direction > 0 && direction < 180) {
@@ -212,6 +230,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if the ball collides with the sideborder
+     */
     private void checkSideborderCollision() {
         if (isTouching(Sideborder.class) && blockedsideborder == false) {
             // Right Sideboarder
@@ -232,6 +253,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if the ball collides with the topborder
+     */
     private void checkTopborderCollision() {
         if (isTouching(Topborder.class) && blockedtopborder == false) {
             if (direction > 180 && direction < 360) {
@@ -245,6 +269,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Make degree between 0 and 360
+     */
     private void normalizeDirection(){
         if (direction >= 360) {
             direction -= 360;
@@ -253,6 +280,9 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if the ball reached the bottom screen border
+     */
     private void checkBottomBorder(){
         if (getY() >= getWorld().getHeight() - 1) {
             getWorld().removeObject(this);

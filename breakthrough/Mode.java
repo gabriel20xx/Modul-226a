@@ -2,22 +2,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
- * Welcome screen
+ * Mode selector screen
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Welcome extends World
+public class Mode extends World
 {
-    private boolean animationEnded;
+    public static int mode;
     /**
      * Constructor to create a world.
      */
-    public Welcome() 
+    public Mode() 
     {
         super(1280, 720, 1);
         setBackground();
-        animationEnded = false;
+        welcomeText();
+        showGames();
     }
     
     /**
@@ -49,13 +50,13 @@ public class Welcome extends World
      * Act method which runs in endless loop.
      */
     public void act() {
-        // Initialize the animation and games only once.
-        if (!animationEnded) {
-            playSound();
-            welcomeText();
+        if (Greenfoot.isKeyDown("1")) {
+            mode = 1;
+            Greenfoot.setWorld(new Level());
         }
-        if (Greenfoot.isKeyDown("enter")) {
-            Greenfoot.setWorld(new Mode());
+        if (Greenfoot.isKeyDown("2")) {
+            mode = 2;
+            Greenfoot.setWorld(new Level());
         }
     }
     
@@ -63,20 +64,16 @@ public class Welcome extends World
      * Show the welcome text.
      */
     private void welcomeText() {
-        String welcome = "Breakthrough";
-        for(int x = 0; x < welcome.length() + 1; x++) {
-            showText(welcome.substring(0,x), this.getWidth()/2, 150);
-            Greenfoot.delay(18);
-        }
-        showText("Press enter to play", this.getWidth()/2, this.getHeight()/8*4);
-        showText("Made by Gabriel Franz and Cornel Forster", this.getWidth()/2, this.getHeight()/16*15);
-        animationEnded = true;
+        showText("Breakthrough", this.getWidth()/2, 150);
+        showText("Press the number of the mode you want to play", this.getWidth()/2, this.getHeight()/8*3);
     }
     
     /**
-     * Plays the intro sound.
+     * Display the different games.
      */
-    private void playSound() {
-        Greenfoot.playSound("Intro.mp3");
+    private void showGames() 
+    {
+        showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*4);
+        showText("2: CO-OP", this.getWidth()/2, this.getHeight()/8*5);
     }
 }
