@@ -1,15 +1,15 @@
 #BlueJ class context
 comment0.target=Paddle
-comment0.text=\r\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \r\n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
+comment0.text=\n\ Eine\ Rakete,\ die\ mit\ den\ Pfeiltasten\ gesteuert\ werden\ kann\:\ hoch,\ runter,\ links,\ rechts.\ \n\ Durch\ Dr\u00FCcken\ der\ Leerzeichentaste\ wird\ ein\ Schuss\ abgefeuert.\ \n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
 comment1.params=type
 comment1.target=Paddle(int)
-comment1.text=\r\n\ Initialisiert\ diese\ Leiste.\r\n
+comment1.text=\n\ Initialisiert\ diese\ Leiste.\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Tut,\ was\ eie\ Leiste\ so\ macht.\ (Das\ hei\u00DFt\:\ meistens\ herumfliegen\ und\ wenden,\r\n\ beschleunigen\ und\ schie\u00DFen,\ wenn\ die\ entsprechenden\ Tasten\ gedr\u00FCckt\ werden.)\r\n
+comment2.text=\n\ Tut,\ was\ eie\ Leiste\ so\ macht.\ (Das\ hei\u00DFt\:\ meistens\ herumfliegen\ und\ wenden,\n\ beschleunigen\ und\ schie\u00DFen,\ wenn\ die\ entsprechenden\ Tasten\ gedr\u00FCckt\ werden.)\n
 comment3.params=
 comment3.target=void\ checkKeys()
-comment3.text=\r\n\ Pr\u00FCft,\ ob\ irgendeine\ Taste\ gedr\u00FCckt\ wurde,\ und\ reagiert\ darauf.\r\n
+comment3.text=\n\ Pr\u00FCft,\ ob\ irgendeine\ Taste\ gedr\u00FCckt\ wurde,\ und\ reagiert\ darauf.\n
 comment4.params=
 comment4.target=void\ checkBallTouching()
 numComments=5

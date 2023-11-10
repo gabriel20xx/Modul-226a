@@ -64,6 +64,7 @@ public class Space extends World
     public void act() {
         checkBricks();
         checkBalls();
+        createPerk();
         increaseSpeed();
         updateTime();
         showTitle();
@@ -85,6 +86,16 @@ public class Space extends World
              int y = Greenfoot.getRandomNumber( getHeight() );
              int color = 150 - Greenfoot.getRandomNumber(120);
              background.setColorAt(x, y, new Color(color,color,color));
+        }
+    }
+    
+    /**
+     * Create a Perk with a chance from 100 to 1.
+     */
+    private void createPerk() {
+        if (Greenfoot.getRandomNumber(1000) < 1) {
+            // Perk will only be created in the upper half.
+            addObject(new Perk(), Greenfoot.getRandomNumber(10*80) + 50, Greenfoot.getRandomNumber(8*24) + 120);
         }
     }
     
