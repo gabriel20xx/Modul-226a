@@ -52,6 +52,7 @@ public class Welcome extends World
     public void act() {
         // Initialize the animation and games only once.
         if (!animationEnded) {
+            playSound();
             welcomeText();
             showGames();
         }
@@ -76,7 +77,7 @@ public class Welcome extends World
         String welcome = "Breakthrough";
         for(int x = 0; x < welcome.length() + 1; x++) {
             showText(welcome.substring(0,x), this.getWidth()/2, 150);
-            Greenfoot.delay(3);
+            Greenfoot.delay(18);
         }
         showText("Press the number of the mode you want to play", this.getWidth()/2, this.getHeight()/8*3);
         showText("Made by Gabriel Franz and Cornel Forster", this.getWidth()/2, this.getHeight()/16*15);
@@ -90,5 +91,9 @@ public class Welcome extends World
         showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*4);
         showText("2: COOP", this.getWidth()/2, this.getHeight()/8*5);
         showText("3: PVP (Work in progress)", this.getWidth()/2, this.getHeight()/8*6);
+    }
+    
+    private void playSound() {
+        Greenfoot.playSound("Intro.mp3");
     }
 }

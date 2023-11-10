@@ -13,6 +13,7 @@ public class Space extends World
     private double ballSpeed = 4;
     private int gameNumber, score, userLives;
     private int lastGame = 4;
+    private int soundCount = 30*50;
     
     // For level creation
     private static final int rows = 16;
@@ -69,6 +70,7 @@ public class Space extends World
         showScore();
         showLevel(gameNumber);
         showLives();
+        playSound();
     }
     
     /**
@@ -344,4 +346,15 @@ public class Space extends World
         userLives = userLives + amount;
         showLives();
     }
+    
+    /**
+     * Play ingame sound.
+     */
+    private void playSound() {
+        if (soundCount >= 30*50) {
+            Greenfoot.playSound("Ingame.mp3");
+            soundCount = 0;
+        }
+        soundCount++;
+    }   
 }
