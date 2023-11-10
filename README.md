@@ -1,3 +1,4 @@
+![Screenshot](Screenshot.png)
 # Breakthrough
 ## Introduction
 A game made by Gabriel Franz and Cornel Forster to get a grade in the Modul 226a.
