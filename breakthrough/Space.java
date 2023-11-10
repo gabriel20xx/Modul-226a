@@ -267,11 +267,11 @@ public class Space extends World
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
-            Greenfoot.delay(100);
             updateUserLive(-1);
             ballSpeed = 4;
             updateScore(-500);
             Greenfoot.playSound("Death.mp3");
+            Greenfoot.delay(100);
             if(userLives == 0) {
                 Greenfoot.setWorld(new End(score, userLives, "You lost"));
             }
