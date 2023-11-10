@@ -271,6 +271,7 @@ public class Space extends World
             updateUserLive(-1);
             ballSpeed = 4;
             updateScore(-500);
+            Greenfoot.playSound("Death.mp3");
             if(userLives == 0) {
                 Greenfoot.setWorld(new End(score, userLives, "You lost"));
             }
