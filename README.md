@@ -12,6 +12,12 @@ Additionally you can increase the speed of your paddle with left "shift" or "spa
 If you play in co-op mode, one player controls only one paddle (there are two).
 The first player controls the paddle with "a", "d" and "shift".
 The second player controls the paddle with "left", "right" arrow key and "space".
+## Modes
+There are currently two different modes with one more to come:
+### Singleplayer
+In singleplayer you are the only player.
+### Co-op
+In co-op mode you and your coplayer play together.
 ## Important functions
 ### Bricks
 Bricks are static objects in the world.
@@ -30,12 +36,3 @@ You get score point for the following:
 - Ball touched paddle: 10 Points
 - Life gets removed: -500 Points
 There is a scoreboard if you beat all levels.
-## Modes
-There are currently two different modes with one more to come:
-### Singleplayer
-In singleplayer you are the only player.
-### Co-op
-In co-op mode you and your coplayer play together.
-
-
-
