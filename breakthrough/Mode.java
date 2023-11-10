@@ -73,7 +73,7 @@ public class Mode extends World
      */
     private void showGames() 
     {
-        showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*4);
-        showText("2: CO-OP", this.getWidth()/2, this.getHeight()/8*5);
+        showText("1: SINGLEPLAYER", this.getWidth()/2, this.getHeight()/8*5);
+        showText("2: CO-OP", this.getWidth()/2, this.getHeight()/8*6);
     }
 }
