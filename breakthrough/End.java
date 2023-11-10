@@ -13,7 +13,6 @@ public class End extends World
     private final String statusMessage;
     private boolean animationAlreadyShowed;
     private boolean typePlayerShowed;
-    private List<PlayerScore> playerScores;
     
     public End(int score, int lives,String statusMessage) 
     {
@@ -97,8 +96,8 @@ public class End extends World
         String topPlayer3Name = PlayerScore.getName3();
         int topPlayer3Score = PlayerScore.getScore3();
         
-        showText("1. Name: " + topPlayer1Name + " ; Score: " + topPlayer1Score, this.getWidth()/2, this.getHeight()/10*5);
-        showText("2. Name: " + topPlayer2Name + " ; Score: " + topPlayer2Score, this.getWidth()/2, this.getHeight()/10*6);
-        showText("3. Name: " + topPlayer3Name + " ; Score: " + topPlayer3Score, this.getWidth()/2, this.getHeight()/10*7);
+        showText("1. " + topPlayer1Name + " (Score: " + topPlayer1Score + ")", this.getWidth()/2, this.getHeight()/10*5);
+        showText("2. " + topPlayer2Name + " (Score: " + topPlayer2Score + ")", this.getWidth()/2, this.getHeight()/10*6);
+        showText("3. " + topPlayer3Name + " (Score: " + topPlayer3Score + ")", this.getWidth()/2, this.getHeight()/10*7);
     }
 }
