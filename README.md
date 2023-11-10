@@ -5,6 +5,13 @@ The game is about a paddle, a ball and a looooooot of bricks.
 The ball is moving in the game world. If it touches an object, it will bounce of it.
 You can only move the paddle left and right.
 The goal is to clear out all the bricks in the world.
+## Controls
+If you play in singleplayer you can either move your paddle left with the "a" or "left" arrow key, right with "d" or the "right" arrow key on your keyboard.
+Additionally you can increase the speed of your paddle with left "shift" or "space"
+
+If you play in co-op mode, one player controls only one paddle (there are two).
+The first player controls the paddle with "a", "d" and "shift".
+The second player controls the paddle with "left", "right" arrow key and "space".
 ## Important functions
 ### Bricks
 Bricks are static objects in the world.
@@ -29,13 +36,6 @@ There are currently two different modes with one more to come:
 In singleplayer you are the only player.
 ### Co-op
 In co-op mode you and your coplayer play together.
-## Controls
-If you play in singleplayer you can either move your paddle left with the "a" or "left" arrow key, right with "d" or the "right" arrow key on your keyboard.
-Additionally you can increase the speed of your paddle with left "shift" or "space"
-
-If you play in co-op mode, one player controls only one paddle (there are two).
-The first player controls the paddle with "a", "d" and "shift".
-The second player controls the paddle with "left", "right" arrow key and "space".
 
 
 
