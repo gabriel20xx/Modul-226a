@@ -19,4 +19,6 @@ comment5.text=\r\n\ Show\ the\ welcome\ text.\r\n
 comment6.params=
 comment6.target=void\ showGames()
 comment6.text=\r\n\ Display\ the\ different\ games.\r\n
-numComments=7
+comment7.params=
+comment7.target=void\ playSound()
+numComments=8

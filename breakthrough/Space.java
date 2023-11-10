@@ -12,6 +12,8 @@ public class Space extends World
     private int timePassed = 0;
     private double ballSpeed = 4;
     private int gameNumber, score, userLives;
+    private int lastGame = 4;
+    private int soundCount = 30*50;
     
     // For level creation
     private static final int rows = 16;
@@ -68,6 +70,7 @@ public class Space extends World
         showScore();
         showLevel(gameNumber);
         showLives();
+        playSound();
     }
     
     /**
@@ -85,14 +88,8 @@ public class Space extends World
         }
     }
     
-    private void levelCreator(int level) {
-        // Define the predefined level data
-        // The first value is the column number (between 1 and 10)
-        // The second value is the row number (between 1 and 16)
-        // The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold)
-        // Level 1
-        if (level == 1) {
-            int[][] level1 = {
+    private int[][] levels(int level) {
+        int[][] level1 = {
                 {1, 2, 1},
                 {10, 2, 1},
                 {2, 3, 1},
@@ -133,7 +130,28 @@ public class Space extends World
                 {8, 11, 1},
                 {9, 11, 1},
                 {10, 11, 1},
-            };
+        };
+        
+        switch (level) {
+            case 1:
+                return level1;
+            /*case 2:
+                return level2;
+            case 3:
+                return level3;*/
+            default:
+                return level1;
+        }
+    }
+    
+    private void levelCreator(int level) {
+        // Define the predefined level data
+        // The first value is the column number (between 1 and 10)
+        // The second value is the row number (between 1 and 16)
+        // The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold)
+        // Level 1
+        if (level == 1) {
+            int[][] level1 = levels(1);
             
             for (int i = 0; i < level1.length; i++) {
                 int x = level1[i][0]-1;
@@ -234,8 +252,12 @@ public class Space extends World
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
         if (bricks.isEmpty()) {
-            Greenfoot.delay(25);
-            Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
+            if (gameNumber <= lastGame) {
+                Greenfoot.delay(25);
+                Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
+            } else {
+                Greenfoot.setWorld(new End(score, userLives, "You Won"));
+            }
         }
     }
     
@@ -245,10 +267,11 @@ public class Space extends World
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
-            Greenfoot.delay(100);
             updateUserLive(-1);
             ballSpeed = 4;
             updateScore(-500);
+            Greenfoot.playSound("Death.mp3");
+            Greenfoot.delay(100);
             if(userLives == 0) {
                 Greenfoot.setWorld(new End(score, userLives, "You lost"));
             }
@@ -324,4 +347,15 @@ public class Space extends World
         userLives = userLives + amount;
         showLives();
     }
+    
+    /**
+     * Play ingame sound.
+     */
+    private void playSound() {
+        if (soundCount >= 30*50) {
+            Greenfoot.playSound("Ingame.mp3");
+            soundCount = 0;
+        }
+        soundCount++;
+    }   
 }

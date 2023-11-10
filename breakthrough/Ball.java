@@ -88,6 +88,7 @@ public class Ball extends Actor {
     
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
+            Greenfoot.playSound("Hit.mp3");
             Brick brickSize = new Brick(1);
             int brickHeight = brickSize.getImage().getHeight();
             int brickWidth = brickSize.getImage().getWidth();

@@ -18,6 +18,7 @@ public class End extends World
         this.lives = lives;
         this.statusMessage = statusMessage;
         setBackground();
+        playSound();
         animationAlreadyShowed = false;
     }
     
@@ -60,5 +61,12 @@ public class End extends World
              int color = 150 - Greenfoot.getRandomNumber(120);
              background.setColorAt(x, y, new Color(color,color,color));
         }
+    }
+    
+    /**
+     * Plays game over sound.
+     */
+    public void playSound() {
+        Greenfoot.playSound("Game-Over.mp3");
     }
 }
