@@ -86,6 +86,17 @@ public class Ball extends Actor {
         }
     }
     
+    /**
+     * Check if ball hits a perk.
+     */
+    private void checkPerkCollision() {
+        if(isTouching(Perk.class)) {
+            removeTouching(Perk.class);
+            Space world = (Space) getWorld();
+            world.updateUserLive(1);
+        }
+    }
+    
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
             Greenfoot.playSound("Hit.mp3");
