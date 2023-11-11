@@ -2,48 +2,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
- * Mode selector screen
+ * Mode selector screen.
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Mode extends World
+public class Mode extends Stars
 {
     public static int mode;
+    
     /**
-     * Constructor to create a world.
+     * Constructor to initialize the world.
      */
     public Mode() 
     {
-        super(1280, 720, 1);
-        setBackground();
         welcomeText();
         showGames();
-    }
-    
-    /**
-     * Set the background of the world.
-     */
-    private void setBackground() {
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.fill();
-        Greenfoot.setSpeed(50);
-        createStars(300);
-    }
-    
-    /**
-     * Create random stars in the world.
-     */
-    private void createStars(int number) 
-    {
-        GreenfootImage background = getBackground();             
-        for (int i=0; i < number; i++) {            
-             int x = Greenfoot.getRandomNumber( getWidth() );
-             int y = Greenfoot.getRandomNumber( getHeight() );
-             int color = 150 - Greenfoot.getRandomNumber(120);
-             background.setColorAt(x, y, new Color(color,color,color));
-        }
     }
     
     /**

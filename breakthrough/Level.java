@@ -1,12 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Level selector screen
+ * Level selector screen.
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Level extends World
+public class Level extends Stars
 {
     private int rows = 3;
     private int columns = 5;
@@ -14,13 +14,12 @@ public class Level extends World
     private int horizontalspacing = this.getWidth()/columns;
     private int verticalspacing = this.getHeight()/rows;
     private boolean keyPressed = false;
+    
     /**
-     * Constructor to create a world.
+     * Constructor to initialize the world.
      */
     public Level() 
     {
-        super(1280, 720, 1);
-        setBackground();
         showLevels();
     }
     
@@ -30,32 +29,7 @@ public class Level extends World
     public void act() {
         changeSelector();   
     }
-    
-    /**
-     * Set the background of the world.
-     */
-    private void setBackground() {
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.fill();
-        Greenfoot.setSpeed(50);
-        createStars(300);
-    }
-    
-    /**
-     * Create random stars in the world.
-     */
-    private void createStars(int number) 
-    {
-        GreenfootImage background = getBackground();             
-        for (int i=0; i < number; i++) {            
-             int x = Greenfoot.getRandomNumber( getWidth() );
-             int y = Greenfoot.getRandomNumber( getHeight() );
-             int color = 150 - Greenfoot.getRandomNumber(120);
-             background.setColorAt(x, y, new Color(color,color,color));
-        }
-    }
-    
+
     private void showLevels() {
         addObject(new Selector(), (0 * horizontalspacing) + (horizontalspacing / 2), (0 * verticalspacing) + (verticalspacing / 2));
         for (int row = 0; row < rows; row++) {

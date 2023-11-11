@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Space extends World
+public class Space extends Stars
 {
     private int timePassed = 0;
     private double ballSpeed = 4;
@@ -15,7 +15,7 @@ public class Space extends World
     private int lastGame = 4;
     private int soundCount = 30*50;
     
-    // For level creation
+    // Variables for the level creation.
     private static final int rows = 16;
     private static final int columns = 10;
     private static final int startWidth = 50;
@@ -24,29 +24,16 @@ public class Space extends World
     private static final int brickHeight = 24;
     
     /**
-     * Constructor for the Space world.
+     * Constructor to initialize the world.
      */
     public Space(int gameNumber, int score, int userLives) 
     {
-        super(1280, 720, 1);
-        setBackground();
         initializeGame();
         this.gameNumber = gameNumber;
         this.score = score;
         this.userLives = userLives;
         levelCreator(gameNumber);
         showText("Game " + gameNumber, this.getWidth()/6*5, this.getHeight()/6*1);
-    }
-    
-    /**
-     * Set the background of the world.
-     */
-    private void setBackground() {
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.fill();
-        Greenfoot.setSpeed(50);
-        createStars(300);
     }
     
     /**
@@ -72,21 +59,6 @@ public class Space extends World
         showLevel(gameNumber);
         showLives();
         playSound();
-    }
-    
-    /**
-     * Create random stars.
-     * @param number The number of stars.
-     */
-    private void createStars(int number) 
-    {
-        GreenfootImage background = getBackground();             
-        for (int i=0; i < number; i++) {            
-             int x = Greenfoot.getRandomNumber(getWidth());
-             int y = Greenfoot.getRandomNumber(getHeight());
-             int color = 150 - Greenfoot.getRandomNumber(120);
-             background.setColorAt(x, y, new Color(color,color,color));
-        }
     }
     
     /**
@@ -268,6 +240,7 @@ public class Space extends World
      */
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
+        // Check if only the not destroyable bricks are left.
         boolean allBricksAreColor10 = bricks.stream().allMatch(brick -> brick.getColor() == 10);
         if (bricks.isEmpty() || allBricksAreColor10) {
             if (gameNumber <= lastGame) {
@@ -285,9 +258,9 @@ public class Space extends World
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
+            updateScore(-500);
             updateUserLive(-1);
             ballSpeed = 4;
-            //updateScore(-500);
             Greenfoot.playSound("Death.mp3");
             Greenfoot.delay(100);
             if(userLives == 0) {

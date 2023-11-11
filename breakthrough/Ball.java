@@ -13,18 +13,23 @@ public class Ball extends Actor {
     public double speed;
     private double fractionalDistanceX = 0.0;
     private double fractionalDistanceY = 0.0;
-    
     private int blockedborderpaddle = 5;
     private boolean blockedsideborder = false;
     private boolean blockedtopborder = false;
     private boolean blockedpaddle = false;
     private boolean blockedbrick = false;
 
+    /**
+     * Constructor to initialize the actor.
+     */
     public Ball(double direction, double speed) {
         this.direction = direction;
         this.speed = speed;
     }
 
+    /**
+     * Act method which runs in endless loop.
+     */
     public void act() {
         if (delayTimer > 0) {
             initial();
@@ -59,7 +64,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Moves the ball in a direction.
+     * Move the ball in a direction.
      */
     private void moveInDirection() {
          // Convert degrees to radians
@@ -85,7 +90,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Checks the collision of the ball with two other objects
+     * Check the collision of the ball with two other objects.
      */
     private void checkCollision() {
         // Check for collision with two objects
@@ -102,18 +107,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Check if ball hits a perk.
-     */
-    private void checkPerkCollision() {
-        if(isTouching(Perk.class)) {
-            removeTouching(Perk.class);
-            Space world = (Space) getWorld();
-            world.updateUserLive(1);
-        }
-    }
-    
-    /**
-     * Check if the ball hits a brick
+     * Check if the ball hits a brick.
      */
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
@@ -208,7 +202,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Check if the ball hits a paddle
+     * Check if the ball hits a paddle.
      */
     private void checkPaddleCollision() {
         if (isTouching(Paddle.class) && blockedpaddle == false) {
@@ -231,7 +225,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Check if the ball collides with the sideborder
+     * Check if the ball collides with the sideborder.
      */
     private void checkSideborderCollision() {
         if (isTouching(Sideborder.class) && blockedsideborder == false) {
@@ -254,7 +248,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Check if the ball collides with the topborder
+     * Check if the ball collides with the topborder.
      */
     private void checkTopborderCollision() {
         if (isTouching(Topborder.class) && blockedtopborder == false) {
@@ -270,7 +264,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Make degree between 0 and 360
+     * Create a degree between 0 and 360.
      */
     private void normalizeDirection(){
         if (direction >= 360) {
@@ -281,7 +275,7 @@ public class Ball extends Actor {
     }
     
     /**
-     * Check if the ball reached the bottom screen border
+     * Check if the ball reached the bottom of screen border.
      */
     private void checkBottomBorder(){
         if (getY() >= getWorld().getHeight() - 1) {

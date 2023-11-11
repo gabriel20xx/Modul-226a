@@ -1,23 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Perk here.
+ * The perk which adds lives to the user.
  * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+ * @author Gabriel Franz
+ * @author Cornel Forster
+ * */
 public class Perk extends Actor
 {
     private int speed;
+
     /**
-     * Constructor to initialize a Perk.
+     * Constructor to initialize the actor.
      */
     public Perk() {
         this.speed = Greenfoot.getRandomNumber(5) + 2;
     }
-    
+
     /**
-     * Fall down the game.
+     * Act method which runs in endless loop.
      */
     public void act()
     {
@@ -38,7 +39,7 @@ public class Perk extends Actor
     }
     
     /**
-     * Update the world
+     * Update the world.
      */
     private void updateWorldForPerk(int addingScore) {
         Space world = (Space) getWorld();

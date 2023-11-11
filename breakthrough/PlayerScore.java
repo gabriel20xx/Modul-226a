@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Scoreboard here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Saves the user scores..
+ *
+ * @author Gabriel Franz
+ * @author Cornel Forster
  */
 public class PlayerScore {
     private static String name1;
@@ -16,7 +16,10 @@ public class PlayerScore {
     private static int score2 = 0;
     private static int score3 = 0;
     private static int newscore;
-    
+
+    /**
+     * Constructor to initialize the score.
+     */
     public PlayerScore(String newname, int newscore) {
         if (newscore >= score1) {
             name3 = name2;
@@ -35,28 +38,40 @@ public class PlayerScore {
             score3 = newscore;
         }
     }
-    
-    public static String getName1() {
-        return name1;
+
+
+
+    /**
+     * Get the name of the player.
+     *
+     * @param playerNumber the number of the player.
+     * @return the name of player.
+     */
+    public static String getNameOfPlayer(int playerNumber) {
+        switch (playerNumber) {
+            case 1:
+                return name1;
+            case 2:
+                return name2;
+            default:
+                return name3;
+        }
     }
 
-    public static String getName2() {
-        return name2;
-    }
-
-    public static String getName3() {
-        return name3;
-    }
-
-    public static int getScore1() {
-        return score1;
-    }
-
-    public static int getScore2() {
-        return score2;
-    }
-
-    public static int getScore3() {
-        return score3;
+    /**
+     * Get the score of the player.
+     *
+     * @param playerNumber the number of the player.
+     * @return the score of player.
+     */
+    public static int getScoreOfPlayer(int playerNumber) {
+        switch (playerNumber) {
+            case 1:
+                return score1;
+            case 2:
+                return score2;
+            default:
+                return score3;
+        }
     }
 }

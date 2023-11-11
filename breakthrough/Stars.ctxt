@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Stars
+comment0.text=\n\ Write\ a\ description\ of\ class\ Stars\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=Stars()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Stars.\n\ \n
+comment2.params=
+comment2.target=void\ setBackground()
+comment2.text=\n\ Set\ the\ background\ of\ the\ world.\n
+comment3.params=number
+comment3.target=void\ createStars(int)
+comment3.text=\n\ Create\ random\ stars.\n\ @param\ number\ The\ number\ of\ stars.\n
+numComments=4

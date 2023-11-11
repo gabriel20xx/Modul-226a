@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
- * Write a description of class Brick here.
+ * The brick actor which gets destroyed when a bill is touching..
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
@@ -11,16 +11,30 @@ public class Brick extends Actor {
     private int color;
     private int count = 0;
     private boolean blockedball = false;
-    
-    // Color codes: 1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold
+
+    /**
+     * Constructor to initialize the actor.
+     */
     public Brick(int colour) {
+        // Color codes: 1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold
         this.color = colour;
         setColor();
     }
 
+    /**
+     * Act method which runs in endless loop.
+     */
     public void act() {
+        checkForBall();
+    }
+
+    /**
+     * Check if ball hits the brick.
+     */
+    private void checkForBall() {
         if (isTouching(Ball.class) && blockedball == false) {
             if (color == 9) {
+                // Bricks with color 9 must be hitted twice.
                 count++;
                 blockedball = true;
                 if (count >= 2) {
@@ -28,24 +42,29 @@ public class Brick extends Actor {
                     space.updateScore(50);
                     getWorld().removeObject(this);
                 }
-            } 
+            }
+            // The brick has neither color 9 nor 10.
             else if (color != 10) {
                 Space space = (Space) getWorld();
                 space.updateScore(50);
                 getWorld().removeObject(this);
             }
+            // The brick has the color 10 and can't be destroyed.
         } else {
             blockedball = false;
         }
     }
-    
+
     /**
      * Return the color code.
      */
     public int getColor() {
         return color;
     }
-    
+
+    /**
+     * Set the color of the brick.
+     */
     private void setColor() {
         GreenfootImage Image;
         switch (color) {
@@ -86,7 +105,7 @@ public class Brick extends Actor {
     }
     
     /**
-     * Check if brick is touching another brick-
+     * Check if the brick is touching another brick.
      */    
     public boolean isTouchingAnotherBrick() {
         if (isTouching(Brick.class)) {
@@ -96,7 +115,7 @@ public class Brick extends Actor {
     }    
     
     /**
-     * Check if brick is touching another brick-
+     * Check if the brick is touching a border.
      */    
     public boolean isTouchingBorder() {
         if (isTouching(Border.class)) {

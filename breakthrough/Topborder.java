@@ -1,19 +1,7 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
- * Write a description of class Border here.
+ * Topborder which bounces a ball off.
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Topborder extends Border
-{
-    /**
-     * Act - do whatever the Border wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
-    }
-}
+public class Topborder extends Border {}

@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Perk
-comment0.text=\n\ Write\ a\ description\ of\ class\ Perk\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\n\ The\ perk\ which\ adds\ lives\ to\ the\ user.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
 comment1.params=
 comment1.target=Perk()
-comment1.text=\n\ Constructor\ to\ initialize\ a\ Perk.\n
+comment1.text=\n\ Constructor\ to\ initialize\ the\ actor.\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\n\ Fall\ down\ the\ game.\n
+comment2.text=\n\ Act\ method\ which\ runs\ in\ endless\ loop.\n
 comment3.params=
 comment3.target=void\ checkToRemove()
 comment3.text=\n\ Check\ if\ perk\ should\ be\ removed.\n
 comment4.params=addingScore
 comment4.target=void\ updateWorldForPerk(int)
-comment4.text=\n\ Update\ the\ world\n
+comment4.text=\n\ Update\ the\ world.\n
 numComments=5
