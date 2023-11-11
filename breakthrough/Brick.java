@@ -39,6 +39,13 @@ public class Brick extends Actor {
         }
     }
     
+    /**
+     * Return the color code.
+     */
+    public int getColor() {
+        return color;
+    }
+    
     private void setColor() {
         GreenfootImage Image;
         switch (color) {

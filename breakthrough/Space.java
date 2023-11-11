@@ -224,7 +224,7 @@ public class Space extends World
             }
         }
     }
-    
+
     /**
      * Create the borders for the game.
      */
@@ -268,7 +268,8 @@ public class Space extends World
      */
     private void checkBricks() {
         List<Brick> bricks = getObjects(Brick.class);
-        if (bricks.isEmpty()) {
+        boolean allBricksAreColor10 = bricks.stream().allMatch(brick -> brick.getColor() == 10);
+        if (bricks.isEmpty() || allBricksAreColor10) {
             if (gameNumber <= lastGame) {
                 Greenfoot.delay(25);
                 Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));

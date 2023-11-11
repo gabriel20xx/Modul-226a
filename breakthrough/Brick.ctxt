@@ -1,16 +1,19 @@
 #BlueJ class context
 comment0.target=Brick
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Brick\ here.\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ Brick\ here.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
 comment1.params=colour
 comment1.target=Brick(int)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
-comment3.target=void\ setColor()
+comment3.target=int\ getColor()
+comment3.text=\n\ Return\ the\ color\ code.\n
 comment4.params=
-comment4.target=boolean\ isTouchingAnotherBrick()
-comment4.text=\r\n\ Check\ if\ brick\ is\ touching\ another\ brick-\r\n
+comment4.target=void\ setColor()
 comment5.params=
-comment5.target=boolean\ isTouchingBorder()
-comment5.text=\r\n\ Check\ if\ brick\ is\ touching\ another\ brick-\r\n
-numComments=6
+comment5.target=boolean\ isTouchingAnotherBrick()
+comment5.text=\n\ Check\ if\ brick\ is\ touching\ another\ brick-\n
+comment6.params=
+comment6.target=boolean\ isTouchingBorder()
+comment6.text=\n\ Check\ if\ brick\ is\ touching\ another\ brick-\n
+numComments=7

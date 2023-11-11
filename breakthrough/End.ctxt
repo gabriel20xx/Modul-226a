@@ -1,20 +1,20 @@
 #BlueJ class context
 comment0.target=End
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ End\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ End\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=score\ lives\ statusMessage
 comment1.target=End(int,\ int,\ java.lang.String)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ setBackground()
-comment3.text=\r\n\ Set\ the\ background\ of\ the\ world.\r\n
+comment3.text=\n\ Set\ the\ background\ of\ the\ world.\n
 comment4.params=number
 comment4.target=void\ createStars(int)
-comment4.text=\r\n\ Create\ random\ stars\ in\ the\ world.\r\n
+comment4.text=\n\ Create\ random\ stars\ in\ the\ world.\n
 comment5.params=
 comment5.target=void\ playSound()
-comment5.text=\r\n\ Plays\ game\ over\ sound.\r\n
+comment5.text=\n\ Plays\ game\ over\ sound.\n
 comment6.params=
 comment6.target=void\ showScoreboard()
-comment6.text=\r\n\ Scoreboard\ (Top\ 3)\r\n
+comment6.text=\n\ Scoreboard\ (Top\ 3)\n
 numComments=7
