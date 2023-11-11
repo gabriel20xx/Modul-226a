@@ -72,10 +72,15 @@ public class Space extends Stars
     }
     
     /**
-     * Method for the level lists
+     * Predefiniton for level six.
      */
-    private int[][] levels(int level) {
-        int[][] level1 = {
+    private int[][] levelSixPreDefinition() {
+        /*
+        The first value is the column number (between 1 and 10).
+        The second value is the row number (between 1 and 16).
+        The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold).
+         */
+        int[][] level = {
                 {1, 2, 1},
                 {10, 2, 1},
                 {2, 3, 1},
@@ -117,58 +122,99 @@ public class Space extends Stars
                 {9, 11, 1},
                 {10, 11, 1},
         };
-        
-        switch (level) {
-            case 1:
-                return level1;
-            /*case 2:
-                return level2;
-            case 3:
-                return level3;*/
-            default:
-                return level1;
-        }
+        return level;
     }
     
     /**
      * Creates all the bricks in the level
      */
     private void levelCreator(int level) {
-        // Define the predefined level data
-        // The first value is the column number (between 1 and 10)
-        // The second value is the row number (between 1 and 16)
-        // The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold)
-        // Level 1
+        // Game crashed with switch case.
         if (level == 1) {
-            int[][] level1 = levels(1);
-            
-            for (int i = 0; i < level1.length; i++) {
-                int x = level1[i][0]-1;
-                int y = level1[i][1]-1;
-                int color = level1[i][2];
-        
-                int brickX = x * brickWidth + startWidth + brickWidth / 2;
-                int brickY = y * brickHeight + startHeight + brickHeight / 2;
-        
-                Brick brick = new Brick(color);
-                addObject(brick, brickX, brickY);
-            }
-        } 
-        // Level 2
-        else if (level == 2) {
-            for (int y = 0; y < rows; y++)
-            {
-                for (int x = 0; x < columns; x++)
-                {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < columns; x++) {
                     Brick brick = new Brick(1);
                     addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
                 }
             }
-        } 
-        // Level 3
+        }
+        else if (level == 2) {
+            for (int x = 0; x != 2; x++) {
+                for (int y = 0; y < 15; y++) {
+                Brick brick = new Brick(0);
+
+                addObject(brick, x * 9 * brickWidth + startWidth + brickWidth / 2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+        }
         else if (level == 3) {
+            for (int y = 0; y < rows; y++) {
+                for (int x = 0; x < columns; x++) {
+                    Brick brick = new Brick(Greenfoot.getRandomNumber(9) + 1);
+                    addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+        }
+        else if (level == 4) {
+            for (int x = 0; x < columns; x += 3) {
+                for (int y = 0; y < rows; y++) {
+                    addObject(new Brick(Greenfoot.getRandomNumber(9) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+        }
+        else if (level == 5) {
+            // Generating left half.
+            for (int x = 1; x < columns/2; x += 3) {
+                for (int y = 0; y < rows; y++) {
+                    addObject(new Brick(Greenfoot.getRandomNumber(10) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+
+            // Generating right half.
+            for (int x = columns/2; x < columns; x += 3) {
+                for (int y = 0; y < rows; y++) {
+                    addObject(new Brick(Greenfoot.getRandomNumber(10) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
+                }
+            }
+        }
+        else if (level == 6) {
+            int[][] levelSix = levelSixPreDefinition();
+
+            for (int i = 0; i < levelSix.length; i++) {
+                int x = levelSix[i][0]-1;
+                int y = levelSix[i][1]-1;
+                int color = levelSix[i][2];
+
+                int brickX = x * brickWidth + startWidth + brickWidth / 2;
+                int brickY = y * brickHeight + startHeight + brickHeight / 2;
+
+                Brick brick = new Brick(color);
+                addObject(brick, brickX, brickY);
+            }
+        }
+        else if (level == 7) {
+            int yDifference, colorCode;
+            for (int amount=0; amount < 6; amount++) {
+                for (int x = 0; x != 10; x++) {
+                    if ((amount + x - Greenfoot.getRandomNumber(2) + 1) % 2 == 0) {
+                        colorCode = 10;
+                    } else {
+                        colorCode = Greenfoot.getRandomNumber(9) +1;
+                    }
+                    Brick brick = new Brick(colorCode);
+                    if (amount == 0) {
+                        yDifference = 0;
+                    }
+                    else {
+                        yDifference = amount * 50;
+                    }
+                    addObject(brick, x * brickWidth + startWidth + brickWidth / 2, x*brickHeight+startHeight+brickHeight/2 + yDifference);
+                }
+            }
+        }
+        else {
             int counter = 0;
-            while (counter < 20) {
+            while (counter < 34) {
                 Brick brick = new Brick(Greenfoot.getRandomNumber(10)+1);
                 addObject(brick, (Greenfoot.getRandomNumber(columns) * brickWidth) + startWidth + (brickWidth / 2), (Greenfoot.getRandomNumber(rows) * brickHeight) + startHeight + (brickHeight / 2));
                 if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
@@ -178,23 +224,9 @@ public class Space extends Stars
                     counter++;
                 }
             }
-        } 
-        // Level 4
-        else if (level == 4) {
-            // Generating left half
-            for (int x = 0+1; x < columns/2; x += 3) {
-                for (int y = 0; y < rows; y++) {
-                    addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
-            
-            // Generating right half
-            for (int x = columns/2; x < columns; x += 3) {
-                for (int y = 0; y < rows; y++) {
-                    addObject(new Brick(1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
         }
+
+
     }
 
     /**

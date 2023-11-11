@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level extends Stars
 {
-    private int rows = 3;
-    private int columns = 5;
+    private int rows = 2;
+    private int columns = 4;
     private int count = 1;
     private int horizontalspacing = this.getWidth()/columns;
     private int verticalspacing = this.getHeight()/rows;
