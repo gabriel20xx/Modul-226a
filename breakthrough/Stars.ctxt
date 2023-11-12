@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Stars
-comment0.text=\n\ Write\ a\ description\ of\ class\ Stars\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\n\ Creates\ a\ background\ full\ of\ stars.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
 comment1.target=Stars()
 comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Stars.\n\ \n

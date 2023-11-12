@@ -55,3 +55,4 @@ public class Welcome extends Stars
         Greenfoot.playSound("Intro.mp3");
     }
 }
+

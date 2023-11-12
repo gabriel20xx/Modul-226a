@@ -15,14 +15,6 @@ public class Space extends Stars
     private int lastGame = 4;
     private int soundCount = 30*50;
     
-    // Variables for the level creation.
-    private static final int rows = 16;
-    private static final int columns = 10;
-    private static final int startWidth = 50;
-    private static final int startHeight = 120;
-    private static final int brickWidth = 80;
-    private static final int brickHeight = 24;
-    
     /**
      * Constructor to initialize the world.
      */
@@ -129,6 +121,13 @@ public class Space extends Stars
      * Creates all the bricks in the level
      */
     private void levelCreator(int level) {
+        final int rows = 16;
+        final int columns = 10;
+        final int startWidth = 50;
+        final int startHeight = 120;
+        final int brickWidth = 80;
+        final int brickHeight = 24;
+        
         // Game crashed with switch case.
         if (level == 1) {
             for (int y = 0; y < 3; y++) {
@@ -363,7 +362,7 @@ public class Space extends Stars
     }
     
     /**
-     * Update the amount of the uses's live
+     * Update the amount of the user's live.
      * @param amount The amount which should be added.
      */
     public void updateUserLive(int amount) {

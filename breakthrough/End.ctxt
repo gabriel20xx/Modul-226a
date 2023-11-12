@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=End
-comment0.text=\n\ The\ end\ to\ show\ the\ different\ scores.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment0.text=\n\ The\ end\ world\ to\ show\ the\ different\ scores.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
 comment1.params=score\ lives\ statusMessage
 comment1.target=End(int,\ int,\ java.lang.String)
 comment1.text=\n\ Constructor\ to\ initialize\ the\ world.\n
@@ -12,5 +12,5 @@ comment3.target=void\ playSound()
 comment3.text=\n\ Plays\ game\ over\ sound.\n
 comment4.params=
 comment4.target=void\ showScoreboard()
-comment4.text=\n\ Scoreboard\ (Top\ 3)\n
+comment4.text=\n\ Scoreboard\ with\ the\ top\ 3\ players.\n
 numComments=5

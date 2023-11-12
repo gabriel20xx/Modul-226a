@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The end to show the different scores.
+ * The end world to show the different scores.
  * 
  * @author Gabriel Franz
  * @author Cornel Forster
@@ -59,7 +59,7 @@ public class End extends Stars
     }
     
     /**
-     * Scoreboard (Top 3)
+     * Scoreboard with the top 3 players.
      */
     private void showScoreboard() {
         String username = Greenfoot.ask("What is your name?");
