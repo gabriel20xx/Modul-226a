@@ -18,7 +18,7 @@ In co-op mode you and your coplayer play together.
 
 ## Controls
 If you play in singleplayer you can either move your paddle left with the "a" or "left" arrow key, right with "d" or the "right" arrow key on your keyboard.  
-Additionally you can increase the speed of your paddle with left "shift" or "space"
+Additionally you can increase the speed of your paddle with your "shift" or "space" key.
 
 If you play in co-op mode, one player controls only one paddle (there are two):
 - The first player controls the paddle with "a", "d" and "shift".
@@ -27,7 +27,8 @@ If you play in co-op mode, one player controls only one paddle (there are two):
 ## Important functions
 ### Bricks
 Bricks are static objects in the world.  
-They are removed, if a ball touches them.
+They are removed, if a ball touches them.  
+**Attention:** There are bricks which can't get destroyed and there are also some bricks which must be hitten multiple times.
 
 ### Perks
 Perks can randomly appear and if the paddle or the ball touches them, you will get one life.
@@ -41,9 +42,9 @@ You start with 3 lives. If you or the ball hits a perk, you will get one life ex
 If you have 0 lives
 
 ### Score
-You get score point for the following:
-- Brick removed: 50 Points
-- Ball touched paddle: 10 Points
+The following actions updates your score:
+- Brick removed: +50 Points
+- Ball touched paddle: +10 Points
 - Life gets removed: -500 Points
 
 There is a scoreboard if you beat all levels.
