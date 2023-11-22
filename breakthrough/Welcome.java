@@ -9,14 +9,14 @@ import java.util.*;
  */
 public class Welcome extends Stars
 {
-    private boolean animationEnded;
+    private boolean animationEnded = false;
+    private boolean keyDown = false;
     
     /**
      * Constructor to initialize the world.
      */
     public Welcome() 
     {
-        animationEnded = false;
     }
     
     /**
@@ -28,8 +28,13 @@ public class Welcome extends Stars
             playSound();
             welcomeText();
         }
-        if (Greenfoot.isKeyDown("enter")) {
-            Greenfoot.setWorld(new Mode());
+        else {
+            if (Greenfoot.isKeyDown("enter")) {
+                keyDown = true;
+            }
+            if ((!Greenfoot.isKeyDown("enter")) && keyDown == true) {
+                Greenfoot.setWorld(new Mode());
+            }
         }
     }
     
@@ -39,12 +44,16 @@ public class Welcome extends Stars
     private void welcomeText() {
         String welcome = "Breakthrough";
         for(int x = 0; x < welcome.length() + 1; x++) {
-            if (!Greenfoot.isKeyDown("Enter")) {
-                showText(welcome.substring(0,x), this.getWidth()/2, 150);
-                Greenfoot.delay(18);
-            } else {
+            if (Greenfoot.isKeyDown("enter")) {
+                keyDown = true;
+            }
+            if ((!Greenfoot.isKeyDown("enter")) && keyDown == true) {
                 showText(welcome, this.getWidth()/2, 150);
+                keyDown = false;
                 break;
+            } else {
+                showText(welcome.substring(0,x), this.getWidth()/2, 150);
+                Greenfoot.delay(20);
             }
         }
     

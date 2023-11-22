@@ -9,11 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Level extends Stars
 {
     private int rows = 2;
-    private int columns = 4;
+    private int columns = 5;
     private int count = 1;
     private int horizontalspacing = this.getWidth()/columns;
     private int verticalspacing = this.getHeight()/rows;
     private boolean keyPressed = false;
+    private boolean keyDown = false;
     
     /**
      * Constructor to initialize the world.
@@ -44,6 +45,7 @@ public class Level extends Stars
                 count++;
             }
         }
+        showText("Select your level", this.getWidth()/2, this.getHeight()/16*1);
     }
     
     private void changeSelector() {
@@ -100,9 +102,10 @@ public class Level extends Stars
                 // Reset the flag when the key is released
                 keyPressed = false;
             }
-            
             if (Greenfoot.isKeyDown("enter")) {
-                // Get the location
+                keyDown = true;
+            }
+            if ((!Greenfoot.isKeyDown("enter")) && keyDown == true) {
                 int level = 1;
                 for (int row = 0; row < rows; row++) {
                     for (int col = 0; col < columns; col++) {
@@ -110,9 +113,8 @@ public class Level extends Stars
                         int x = (col * horizontalspacing) + (horizontalspacing / 2);
                         int y = (row * verticalspacing) + (verticalspacing / 2);
                         
-                        
                         if (selectorX == x && selectorY == y) {
-                        Greenfoot.setWorld(new Space(level, 0, 3));
+                            Greenfoot.setWorld(new Space(level, 0, 3));
                         } else {
                             level++;
                         }

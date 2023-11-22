@@ -1,4 +1,4 @@
-    import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
+import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
@@ -13,7 +13,7 @@ public class Space extends Stars
     private int timePassed = 0;
     private double ballSpeed = 4;
     private int gameNumber, score, userLives;
-    private int lastGame = 4;
+    private int lastGame = 10;
     private int soundCount = 30*50;
     
     /**
@@ -96,10 +96,8 @@ public class Space extends Stars
         final int brickWidth = 80;
         final int brickHeight = 24;
         
-        
         Levels levels = new Levels();
         int[][] levelDef = levels.levelDefinition(level);
-
         for (int i = 0; i < levelDef.length; i++) {
             int x = levelDef[i][0]-1;
             int y = levelDef[i][1]-1;
@@ -259,7 +257,7 @@ public class Space extends Stars
      * Play ingame sound.
      */
     private void playSound() {
-        if (soundCount >= 30*50) {
+        if (soundCount >= 40*50) {
             Greenfoot.playSound("Ingame.mp3");
             soundCount = 0;
         }
