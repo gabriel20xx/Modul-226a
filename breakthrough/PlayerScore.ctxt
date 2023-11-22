@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=PlayerScore
-comment0.text=\n\ Saves\ the\ user\ scores..\n\n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment0.text=\r\n\ Saves\ the\ user\ scores..\r\n\r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=newname\ newscore
 comment1.target=PlayerScore(java.lang.String,\ int)
-comment1.text=\n\ Constructor\ to\ initialize\ the\ score.\n
+comment1.text=\r\n\ Constructor\ to\ initialize\ the\ score.\r\n
 comment2.params=playerNumber
 comment2.target=java.lang.String\ getNameOfPlayer(int)
-comment2.text=\n\ Get\ the\ name\ of\ the\ player.\n\n\ @param\ playerNumber\ the\ number\ of\ the\ player.\n\ @return\ the\ name\ of\ player.\n
+comment2.text=\r\n\ Get\ the\ name\ of\ the\ player.\r\n\r\n\ @param\ playerNumber\ the\ number\ of\ the\ player.\r\n\ @return\ the\ name\ of\ player.\r\n
 comment3.params=playerNumber
 comment3.target=int\ getScoreOfPlayer(int)
-comment3.text=\n\ Get\ the\ score\ of\ the\ player.\n\n\ @param\ playerNumber\ the\ number\ of\ the\ player.\n\ @return\ the\ score\ of\ player.\n
+comment3.text=\r\n\ Get\ the\ score\ of\ the\ player.\r\n\r\n\ @param\ playerNumber\ the\ number\ of\ the\ player.\r\n\ @return\ the\ score\ of\ player.\r\n
 numComments=4

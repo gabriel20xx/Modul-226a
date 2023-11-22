@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Mode
-comment0.text=\n\ Mode\ selector\ screen.\n\ \n\ @author\ Gabriel\ Franz\n\ @author\ Cornel\ Forster\n
+comment0.text=\r\n\ Mode\ selector\ screen.\r\n\ \r\n\ @author\ Gabriel\ Franz\r\n\ @author\ Cornel\ Forster\r\n
 comment1.params=
 comment1.target=Mode()
-comment1.text=\n\ Constructor\ to\ initialize\ the\ world.\n
+comment1.text=\r\n\ Constructor\ to\ initialize\ the\ world.\r\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\n\ Act\ method\ which\ runs\ in\ endless\ loop.\n
+comment2.text=\r\n\ Act\ method\ which\ runs\ in\ endless\ loop.\r\n
 comment3.params=
 comment3.target=void\ welcomeText()
-comment3.text=\n\ Show\ the\ welcome\ text.\n
+comment3.text=\r\n\ Show\ the\ welcome\ text.\r\n
 comment4.params=
 comment4.target=void\ showGames()
-comment4.text=\n\ Display\ the\ different\ games.\n
+comment4.text=\r\n\ Display\ the\ different\ games.\r\n
 numComments=5

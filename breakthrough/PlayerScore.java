@@ -39,8 +39,6 @@ public class PlayerScore {
         }
     }
 
-
-
     /**
      * Get the name of the player.
      *

@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
+    import greenfoot.*;  // (World, Actor, GreenfootImage und Greenfoot)
 import java.util.*;
 
 /**
@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class Space extends Stars
 {
+    private int delayTimer = 100;
     private int timePassed = 0;
     private double ballSpeed = 4;
     private int gameNumber, score, userLives;
@@ -43,7 +44,6 @@ public class Space extends Stars
     public void act() {
         checkBricks();
         checkBalls();
-        createPerk();
         increaseSpeed();
         updateTime();
         showTitle();
@@ -51,70 +51,38 @@ public class Space extends Stars
         showLevel(gameNumber);
         showLives();
         playSound();
-    }
-    
-    /**
-     * Create a Perk with a chance from 100 to 1.
-     */
-    private void createPerk() {
-        if (Greenfoot.getRandomNumber(1000) < 1) {
-            // Perk will only be created in the upper half.
-            addObject(new Perk(), Greenfoot.getRandomNumber(10*80) + 50, Greenfoot.getRandomNumber(8*24) + 120);
+        if (delayTimer > 0) {
+            initial();
+            delayTimer--;
         }
     }
     
     /**
-     * Predefiniton for level six.
+     * Runs on the first few seconds of the game
      */
-    private int[][] levelSixPreDefinition() {
-        /*
-        The first value is the column number (between 1 and 10).
-        The second value is the row number (between 1 and 16).
-        The third value is the brick color (between 1 and 10) (1=White, 2=Green, 3=Yellow, 4=LightBlue, 5=Red, 6=Pink, 7=Orange, 8=DarkBlue, 9=Silver, 10=Gold).
-         */
-        int[][] level = {
-                {1, 2, 1},
-                {10, 2, 1},
-                {2, 3, 1},
-                {9, 3, 1},
-                {3, 4, 1},
-                {8, 4, 1},
-                {4, 3, 1},
-                {7, 3, 1},
-                {4, 5, 5},
-                {7, 5, 5},
-                {5, 5, 6},
-                {6, 5, 6},
-                {2, 6, 2},
-                {9, 6, 2},
-                {3, 6, 3},
-                {8, 6, 3},
-                {2, 7, 2},
-                {9, 7, 2},
-                {5, 7, 7},
-                {6, 7, 7},
-                {2, 8, 2},
-                {9, 8, 2},
-                {3, 8, 3},
-                {8, 8, 3},
-                {4, 9, 5},
-                {7, 9, 5},
-                {5, 9, 6},
-                {6, 9, 6},
-                {3, 10, 4},
-                {8, 10, 4},
-                {5, 10, 4},
-                {6, 10, 4},
-                {1, 11, 1},
-                {2, 11, 1},
-                {3, 11, 1},
-                {4, 11, 1},
-                {7, 11, 1},
-                {8, 11, 1},
-                {9, 11, 1},
-                {10, 11, 1},
-        };
-        return level;
+    private void initial() {
+        Class<Paddle> actorClass = Paddle.class;
+        Paddle foundPaddle = null;
+        
+        for (Actor object : getObjects(Paddle.class)) {
+            if (object.getClass() == actorClass) {
+                foundPaddle = (Paddle) object;
+                break;
+            }
+        }
+        
+        if (foundPaddle != null) {
+            int foundPaddleX = foundPaddle.getX();
+            int foundPaddleY = foundPaddle.getY();
+            for (Object obj : getObjects(null)) {
+                // Check if the object is an instance of the Ball class
+                if (obj instanceof Ball) {
+                    // Cast the object to Ball to access its methods and properties
+                    Ball ball = (Ball) obj;
+                    ball.setLocation(foundPaddleX + foundPaddle.getImage().getWidth()/4, foundPaddleY - foundPaddle.getImage().getHeight());
+                }
+            }
+        }
     }
     
     /**
@@ -128,104 +96,21 @@ public class Space extends Stars
         final int brickWidth = 80;
         final int brickHeight = 24;
         
-        // Game crashed with switch case.
-        if (level == 1) {
-            for (int y = 0; y < 3; y++) {
-                for (int x = 0; x < columns; x++) {
-                    Brick brick = new Brick(1);
-                    addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
-        }
-        else if (level == 2) {
-            for (int x = 0; x != 2; x++) {
-                for (int y = 0; y < 15; y++) {
-                Brick brick = new Brick(0);
+        
+        Levels levels = new Levels();
+        int[][] levelDef = levels.levelDefinition(level);
 
-                addObject(brick, x * 9 * brickWidth + startWidth + brickWidth / 2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
-        }
-        else if (level == 3) {
-            for (int y = 0; y < rows; y++) {
-                for (int x = 0; x < columns; x++) {
-                    Brick brick = new Brick(Greenfoot.getRandomNumber(9) + 1);
-                    addObject(brick, x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
-        }
-        else if (level == 4) {
-            for (int x = 0; x < columns; x += 3) {
-                for (int y = 0; y < rows; y++) {
-                    addObject(new Brick(Greenfoot.getRandomNumber(9) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
-        }
-        else if (level == 5) {
-            // Generating left half.
-            for (int x = 1; x < columns/2; x += 3) {
-                for (int y = 0; y < rows; y++) {
-                    addObject(new Brick(Greenfoot.getRandomNumber(10) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
+        for (int i = 0; i < levelDef.length; i++) {
+            int x = levelDef[i][0]-1;
+            int y = levelDef[i][1]-1;
+            int color = levelDef[i][2];
 
-            // Generating right half.
-            for (int x = columns/2; x < columns; x += 3) {
-                for (int y = 0; y < rows; y++) {
-                    addObject(new Brick(Greenfoot.getRandomNumber(10) + 1), x*brickWidth+startWidth+brickWidth/2, y*brickHeight+startHeight+brickHeight/2);
-                }
-            }
+            int brickX = x * brickWidth + startWidth + brickWidth / 2;
+            int brickY = y * brickHeight + startHeight + brickHeight / 2;
+
+            Brick brick = new Brick(color);
+            addObject(brick, brickX, brickY);    
         }
-        else if (level == 6) {
-            int[][] levelSix = levelSixPreDefinition();
-
-            for (int i = 0; i < levelSix.length; i++) {
-                int x = levelSix[i][0]-1;
-                int y = levelSix[i][1]-1;
-                int color = levelSix[i][2];
-
-                int brickX = x * brickWidth + startWidth + brickWidth / 2;
-                int brickY = y * brickHeight + startHeight + brickHeight / 2;
-
-                Brick brick = new Brick(color);
-                addObject(brick, brickX, brickY);
-            }
-        }
-        else if (level == 7) {
-            int yDifference, colorCode;
-            for (int amount=0; amount < 6; amount++) {
-                for (int x = 0; x != 10; x++) {
-                    if ((amount + x - Greenfoot.getRandomNumber(2) + 1) % 2 == 0) {
-                        colorCode = 10;
-                    } else {
-                        colorCode = Greenfoot.getRandomNumber(9) +1;
-                    }
-                    Brick brick = new Brick(colorCode);
-                    if (amount == 0) {
-                        yDifference = 0;
-                    }
-                    else {
-                        yDifference = amount * 50;
-                    }
-                    addObject(brick, x * brickWidth + startWidth + brickWidth / 2, x*brickHeight+startHeight+brickHeight/2 + yDifference);
-                }
-            }
-        }
-        else {
-            int counter = 0;
-            while (counter < 34) {
-                Brick brick = new Brick(Greenfoot.getRandomNumber(10)+1);
-                addObject(brick, (Greenfoot.getRandomNumber(columns) * brickWidth) + startWidth + (brickWidth / 2), (Greenfoot.getRandomNumber(rows) * brickHeight) + startHeight + (brickHeight / 2));
-                if(brick.isTouchingAnotherBrick() || brick.isTouchingBorder()) {
-                    removeObject(brick);
-                }
-                else {
-                    counter++;
-                }
-            }
-        }
-
-
     }
 
     /**

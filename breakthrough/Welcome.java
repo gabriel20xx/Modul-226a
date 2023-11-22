@@ -19,7 +19,6 @@ public class Welcome extends Stars
         animationEnded = false;
     }
     
-    
     /**
      * Act method which runs in endless loop.
      */
@@ -40,9 +39,15 @@ public class Welcome extends Stars
     private void welcomeText() {
         String welcome = "Breakthrough";
         for(int x = 0; x < welcome.length() + 1; x++) {
-            showText(welcome.substring(0,x), this.getWidth()/2, 150);
-            Greenfoot.delay(18);
+            if (!Greenfoot.isKeyDown("Enter")) {
+                showText(welcome.substring(0,x), this.getWidth()/2, 150);
+                Greenfoot.delay(18);
+            } else {
+                showText(welcome, this.getWidth()/2, 150);
+                break;
+            }
         }
+    
         showText("Press enter to play", this.getWidth()/2, this.getHeight()/8*4);
         showText("Made by Gabriel Franz and Cornel Forster", this.getWidth()/2, this.getHeight()/16*15);
         animationEnded = true;

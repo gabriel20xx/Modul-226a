@@ -40,6 +40,7 @@ public class Brick extends Actor {
                 if (count >= 2) {
                     Space space = (Space) getWorld();
                     space.updateScore(50);
+                    createPerk();
                     getWorld().removeObject(this);
                 }
             }
@@ -47,6 +48,7 @@ public class Brick extends Actor {
             else if (color != 10) {
                 Space space = (Space) getWorld();
                 space.updateScore(50);
+                createPerk();
                 getWorld().removeObject(this);
             }
             // The brick has the color 10 and can't be destroyed.
@@ -123,4 +125,13 @@ public class Brick extends Actor {
         }
         return false;
     }     
+    
+    /**
+     * Create a Perk on the brick position with a chance from 10 to 1.
+     */
+    private void createPerk() {
+        if (Greenfoot.getRandomNumber(10) < 1) {
+            getWorld().addObject(new Perk(), this.getX(), this.getY());
+        }
+    }
 }

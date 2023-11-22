@@ -8,8 +8,7 @@ import java.util.*;
  * @author Cornel Forster
  */
 public class Ball extends Actor {
-    private int delayTimer = 100;
-    private double direction;
+    public double direction;
     public double speed;
     private double fractionalDistanceX = 0.0;
     private double fractionalDistanceY = 0.0;
@@ -31,36 +30,10 @@ public class Ball extends Actor {
      * Act method which runs in endless loop.
      */
     public void act() {
-        if (delayTimer > 0) {
-            initial();
-            delayTimer--;
-        } else {
-            moveInDirection();
-            checkCollision();
-            normalizeDirection();
-            checkBottomBorder();
-        }
-    }
-    
-    /**
-     * Runs on the first few seconds of the game
-     */
-    private void initial() {
-        Class<Paddle> actorClass = Paddle.class;
-        Paddle foundPaddle = null;
-        
-        for (Actor object : getWorld().getObjects(Paddle.class)) {
-            if (object.getClass() == actorClass) {
-                foundPaddle = (Paddle) object;
-                break;
-            }
-        }
-        
-        if (foundPaddle != null) {
-            int foundPaddleX = foundPaddle.getX();
-            int foundPaddleY = foundPaddle.getY();
-            setLocation(foundPaddleX + foundPaddle.getImage().getWidth()/4, foundPaddleY - foundPaddle.getImage().getHeight());
-        }
+        moveInDirection();
+        checkCollision();
+        normalizeDirection();
+        checkBottomBorder();
     }
     
     /**
@@ -80,9 +53,43 @@ public class Ball extends Actor {
 
         int wholePixelsX = (int) fractionalDistanceX;
         int wholePixelsY = (int) fractionalDistanceY;
+        
+        int initialX = getX();
+        int initialY = getY();
 
         // Update the position
-        setLocation(getX() + wholePixelsX, getY() + wholePixelsY); 
+        int intSpeed = (int) Math.ceil(speed);
+        for (int i = 0; i < intSpeed; i++) {
+            // Create new ball and delete it afterwards
+            int newX, newY;
+
+            if (wholePixelsX < 0) {
+                newX = (wholePixelsX / intSpeed) - i;
+            } else {
+                newX = (wholePixelsX / intSpeed) + i;
+            }
+            
+            if (wholePixelsY < 0) {
+                newY = (wholePixelsY / intSpeed) - i;
+            } else {
+                newY = (wholePixelsY / intSpeed) + i;
+            }
+            
+            // 
+            BallInvisible invball = new BallInvisible();
+            getWorld().addObject(invball, getX() + newX, getY() + newY);
+                
+            if (invball.brickTouching) {
+                wholePixelsX = newX;
+                wholePixelsY = newY;
+                getWorld().removeObject(invball);
+                break;
+            } else {
+                getWorld().removeObject(invball);
+            }
+        }
+        
+        setLocation(initialX + wholePixelsX, initialY + wholePixelsY); 
 
         // Substract full pixels from fractional one
         fractionalDistanceX -= wholePixelsX;
@@ -178,6 +185,10 @@ public class Ball extends Actor {
                         difference = 180 - direction;
                         direction = 360 + difference;
                     }
+                    // Exact line
+                    else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                        direction = direction + 180;
+                        }
                 } else if (yDiffOffset < xDiffOffset) {
                     // Ball comming from bottom
                     if (direction > 180 && direction < 360) {
@@ -190,6 +201,10 @@ public class Ball extends Actor {
                         double difference = 0;
                         difference = 90 - direction;
                         direction = 270 + difference;
+                    } 
+                    // Exact line
+                    else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                        direction = direction + 180;
                     }
                 } else {
                     direction += 180;
@@ -218,6 +233,11 @@ public class Ball extends Actor {
                     direction = 270 + (distance*(90/(width/1.5)));
                 }
             }
+            
+            // Exact line
+            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                direction = direction + 180;
+            }
             blockedpaddle = true;
         } else {
             blockedpaddle = false;
@@ -240,6 +260,10 @@ public class Ball extends Actor {
                 double difference = 0;
                 difference = 180 - direction;
                 direction = 360 + difference;
+            } 
+            // Exact line
+            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                direction = direction + 180;
             }
             blockedsideborder = true;
         } else {
@@ -256,6 +280,11 @@ public class Ball extends Actor {
                 double difference = 0;
                 difference = 270 - direction;
                 direction = 90 + difference;
+            }
+            
+            // Exact line
+            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                direction = direction + 180;
             }
             blockedtopborder = true;
         } else {

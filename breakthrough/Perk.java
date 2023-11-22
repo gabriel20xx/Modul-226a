@@ -30,20 +30,49 @@ public class Perk extends Actor
      * Check if perk should be removed.
      */
     private void checkToRemove() {
-        if(isTouching(Ball.class) || isTouching(Paddle.class)) {
-            updateWorldForPerk(1);
-        }
-        else if(getY() > 700) {
-            updateWorldForPerk(0);
+        if(getY() > 700) {
+            Space world = (Space) getWorld();
+            world.removeObject(this);
+        } else {
+            checkPaddleTouch();
         }
     }
     
     /**
      * Update the world.
      */
-    private void updateWorldForPerk(int addingScore) {
-        Space world = (Space) getWorld();
-        world.updateUserLive(addingScore);
-        world.removeObject(this);
+    private void checkPaddleTouch() {
+        if(isTouching(Paddle.class)) {
+            Space world = (Space) getWorld();
+            int perk = Greenfoot.getRandomNumber(2) + 1;
+            switch (perk) {
+                case 1:
+                    // Add 1 Live
+                    world.updateUserLive(1);
+                case 2:
+                    // Split ball
+                    for (Object obj : getWorld().getObjects(null)) {
+                    // Check if the object is an instance of the Ball class
+                    if (obj instanceof Ball) {
+                        // Cast the object to Ball to access its methods and properties
+                        Ball ball = (Ball) obj;
+        
+                        // Get the x and y positions of the ball
+                        int x = ball.getX();
+                        int y = ball.getY();
+                        double direction = ball.direction;
+                        double speed = ball.speed;
+                        
+                        Ball new1 = new Ball(direction + 45, speed);
+                        getWorld().addObject(new1, x, y);
+                        Ball new2 = new Ball(direction - 45, speed);
+                        getWorld().addObject(new2, x, y);
+                        
+                        getWorld().removeObject(ball);
+                    }
+                } 
+            }
+            world.removeObject(this);
+        }
     }
 }
