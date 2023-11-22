@@ -39,10 +39,7 @@ public class Space extends Stars
         checkBalls();
         increaseSpeed();
         updateTime();
-        showTitle();
-        showScore();
-        showLevel(gameNumber);
-        showLives();
+        displayText();
         playSound();
         initial();
     }
@@ -156,7 +153,7 @@ public class Space extends Stars
                 Greenfoot.delay(25);
                 Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
             } else {
-                Greenfoot.setWorld(new End(score, userLives, "You Won"));
+                Greenfoot.setWorld(new End(score, userLives, "You Won, Thank You For Playing"));
             }
         }
     }
@@ -196,31 +193,14 @@ public class Space extends Stars
     }
     
     /**
-     * Display the scoreboard.
+     * Display the Text
      */
-    private void showScore() {
-        showText("Score: " + score, this.getWidth()/6*5, this.getHeight()/12*4);
-    }
-    
-    /**
-     * Display the level.
-     */
-    private void showLevel(int gameNumber) {
-        showText("Level "+ gameNumber, this.getWidth()/6*5, this.getHeight()/12*2);
-    }
-    
-    /**
-     * Display the title.
-     */
-    private void showTitle() {
+    private void displayText() {
         showText("Breakthrough", this.getWidth()/12, this.getHeight()/12*1);
-    }
-    
-    /**
-     * Display the amount of lives the user has left.
-     */
-    private void showLives() {
+        showText("Score: " + score, this.getWidth()/6*5, this.getHeight()/12*4);
+        showText("Level "+ gameNumber, this.getWidth()/6*5, this.getHeight()/12*2);
         showText("Lives: " + userLives, this.getWidth()/6*5, this.getHeight()/12*5);
+        showText("Time: " + timePassed / 50, this.getWidth()/6*5, this.getHeight()/12*3);
     }
     
     /**
@@ -228,7 +208,6 @@ public class Space extends Stars
      */
     private void updateTime() {
         timePassed++;
-        showText("Time: " + timePassed / 50, this.getWidth()/6*5, this.getHeight()/12*3);
     }
     
     /**
@@ -237,7 +216,6 @@ public class Space extends Stars
      */
     public void updateScore(int amount) {
         score = score + amount;
-        showScore();
     }
     
     /**
@@ -246,7 +224,6 @@ public class Space extends Stars
      */
     public void updateUserLive(int amount) {
         userLives = userLives + amount;
-        showLives();
     }
     
     /**

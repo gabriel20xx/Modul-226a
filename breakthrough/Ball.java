@@ -33,6 +33,7 @@ public class Ball extends Actor {
         normalizeDirection();
         moveInDirection();
         checkCollision();
+        checkIntersecting();
         checkBottomBorder();
     }
     
@@ -329,11 +330,89 @@ public class Ball extends Actor {
     /**
      * Create a degree between 0 and 360.
      */
-    private void normalizeDirection(){
+    private void normalizeDirection() {
         if (direction >= 360) {
             direction -= 360;
         } else if (direction < 0) {
             direction += 360;
+        }
+    }
+    
+    private void checkIntersecting() {
+        List<Brick> bricks = getObjectsInRange(100, Brick.class);
+
+        // Counter for the number of intersections
+        int intersections = 0;
+        int brick1X = 0;
+        int brick1Y = 0;
+        int brick2X = 0;
+        int brick2Y = 0;
+        int brick3X = 0;
+        int brick3Y = 0;
+        
+        // Loop through each instance to check for intersections
+        for (Brick brick : bricks) {
+            if (this.intersects(brick)) {
+                intersections++;
+
+                // Your code for when the ball touches this instance of "Target"
+                if (intersections == 3) {
+                    // Your code for when the ball intersects with three instances
+                    brick3X = brick.getX();
+                    brick3Y = brick.getY();
+                    break; // exit the loop once you've found three intersections
+                }
+        
+                if (intersections == 2) {
+                    // Your code for when the ball intersects with three instances
+                    brick2X = brick.getX();
+                    brick2Y = brick.getY();
+                }
+                
+                if (intersections == 1) {
+                    // Your code for when the ball intersects with three instances
+                    brick1X = brick.getX();
+                    brick1Y = brick.getY();
+                }
+            }
+        }
+        getWorld().showText("Intersections: "+ intersections, 1100, 500);
+        getWorld().showText("Brick 1: "+ brick1X + " / " + brick1Y, 1100, 600);
+        getWorld().showText("Brick 2: "+ brick2X + " / " + brick2Y, 1100, 650);
+        getWorld().showText("Brick 3: "+ brick3X + " / " + brick3Y, 1100, 700);
+        if (intersections >= 1) {
+            redirectBall(intersections, brick1X, brick1Y, brick2X, brick2Y, brick3X, brick3Y);
+        }
+    }
+    
+    private void redirectBall(int objectCount, int brick1X, int brick1Y, int brick2X, int brick2Y, int brick3X, int brick3Y) {
+        if (objectCount == 1) {
+            int ballX = this.getX();
+            int ballY = this.getY();
+            
+            int ballWidth = this.getImage().getWidth();
+            int ballHeight = this.getImage().getHeight();
+            
+            Brick brick = new Brick(1);
+            int brickWidth = brick.getImage().getWidth();
+            int brickHeight = brick.getImage().getHeight();
+            
+            int verticalSpacing = ballHeight/2 + brickHeight/2;
+            int verticalLocation = brick1Y - ballY;
+            
+            int horizontalSpacing = ballWidth/2 + brickWidth/2;
+            int horizontalLocation = brick1X - ballX;
+            
+            if (verticalLocation <= verticalSpacing && horizontalLocation <= horizontalSpacing) {
+                
+            } else if (verticalLocation <= verticalSpacing) {
+                
+            }
+            
+        } else if (objectCount == 2) {
+            
+        } else if (objectCount == 3) {
+            
         }
     }
     
