@@ -71,6 +71,9 @@ public class Perk extends Actor
                         getWorld().removeObject(ball);
                     }
                 } 
+                case 3:
+                    // Fireball
+                    
             }
             world.removeObject(this);
         }

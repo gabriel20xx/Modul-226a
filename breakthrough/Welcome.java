@@ -57,7 +57,7 @@ public class Welcome extends Stars
             }
         }
     
-        showText("Press enter to play", this.getWidth()/2, this.getHeight()/8*4);
+        showText("Press enter to play", this.getWidth()/2, this.getHeight()/16*9);
         showText("Made by Gabriel Franz and Cornel Forster", this.getWidth()/2, this.getHeight()/16*15);
         animationEnded = true;
     }

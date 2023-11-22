@@ -30,9 +30,9 @@ public class Ball extends Actor {
      * Act method which runs in endless loop.
      */
     public void act() {
+        normalizeDirection();
         moveInDirection();
         checkCollision();
-        normalizeDirection();
         checkBottomBorder();
     }
     
@@ -57,28 +57,45 @@ public class Ball extends Actor {
         int initialX = getX();
         int initialY = getY();
 
-        // Update the position
+        // Check line in sight
+        int[] result = checkLineInSight(wholePixelsX, wholePixelsY);
+        wholePixelsX = result[0];
+        wholePixelsY = result[1];
+        
+        // Move object
+        setLocation(initialX + wholePixelsX, initialY + wholePixelsY); 
+
+        // Substract full pixels from fractional one
+        fractionalDistanceX -= wholePixelsX;
+        fractionalDistanceY -= wholePixelsY; 
+    }
+    
+    /**
+     * Checks if an object is in line of sight.
+     */
+    private int[] checkLineInSight(int wholePixelsX, int wholePixelsY) {
+        // Check line in sight for touching
         int intSpeed = (int) Math.ceil(speed);
+        //getWorld().showText("Speed: "+ intSpeed, 1000, 650);
         for (int i = 0; i < intSpeed; i++) {
             // Create new ball and delete it afterwards
-            int newX, newY;
+            int newX = 0; 
+            int newY = 0;
 
             if (wholePixelsX < 0) {
                 newX = (wholePixelsX / intSpeed) - i;
             } else {
                 newX = (wholePixelsX / intSpeed) + i;
             }
-            
             if (wholePixelsY < 0) {
                 newY = (wholePixelsY / intSpeed) - i;
             } else {
                 newY = (wholePixelsY / intSpeed) + i;
             }
             
-            // 
+            // Spawn an invisible ball to check for touching
             BallInvisible invball = new BallInvisible();
             getWorld().addObject(invball, getX() + newX, getY() + newY);
-                
             if (invball.brickTouching) {
                 wholePixelsX = newX;
                 wholePixelsY = newY;
@@ -87,13 +104,28 @@ public class Ball extends Actor {
             } else {
                 getWorld().removeObject(invball);
             }
+            
+            // Spawn an invisible ball to check for touching
+            getWorld().addObject(invball, getX() + newX, getY());
+            if (invball.brickTouching) {
+                wholePixelsX = newX;
+                getWorld().removeObject(invball);
+                break;
+            } else {
+                getWorld().removeObject(invball);
+            }
+            
+            // Spawn an invisible ball to check for touching 
+            getWorld().addObject(invball, getX(), getY() + newY); 
+            if (invball.brickTouching) {
+                wholePixelsY = newY;
+                getWorld().removeObject(invball);
+                break;
+            } else {
+                getWorld().removeObject(invball);
+            }
         }
-        
-        setLocation(initialX + wholePixelsX, initialY + wholePixelsY); 
-
-        // Substract full pixels from fractional one
-        fractionalDistanceX -= wholePixelsX;
-        fractionalDistanceY -= wholePixelsY; 
+        return new int[]{wholePixelsX, wholePixelsY};
     }
     
     /**
@@ -118,6 +150,7 @@ public class Ball extends Actor {
      */
     private void checkBrickCollision() {
         if (isTouching(Brick.class) && blockedbrick == false) {
+            // getWorld().showText("Touching: yes", 1000, 600);
             Greenfoot.playSound("Hit.mp3");
             Brick brickSize = new Brick(1);
             int brickHeight = brickSize.getImage().getHeight();
@@ -213,6 +246,7 @@ public class Ball extends Actor {
             }
         } else {
             blockedbrick = false;
+            // getWorld().showText("Touching: no", 1000, 600);
         }
     }
     

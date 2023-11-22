@@ -42,17 +42,18 @@ public class Paddle extends Actor {
             moveToLeft(Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left"));
             moveToRight(Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right"));
         } else if (mode == 2) {
-                if (type == 1) {
-                    updatePaddleSpeed(Greenfoot.isKeyDown("shift"));
-                    moveToLeft(Greenfoot.isKeyDown("a"));
-                    moveToRight(Greenfoot.isKeyDown("d"));
-                } else if (type == 2) {
-                    updatePaddleSpeed(Greenfoot.isKeyDown("space"));
-                    moveToLeft(Greenfoot.isKeyDown("left"));
-                    moveToRight(Greenfoot.isKeyDown("right"));
-                }
+            if (type == 1) {
+                updatePaddleSpeed(Greenfoot.isKeyDown("shift"));
+                moveToLeft(Greenfoot.isKeyDown("a"));
+                moveToRight(Greenfoot.isKeyDown("d"));
+            } else if (type == 2) {
+                updatePaddleSpeed(Greenfoot.isKeyDown("space"));
+                moveToLeft(Greenfoot.isKeyDown("left"));
+                moveToRight(Greenfoot.isKeyDown("right"));
+                setImage("Paddle2.png");
             }
         }
+    }
 
     /**
      * Update the moving speed of the paddle
