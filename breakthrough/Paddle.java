@@ -11,13 +11,13 @@ public class Paddle extends Mover {
     private int movingSpeed = 8;
     private int type;
     private int mode;
-
+    
     /**
      * Constructor to initialize the actor.
      */
     public Paddle(int type) {
         this.type = type;
-        mode = Mode.mode;
+        mode = Selection.mode;
     }
 
     /**
