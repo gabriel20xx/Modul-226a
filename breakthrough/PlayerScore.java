@@ -21,19 +21,19 @@ public class PlayerScore {
      * Constructor to initialize the score.
      */
     public PlayerScore(String newname, int newscore) {
-        if (newscore >= score1) {
+        if (newscore >= score1 || score1 == 0) {
             name3 = name2;
             score3 = score2;
             name2 = name1;
             score2 = score1;
             name1 = newname;
             score1 = newscore;
-        } else if (newscore >= score2) {
+        } else if (newscore >= score2 || score2 == 0) {
             name3 = name2;
             score3 = score2;
             name2 = newname;
             score2 = newscore;
-        } else if (newscore >= score3) {
+        } else if (newscore >= score3 || score3 == 0) {
             name3 = newname;
             score3 = newscore;
         }
