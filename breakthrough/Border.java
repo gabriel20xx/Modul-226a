@@ -5,4 +5,4 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-abstract class Border extends Actor {}
+abstract class Border extends Static {}

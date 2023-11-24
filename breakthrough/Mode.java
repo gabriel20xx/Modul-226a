@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Mode extends Stars
+public class Mode extends Selection
 {
     public static int mode;
     private int rows = 1;

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Gabriel Franz
  * @author Cornel Forster
  * */
-public class Perk extends Actor
+public class Perk extends Mover
 {
     private int speed;
 

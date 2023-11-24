@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Level extends Stars
+public class Level extends Selection
 {
     private int rows = 2;
     private int columns = 5;

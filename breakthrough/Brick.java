@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Brick extends Actor {
+public class Brick extends Static {
     private int color;
     private int count = 0;
     private boolean blockedball = false;

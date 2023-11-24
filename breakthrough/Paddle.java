@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Paddle extends Actor {
+public class Paddle extends Mover {
     private int movingSpeed = 8;
     private int type;
     private int mode;

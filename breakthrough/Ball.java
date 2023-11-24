@@ -7,7 +7,7 @@ import java.util.*;
  * @author Gabriel Franz
  * @author Cornel Forster
  */
-public class Ball extends Actor {
+public class Ball extends Mover {
     public double direction;
     public double speed;
     private double fractionalDistanceX = 0.0;
@@ -33,7 +33,6 @@ public class Ball extends Actor {
         normalizeDirection();
         moveInDirection();
         checkCollision();
-        checkIntersecting();
         checkBottomBorder();
     }
     
@@ -55,16 +54,16 @@ public class Ball extends Actor {
         int wholePixelsX = (int) fractionalDistanceX;
         int wholePixelsY = (int) fractionalDistanceY;
         
-        int initialX = getX();
+        /*int initialX = getX();
         int initialY = getY();
 
         // Check line in sight
         int[] result = checkLineInSight(wholePixelsX, wholePixelsY);
         wholePixelsX = result[0];
-        wholePixelsY = result[1];
+        wholePixelsY = result[1];*/
         
         // Move object
-        setLocation(initialX + wholePixelsX, initialY + wholePixelsY); 
+        setLocation(getX() + wholePixelsX, getY() + wholePixelsY); 
 
         // Substract full pixels from fractional one
         fractionalDistanceX -= wholePixelsX;
@@ -72,182 +71,19 @@ public class Ball extends Actor {
     }
     
     /**
-     * Checks if an object is in line of sight.
-     */
-    private int[] checkLineInSight(int wholePixelsX, int wholePixelsY) {
-        // Check line in sight for touching
-        int intSpeed = (int) Math.ceil(speed);
-        //getWorld().showText("Speed: "+ intSpeed, 1000, 650);
-        for (int i = 0; i < intSpeed; i++) {
-            // Create new ball and delete it afterwards
-            int newX = 0; 
-            int newY = 0;
-
-            if (wholePixelsX < 0) {
-                newX = (wholePixelsX / intSpeed) - i;
-            } else {
-                newX = (wholePixelsX / intSpeed) + i;
-            }
-            if (wholePixelsY < 0) {
-                newY = (wholePixelsY / intSpeed) - i;
-            } else {
-                newY = (wholePixelsY / intSpeed) + i;
-            }
-            
-            // Spawn an invisible ball to check for touching
-            BallInvisible invball = new BallInvisible();
-            getWorld().addObject(invball, getX() + newX, getY() + newY);
-            if (invball.brickTouching) {
-                wholePixelsX = newX;
-                wholePixelsY = newY;
-                getWorld().removeObject(invball);
-                break;
-            } else {
-                getWorld().removeObject(invball);
-            }
-            
-            // Spawn an invisible ball to check for touching
-            getWorld().addObject(invball, getX() + newX, getY());
-            if (invball.brickTouching) {
-                wholePixelsX = newX;
-                getWorld().removeObject(invball);
-                break;
-            } else {
-                getWorld().removeObject(invball);
-            }
-            
-            // Spawn an invisible ball to check for touching 
-            getWorld().addObject(invball, getX(), getY() + newY); 
-            if (invball.brickTouching) {
-                wholePixelsY = newY;
-                getWorld().removeObject(invball);
-                break;
-            } else {
-                getWorld().removeObject(invball);
-            }
-        }
-        return new int[]{wholePixelsX, wholePixelsY};
-    }
-    
-    /**
      * Check the collision of the ball with two other objects.
      */
     private void checkCollision() {
-        // Check for collision with two objects
+        // Check for collision with two classes
         if (((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) && blockedborderpaddle <= 0) {
             direction += 180;
             blockedborderpaddle = this.blockedborderpaddle;
         } else {
             blockedborderpaddle--;
-            checkBrickCollision();
+            checkIntersecting();
             checkPaddleCollision();
             checkSideborderCollision();
             checkTopborderCollision();
-        }
-    }
-    
-    /**
-     * Check if the ball hits a brick.
-     */
-    private void checkBrickCollision() {
-        if (isTouching(Brick.class) && blockedbrick == false) {
-            // getWorld().showText("Touching: yes", 1000, 600);
-            Greenfoot.playSound("Hit.mp3");
-            Brick brickSize = new Brick(1);
-            int brickHeight = brickSize.getImage().getHeight();
-            int brickWidth = brickSize.getImage().getWidth();
-            int brickPosX;
-            int brickPosY;
-            
-            int ballHeight = this.getImage().getHeight();
-            int ballWidth = this.getImage().getWidth();
-            int ballPosX = this.getX();
-            int ballPosY = this.getY();
-            
-            int xOffset = brickWidth/2 + ballWidth/2;
-            int yOffset = brickHeight/2 + ballHeight/2;
-            
-            List<Brick> bricksInRadius = getObjectsInRange(yOffset + 2, Brick.class);
-            if (bricksInRadius.isEmpty()) {
-                bricksInRadius = getObjectsInRange(xOffset + 2, Brick.class);
-            }
-            
-            Brick closestBrick = null;
-            int minDiffX = Integer.MAX_VALUE;
-            int minDiffY = Integer.MAX_VALUE;
-            
-            // Calculate closest brick
-            for (Brick brick : bricksInRadius) {
-                brickPosX = brick.getX();
-                brickPosY = brick.getY();
-            
-                int DiffXx = brickPosX - ballPosX;
-                int DiffYy = brickPosY - ballPosY;
-            
-                if (DiffXx < minDiffX) {
-                    minDiffX = DiffXx;
-                    closestBrick = brick;
-                }
-                
-                if (DiffYy < minDiffY) {
-                    minDiffY = DiffYy;
-                    closestBrick = brick;
-                }
-            }
-            
-            if (closestBrick != null) {
-                brickPosX = closestBrick.getX();
-                brickPosY = closestBrick.getY();
-                
-                int DiffX = ballPosX - brickPosX;
-                int DiffY = ballPosY - brickPosY;
-                
-                // Calculate Difference from DiffY to yOffset and DiffX to xOffset
-                int xDiffOffset = Math.abs(DiffX - xOffset);
-                int yDiffOffset = Math.abs(DiffY - yOffset);
-                
-                if (xDiffOffset < yDiffOffset) {
-                    // Ball comming from right
-                    if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
-                        double difference = 0;
-                        difference = 360 - direction;
-                        direction = 180 + difference;
-                    }
-                    // Ball comming from left
-                    else if (direction > 90 && direction < 270) {
-                        double difference = 0;
-                        difference = 180 - direction;
-                        direction = 360 + difference;
-                    }
-                    // Exact line
-                    else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-                        direction = direction + 180;
-                        }
-                } else if (yDiffOffset < xDiffOffset) {
-                    // Ball comming from bottom
-                    if (direction > 180 && direction < 360) {
-                        double difference = 0;
-                        difference = 270 - direction;
-                        direction = 90 + difference;
-                    }
-                    // Ball comming from top
-                    else if (direction > 0 && direction < 180){
-                        double difference = 0;
-                        difference = 90 - direction;
-                        direction = 270 + difference;
-                    } 
-                    // Exact line
-                    else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-                        direction = direction + 180;
-                    }
-                } else {
-                    direction += 180;
-                }
-                blockedbrick = true;
-            }
-        } else {
-            blockedbrick = false;
-            // getWorld().showText("Touching: no", 1000, 600);
         }
     }
     
@@ -381,38 +217,122 @@ public class Ball extends Actor {
         getWorld().showText("Brick 2: "+ brick2X + " / " + brick2Y, 1100, 650);
         getWorld().showText("Brick 3: "+ brick3X + " / " + brick3Y, 1100, 700);
         if (intersections >= 1) {
-            redirectBall(intersections, brick1X, brick1Y, brick2X, brick2Y, brick3X, brick3Y);
+            String edge = checkEdge(intersections, brick1X, brick1Y, brick2X, brick2Y, brick3X, brick3Y);
+            redirectBall(edge);
         }
     }
     
-    private void redirectBall(int objectCount, int brick1X, int brick1Y, int brick2X, int brick2Y, int brick3X, int brick3Y) {
-        if (objectCount == 1) {
-            int ballX = this.getX();
-            int ballY = this.getY();
-            
-            int ballWidth = this.getImage().getWidth();
-            int ballHeight = this.getImage().getHeight();
-            
-            Brick brick = new Brick(1);
-            int brickWidth = brick.getImage().getWidth();
-            int brickHeight = brick.getImage().getHeight();
-            
-            int verticalSpacing = ballHeight/2 + brickHeight/2;
-            int verticalLocation = brick1Y - ballY;
-            
-            int horizontalSpacing = ballWidth/2 + brickWidth/2;
-            int horizontalLocation = brick1X - ballX;
-            
-            if (verticalLocation <= verticalSpacing && horizontalLocation <= horizontalSpacing) {
-                
-            } else if (verticalLocation <= verticalSpacing) {
-                
+    private String checkEdge(int objectCount, int brick1X, int brick1Y, int brick2X, int brick2Y, int brick3X, int brick3Y) {
+        Brick brick = new Brick(1);
+        int ballX = getX();
+        int ballY = getY();
+        int brickX = brick1X;
+        int brickY = brick1Y;
+        int brickWidth = brick.getImage().getWidth();
+        int brickHeight = brick.getImage().getHeight();
+        
+        int topEdge = brickY - brickHeight/2;
+        int bottomEdge = brickY + brickHeight/2;
+        int leftEdge = brickX - brickWidth/2;
+        int rightEdge = brickX + brickWidth/2;
+        
+        // Calculate the distance from the ball to the edges of the brick
+        int xDistanceToMiddle = Math.abs(brickX - ballX);
+        int yDistanceToMiddle = Math.abs(brickY - ballY);
+        int distanceToTop = Math.abs(topEdge - ballY);
+        int distanceToBottom = Math.abs(bottomEdge - ballY);
+        int distanceToLeft = Math.abs(leftEdge - ballX);
+        int distanceToRight = Math.abs(rightEdge - ballX);
+        
+        if (objectCount == 1) {            
+            // Determine the closest edge and print the corresponding statement
+            if (distanceToTop < distanceToBottom && distanceToTop < distanceToLeft && distanceToTop < distanceToRight) {
+                if (xDistanceToMiddle < brickWidth/2) {
+                    // Top Edge
+                    return "Top";
+                } else {
+                    if (distanceToLeft < distanceToRight) {
+                        return "Left";
+                        // Left Edge
+                    } else {
+                        return "Right";
+                        // Right Edge
+                    }
+                }
             }
-            
+            else if (distanceToBottom < distanceToTop && distanceToBottom < distanceToLeft && distanceToBottom < distanceToRight) {
+                if (xDistanceToMiddle < brickWidth/2) {
+                    // Bottom Edge
+                    return "Bottom";
+                } else {
+                    if (distanceToLeft < distanceToRight) {
+                        return "Left";
+                        // Left Edge
+                    } else {
+                        return "Right";
+                        // Right Edge
+                    }
+                }
+            } else if (distanceToLeft < distanceToTop && distanceToLeft < distanceToBottom && distanceToLeft < distanceToRight) {
+                return "Left";
+                // Left Edge
+            } else {
+                return "Right";
+                // Right Edge
+            }
         } else if (objectCount == 2) {
-            
-        } else if (objectCount == 3) {
-            
+            // 3 Variants
+            // 1. Horizontaly Next to each other (top or bottom)
+            // 2. Verticaly Next to each other (like left or right)
+            // 3. Diagonally next to each other (invert)
+            if (brick1X == brick2X) {
+                // Vertically (left / right)
+                if (distanceToLeft < distanceToRight) {
+                    return "Left";
+                } else {
+                    return "Right";
+                }
+            } else if (brick1Y == brick2Y) {
+                if (distanceToTop < distanceToBottom) {
+                    return "Top";
+                } else {
+                    return "Bottom";
+                }
+                // Horizontally (top / bottom)
+            } else {
+                return "Invert";
+            }
+        } else {
+            // Invert direction
+            return "Invert";
+        }
+    }
+    
+    private void redirectBall(String edge) {
+        if (edge == "Top") {
+            getWorld().showText("Top", 1000, 550);
+            double difference = 0;
+            difference = 90 - direction;
+            direction = 270 + difference;
+        } else if (edge == "Bottom") {
+            getWorld().showText("Bottom", 1000, 550);
+            double difference = 0;
+            difference = 270 - direction;
+            direction = 90 + difference;
+        } else if (edge == "Left") {
+            getWorld().showText("Left", 1000, 550);
+            double difference = 0;
+            difference = 360 - direction;
+            direction = 180 + difference;
+        } else if (edge == "Right") {
+            getWorld().showText("Right", 1000, 550);
+            double difference = 0;
+            difference = 180 - direction;
+            direction = 360 + difference;    
+        } else {
+            getWorld().showText("Invert", 1000, 550);
+            double difference = 0;
+            direction = direction + 180;
         }
     }
     
