@@ -149,7 +149,7 @@ public class Space extends Stars
         // Check if only the not destroyable bricks are left.
         boolean allBricksAreColor10 = bricks.stream().allMatch(brick -> brick.getColor() == 10);
         if (bricks.isEmpty() || allBricksAreColor10) {
-            if (gameNumber <= lastGame) {
+            if (gameNumber < lastGame) {
                 Greenfoot.delay(25);
                 Greenfoot.setWorld(new Space(gameNumber+1, score, userLives));
             } else {

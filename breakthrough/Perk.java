@@ -30,9 +30,8 @@ public class Perk extends Mover
      * Check if perk should be removed.
      */
     private void checkToRemove() {
-        if(getY() > 700) {
-            Space world = (Space) getWorld();
-            world.removeObject(this);
+        if (getY() >= getWorld().getHeight() - 1) {
+            getWorld().removeObject(this);
         } else {
             checkPaddleTouch();
         }
