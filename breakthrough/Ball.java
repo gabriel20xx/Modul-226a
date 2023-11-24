@@ -323,21 +323,29 @@ public class Ball extends Mover {
     
     private void redirectBall(String edge) {
         if (edge == "Top") {
-            double difference = 0;
-            difference = 90 - direction;
-            direction = 270 + difference;
+            if (direction >= 0 && direction <= 180) {
+                double difference = 0;
+                difference = 90 - direction;
+                direction = 270 + difference;
+            }
         } else if (edge == "Bottom") {
-            double difference = 0;
-            difference = 270 - direction;
-            direction = 90 + difference;
-        } else if (edge == "Left") {
-            double difference = 0;
-            difference = 360 - direction;
-            direction = 180 + difference;
+            if (direction >= 180 && direction <= 360) {
+                double difference = 0;
+                difference = 270 - direction;
+                direction = 90 + difference;
+            }
         } else if (edge == "Right") {
-            double difference = 0;
-            difference = 180 - direction;
-            direction = 360 + difference;    
+            if (direction >= 90 && direction <= 270) {
+                double difference = 0;
+                difference = 180 - direction;
+                direction = 360 + difference;   
+            }
+        } else if (edge == "Left") {
+            if (direction >= 270 || direction <= 90) {
+                double difference = 0;
+                difference = 360 - direction;
+                direction = 180 + difference;
+            }
         } else {
             double difference = 0;
             direction = direction + 180;
