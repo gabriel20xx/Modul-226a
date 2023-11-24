@@ -12,11 +12,10 @@ public class Ball extends Mover {
     public double speed;
     private double fractionalDistanceX = 0.0;
     private double fractionalDistanceY = 0.0;
-    private int blockedborderpaddle = 5;
-    private boolean blockedsideborder = false;
-    private boolean blockedtopborder = false;
-    private boolean blockedpaddle = false;
-    private boolean blockedbrick = false;
+    private boolean brickTouched = false;
+    private boolean sideborderTouched = false;
+    private boolean topborderTouched = false;
+    private boolean paddleTouched = false;
 
     /**
      * Constructor to initialize the actor.
@@ -32,7 +31,7 @@ public class Ball extends Mover {
     public void act() {
         normalizeDirection();
         moveInDirection();
-        checkCollision();
+        checkCollisions();
         checkBottomBorder();
     }
     
@@ -54,14 +53,6 @@ public class Ball extends Mover {
         int wholePixelsX = (int) fractionalDistanceX;
         int wholePixelsY = (int) fractionalDistanceY;
         
-        /*int initialX = getX();
-        int initialY = getY();
-
-        // Check line in sight
-        int[] result = checkLineInSight(wholePixelsX, wholePixelsY);
-        wholePixelsX = result[0];
-        wholePixelsY = result[1];*/
-        
         // Move object
         setLocation(getX() + wholePixelsX, getY() + wholePixelsY); 
 
@@ -73,17 +64,70 @@ public class Ball extends Mover {
     /**
      * Check the collision of the ball with two other objects.
      */
-    private void checkCollision() {
+    private void checkCollisions() {
         // Check for collision with two classes
-        if (((isTouching(Sideborder.class) && isTouching(Topborder.class)) || (isTouching(Sideborder.class) && isTouching(Paddle.class)) || (isTouching(Sideborder.class) && isTouching(Brick.class))) && blockedborderpaddle <= 0) {
-            direction += 180;
-            blockedborderpaddle = this.blockedborderpaddle;
+        if ((isTouching(Sideborder.class) && isTouching(Topborder.class)) || 
+            (isTouching(Sideborder.class) && isTouching(Paddle.class)) || 
+            (isTouching(Sideborder.class) && isTouching(Brick.class))) {
+            redirectBall("Invert");
+            
+            if (isTouching(Brick.class)) {
+                brickTouched = true;
+            } else {
+                sideborderTouched = false;
+            }
+            if (isTouching(Sideborder.class)) {
+                sideborderTouched = true;
+            } else {
+                sideborderTouched = false;
+            }
+            if (isTouching(Topborder.class)) {
+                topborderTouched = true;
+            } else {
+                sideborderTouched = false;
+            }
+            if (isTouching(Paddle.class)) {
+                paddleTouched = true;
+            } else {
+                sideborderTouched = false;
+            }
         } else {
-            blockedborderpaddle--;
-            checkIntersecting();
-            checkPaddleCollision();
-            checkSideborderCollision();
-            checkTopborderCollision();
+            // Check for collision with only one object
+            if (isTouching(Brick.class)) {
+                if (!brickTouched) {
+                    checkIntersecting();
+                    brickTouched = true;
+                }
+            } else {
+                brickTouched = false;
+            }
+    
+            if (isTouching(Sideborder.class)) {
+                if (!sideborderTouched) {
+                    checkSideborderCollision();
+                    sideborderTouched = true;
+                }
+            } else {
+                sideborderTouched = false;
+            }
+    
+            if (isTouching(Topborder.class)) {
+                if (!topborderTouched) {
+                    checkTopborderCollision();
+                    topborderTouched = true;
+                }
+            } else {
+                topborderTouched = false;
+            }
+    
+            if (isTouching(Paddle.class)) {
+                if (!paddleTouched) {
+                    checkPaddleCollision();
+                    paddleTouched = true;
+                }
+            } else {
+                paddleTouched = false;
+            }
         }
     }
     
@@ -91,27 +135,22 @@ public class Ball extends Mover {
      * Check if the ball hits a paddle.
      */
     private void checkPaddleCollision() {
-        if (isTouching(Paddle.class) && blockedpaddle == false) {
-            if (direction > 0 && direction < 180) {
-                // Implement Callculation
-                Paddle paddle = new Paddle(1);
-                int width = paddle.getImage().getWidth();
-                List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
-            
-                if (!paddles.isEmpty()) {
-                    Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
-                    int distance = getX() - closestPaddle.getX();
-                    direction = 270 + (distance*(90/(width/1.5)));
-                }
+        if (direction > 0 && direction < 180) {
+            // Implement Callculation
+            Paddle paddle = new Paddle(1);
+            int width = paddle.getImage().getWidth();
+            List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
+        
+            if (!paddles.isEmpty()) {
+                Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
+                int distance = getX() - closestPaddle.getX();
+                direction = 270 + (distance*(90/(width/1.5)));
             }
-            
-            // Exact line
-            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-                direction = direction + 180;
-            }
-            blockedpaddle = true;
-        } else {
-            blockedpaddle = false;
+        }
+        
+        // Exact line
+        else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+            redirectBall("Invert");
         }
     }
     
@@ -119,26 +158,17 @@ public class Ball extends Mover {
      * Check if the ball collides with the sideborder.
      */
     private void checkSideborderCollision() {
-        if (isTouching(Sideborder.class) && blockedsideborder == false) {
-            // Right Sideboarder
-            if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
-                double difference = 0;
-                difference = 360 - direction;
-                direction = 180 + difference;
-            }
-            // Left Sideboarder
-            else if (direction > 90 && direction < 270) {
-                double difference = 0;
-                difference = 180 - direction;
-                direction = 360 + difference;
-            } 
-            // Exact line
-            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-                direction = direction + 180;
-            }
-            blockedsideborder = true;
-        } else {
-            blockedsideborder = false;
+        // Right Sideboarder
+        if ((direction > 270 && direction < 360) || (direction < 90 && direction > 0)) {
+            redirectBall("Left");
+        }
+        // Left Sideboarder
+        else if (direction > 90 && direction < 270) {
+            redirectBall("Right");
+        } 
+        // Exact line
+        else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+            redirectBall("Invert");
         }
     }
     
@@ -146,20 +176,12 @@ public class Ball extends Mover {
      * Check if the ball collides with the topborder.
      */
     private void checkTopborderCollision() {
-        if (isTouching(Topborder.class) && blockedtopborder == false) {
-            if (direction > 180 && direction < 360) {
-                double difference = 0;
-                difference = 270 - direction;
-                direction = 90 + difference;
-            }
-            
-            // Exact line
-            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-                direction = direction + 180;
-            }
-            blockedtopborder = true;
-        } else {
-            blockedtopborder = false;
+        if (direction > 180 && direction < 360) {
+            redirectBall("Bottom");
+        }
+        // Exact line
+        else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+            redirectBall("Invert");
         }
     }
     
@@ -212,23 +234,15 @@ public class Ball extends Mover {
                 }
             }
         }
-        getWorld().showText("Intersections: "+ intersections, 1100, 500);
-        getWorld().showText("Brick 1: "+ brick1X + " / " + brick1Y, 1100, 600);
-        getWorld().showText("Brick 2: "+ brick2X + " / " + brick2Y, 1100, 650);
-        getWorld().showText("Brick 3: "+ brick3X + " / " + brick3Y, 1100, 700);
-        if (intersections >= 1) {
-            String edge = checkEdge(intersections, brick1X, brick1Y, brick2X, brick2Y, brick3X, brick3Y);
-            redirectBall(edge);
-        }
+
+        String edge = checkEdge(intersections, brick1X, brick1Y, brick2X, brick2Y);
+        redirectBall(edge);
     }
     
-    private String checkEdge(int objectCount, int brick1X, int brick1Y, int brick2X, int brick2Y, int brick3X, int brick3Y) {
+    private String checkEdge(int objectCount, int brickX, int brickY, int brick2X, int brick2Y) {
         Brick brick = new Brick(1);
         int ballX = getX();
-        int ballY = getY();
-        int brickX = brick1X;
-        int brickY = brick1Y;
-        int brickWidth = brick.getImage().getWidth();
+        int ballY = getY();        int brickWidth = brick.getImage().getWidth();
         int brickHeight = brick.getImage().getHeight();
         
         int topEdge = brickY - brickHeight/2;
@@ -236,7 +250,6 @@ public class Ball extends Mover {
         int leftEdge = brickX - brickWidth/2;
         int rightEdge = brickX + brickWidth/2;
         
-        // Calculate the distance from the ball to the edges of the brick
         int xDistanceToMiddle = Math.abs(brickX - ballX);
         int yDistanceToMiddle = Math.abs(brickY - ballY);
         int distanceToTop = Math.abs(topEdge - ballY);
@@ -285,20 +298,20 @@ public class Ball extends Mover {
             // 1. Horizontaly Next to each other (top or bottom)
             // 2. Verticaly Next to each other (like left or right)
             // 3. Diagonally next to each other (invert)
-            if (brick1X == brick2X) {
+            if (brickX == brick2X) {
                 // Vertically (left / right)
                 if (distanceToLeft < distanceToRight) {
                     return "Left";
                 } else {
                     return "Right";
                 }
-            } else if (brick1Y == brick2Y) {
+            } else if (brickY == brick2Y) {
+                // Horizontally (top / bottom)
                 if (distanceToTop < distanceToBottom) {
                     return "Top";
                 } else {
                     return "Bottom";
                 }
-                // Horizontally (top / bottom)
             } else {
                 return "Invert";
             }
@@ -310,27 +323,22 @@ public class Ball extends Mover {
     
     private void redirectBall(String edge) {
         if (edge == "Top") {
-            getWorld().showText("Top", 1000, 550);
             double difference = 0;
             difference = 90 - direction;
             direction = 270 + difference;
         } else if (edge == "Bottom") {
-            getWorld().showText("Bottom", 1000, 550);
             double difference = 0;
             difference = 270 - direction;
             direction = 90 + difference;
         } else if (edge == "Left") {
-            getWorld().showText("Left", 1000, 550);
             double difference = 0;
             difference = 360 - direction;
             direction = 180 + difference;
         } else if (edge == "Right") {
-            getWorld().showText("Right", 1000, 550);
             double difference = 0;
             difference = 180 - direction;
             direction = 360 + difference;    
         } else {
-            getWorld().showText("Invert", 1000, 550);
             double difference = 0;
             direction = direction + 180;
         }
