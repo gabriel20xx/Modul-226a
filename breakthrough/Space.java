@@ -81,8 +81,10 @@ public class Space extends Stars
     private void createBricks(int level) {
         final int rows = 16;
         final int columns = 10;
-        final int startWidth = 50;
-        final int startHeight = 120;
+        Sideborder leftborder = new Sideborder();
+        Topborder topborder = new Topborder();
+        final int startWidth = getWidth()/24+leftborder.getImage().getWidth()/2;
+        final int startHeight = getHeight()-leftborder.getImage().getHeight()+topborder.getImage().getHeight()/2+topborder.getImage().getHeight()/2;
         final int brickWidth = 80;
         final int brickHeight = 24;
         
@@ -107,11 +109,12 @@ public class Space extends Stars
     private void createBorders()
     {
         Sideborder leftborder = new Sideborder();
-        addObject(leftborder, 40, 410);
+        addObject(leftborder, getWidth()/24, getHeight()-leftborder.getImage().getHeight()/2);
         Sideborder rightborder = new Sideborder();
-        addObject(rightborder, 860, 410);
+        Brick brick = new Brick(1);
+        addObject(rightborder, getWidth()/24 + leftborder.getImage().getWidth()/2 + rightborder.getImage().getWidth()/2 + 10*brick.getImage().getWidth(), getHeight()-leftborder.getImage().getHeight()/2);
         Topborder topborder = new Topborder();
-        addObject(topborder, 450, 110);
+        addObject(topborder, getWidth()/24 + leftborder.getImage().getWidth()/2 + 5*brick.getImage().getWidth(), getHeight()-leftborder.getImage().getHeight()+topborder.getImage().getHeight()/2);
     }
     
     /**
@@ -119,13 +122,15 @@ public class Space extends Stars
      */
     private void createPaddle()
     {
+        Sideborder leftborder = new Sideborder();
         Paddle paddle1 = new Paddle(1);
-        addObject(paddle1, 450, this.getHeight() - this.getHeight()/ 12);
+        Brick brick = new Brick(1);
+        addObject(paddle1, getWidth()/24 + leftborder.getImage().getWidth()/2 + 5*brick.getImage().getWidth(), this.getHeight() - this.getHeight()/ 12);
         
         int mode = Mode.mode;
         if (mode == 2) {
             Paddle paddle2 = new Paddle(2);
-            addObject(paddle2, 450, this.getHeight() - this.getHeight()/ 24);
+            addObject(paddle2, getWidth()/24 + leftborder.getImage().getWidth()/2 + 5*brick.getImage().getWidth(), this.getHeight() - this.getHeight()/ 24);
         }
     }
     
