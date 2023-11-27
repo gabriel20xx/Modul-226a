@@ -142,15 +142,19 @@ public class Ball extends Mover {
             List<Paddle> paddles = getObjectsInRange(width, Paddle.class);
         
             if (!paddles.isEmpty()) {
-                Paddle closestPaddle = paddles.get(0); // Assume the first Leiste is the only one
-                int distance = getX() - closestPaddle.getX();
-                direction = 270 + (distance*(90/(width/1.5)));
+                for (Paddle closestpaddle : paddles) {
+                    if (this.intersects(closestpaddle)) {
+                        int distance = getX() - closestpaddle.getX();
+                        direction = 270 + (distance*(90/(width/1.5)));
+                        break;
+                    }
+                }
             }
-        }
         
-        // Exact line
-        else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
-            redirectBall("Invert");
+            // Exact line
+            else if (direction == 0 || direction == 90 || direction == 180 || direction == 270 || direction == 360) {
+                redirectBall("Invert");
+            }
         }
     }
     
@@ -215,10 +219,8 @@ public class Ball extends Mover {
 
                 // Your code for when the ball touches this instance of "Target"
                 if (intersections == 3) {
-                    // Your code for when the ball intersects with three instances
-                    brick3X = brick.getX();
-                    brick3Y = brick.getY();
-                    break; // exit the loop once you've found three intersections
+                    // Exit the loop once you've found three intersections
+                    break; 
                 }
         
                 if (intersections == 2) {
@@ -234,7 +236,6 @@ public class Ball extends Mover {
                 }
             }
         }
-
         String edge = checkEdge(intersections, brick1X, brick1Y, brick2X, brick2Y);
         redirectBall(edge);
     }
