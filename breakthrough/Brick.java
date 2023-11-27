@@ -39,7 +39,7 @@ public class Brick extends Static {
                 blockedball = true;
                 if (count >= 2) {
                     Space space = (Space) getWorld();
-                    space.updateScore(50);
+                    space.updateScore(Config.silverBrickScore);
                     createPerk();
                     getWorld().removeObject(this);
                 }
@@ -47,7 +47,7 @@ public class Brick extends Static {
             // The brick has neither color 9 nor 10.
             else if (color != 10) {
                 Space space = (Space) getWorld();
-                space.updateScore(50);
+                space.updateScore(Config.normalBrickScore);
                 createPerk();
                 getWorld().removeObject(this);
             }

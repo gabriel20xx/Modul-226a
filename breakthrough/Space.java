@@ -135,7 +135,7 @@ public class Space extends Stars
     private void createBall()
     {
         // 315 = Direction in Degrees, ballSpeed = Speed
-        Ball ball = new Ball(320,ballSpeed);
+        Ball ball = new Ball(Config.initialBallDirection,Config.initialBallSpeed);
         Paddle paddle = new Paddle(1);
         // Location does not matter because it is hanled by initial()
         addObject(ball, 450, (this.getHeight() - this.getHeight()/ 12));
@@ -164,9 +164,9 @@ public class Space extends Stars
     private void checkBalls() {
         List<Ball> balls = getObjects(Ball.class);
         if (balls.isEmpty()) {
-            updateScore(-500);
+            updateScore(Config.deathScore);
             updateUserLive(-1);
-            ballSpeed = 4;
+            ballSpeed = Config.initialBallSpeed;
             Greenfoot.playSound("Death.mp3");
             Greenfoot.delay(100);
             if(userLives == 0) {
@@ -185,7 +185,7 @@ public class Space extends Stars
     private void increaseSpeed() {
         if (timePassed % 60 == 0) {
             List<Ball> balls = getObjects(Ball.class);
-            ballSpeed+=0.1;
+            ballSpeed+=Config.speedIncreasePerMinute;
             for (Ball ball : balls) {
                 ball.speed = ballSpeed;
             }

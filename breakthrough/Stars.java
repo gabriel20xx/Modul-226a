@@ -14,7 +14,7 @@ public class Stars extends World
      */
     public Stars()
     {    
-        super(1280, 720, 1);
+        super(Config.screenWidth, Config.screenHeight, 1);
         setBackground();
     }
     

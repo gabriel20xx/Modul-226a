@@ -7,8 +7,6 @@
 public class Levels  
 {
     // instance variables - replace the example below with your own
-    private int x;
-
     /**
      * Constructor for objects of class Levels
      */
@@ -493,7 +491,6 @@ public class Levels
                 return level9;
             case 10:
                 return level10;
-
             default:
                 return level1;
         }

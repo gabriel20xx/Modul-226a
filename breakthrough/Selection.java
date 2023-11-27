@@ -119,7 +119,7 @@ public class Selection extends Stars
                                 mode = count;
                                 Greenfoot.setWorld(new Level());
                             } else if (step == 2) {
-                                Greenfoot.setWorld(new Space(count, 0, 3));
+                                Greenfoot.setWorld(new Space(count, 0, Config.initialLives));
                             }
                         } else {
                             count++;
