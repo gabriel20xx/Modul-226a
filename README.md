@@ -1,50 +1,102 @@
-![Screenshot](Screenshot.png)
 # Breakthrough
+
+![Screenshot](https://github.com/gabriel20xx/Modul-226a/raw/main/Screenshot.png)
+
+A classic Breakout-style arcade game built with Greenfoot as part of Modul 226a.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [How to Start](#how-to-start)
+- [Game Modes](#game-modes)
+- [Controls](#controls)
+- [Game Features](#game-features)
+- [Scoring System](#scoring-system)
+- [Authors](#authors)
+
 ## Introduction
-A game made by Gabriel Franz and Cornel Forster to get a grade in the Modul 226a.  
-The game is about a paddle, a ball and a looooooot of bricks. The ball is moving in the game world. If it touches an object, it will bounce of it. You can only move the paddle left and right. The goal is to clear out all the bricks in the world.
+Breakthrough is a fun arcade game featuring a paddle, a ball, and lots of bricks! The objective is simple: use your paddle to bounce the ball and destroy all the bricks in each level. The ball bounces off objects it touches, and you control the paddle's horizontal movement to keep the ball in play.
 
-## Start the game
-They game should automatically start wif you click on the "Run" Button.  
-If it doesn't work, click on the "Welcome" world, chose the option "new Welcome()" and and click on the "Run" Button.
+## Requirements
+- [Greenfoot](https://www.greenfoot.org/) (Version 3.0 or higher recommended)
+- Java Development Kit (JDK) 8 or higher
+
+## Installation
+1. Download and install [Greenfoot](https://www.greenfoot.org/download)
+2. Clone or download this repository
+3. Open Greenfoot
+4. Select `Open...` from the `Scenario` menu
+5. Navigate to the `breakthrough` folder in this repository
+6. Click `Open` to load the project
+
+## How to Start
+The game should automatically start when you click the "Run" button.  
+If it doesn't work:
+1. Click on the "Welcome" world
+2. Choose the option "new Welcome()"
+3. Click the "Run" button
 
 
-## Modes
-There are currently two different modes with one more to come.
+## Game Modes
+There are currently two different modes available:
+
 ### Singleplayer
-In singleplayer you are the only player.
+Play solo and control the paddle by yourself.
+
 ### Co-op
-In co-op mode you and your coplayer play together.
+Team up with a friend! Both players work together using two paddles to keep the ball in play.
 
 ## Controls
-If you play in singleplayer you can either move your paddle left with the "a" or "left" arrow key, right with "d" or the "right" arrow key on your keyboard.  
-Additionally you can increase the speed of your paddle with your "shift" or "space" key.
 
-If you play in co-op mode, one player controls only one paddle (there are two):
-- The first player controls the paddle with "a", "d" and "shift".
-- The second player controls the paddle with "left", "right" arrow key and "space".
-  
-## Important functions
+### Singleplayer Mode
+- **Move Left**: `A` or `←` (Left Arrow)
+- **Move Right**: `D` or `→` (Right Arrow)
+- **Speed Boost**: `Shift` or `Space`
+
+### Co-op Mode
+Each player controls one paddle:
+
+**Player 1:**
+- Move Left: `A`
+- Move Right: `D`
+- Speed Boost: `Shift`
+
+**Player 2:**
+- Move Left: `←` (Left Arrow)
+- Move Right: `→` (Right Arrow)
+- Speed Boost: `Space`
+
+## Game Features
 ### Bricks
-Bricks are static objects in the world.  
-They are removed, if a ball touches them.  
-**Attention:** There are bricks which can't get destroyed and there are also some bricks which must be hitten multiple times.
+Bricks are static objects placed throughout the level. They are destroyed when the ball touches them.  
+**Note:** Some bricks are indestructible, and others require multiple hits to destroy.
 
 ### Perks
-Perks can randomly appear and if the paddle or the ball touches them, you will get one life.
+Perks randomly appear during gameplay. When the paddle or ball touches a perk, you gain an extra life.
 
 ### Ball
-The ball increases it's speed over time.  
-If it reaches the bottom screen border you loose one life.
+The ball gradually increases its speed over time, making the game progressively more challenging.  
+**Warning:** If the ball reaches the bottom of the screen, you lose one life.
 
-### Lifes
-You start with 3 lives. If you or the ball hits a perk, you will get one life extra.  
-If you have 0 lives
+### Lives
+You start with **3 lives**. Collecting perks grants additional lives.  
+**Game Over:** The game ends when you run out of lives.
 
-### Score
-The following actions updates your score:
-- Brick removed: +50 Points
-- Ball touched paddle: +10 Points
-- Life gets removed: -500 Points
+## Scoring System
+Your score is updated based on the following actions:
+- **Brick Destroyed**: +50 Points
+- **Ball Touches Paddle**: +10 Points
+- **Life Lost**: -500 Points
 
-There is a scoreboard if you beat all levels.
+Complete all levels to see the final scoreboard!
+
+## Authors
+- **Gabriel Franz** - Co-Developer
+- **Cornel Forster** - Co-Developer
+
+Created as part of Modul 226a coursework.
+
+---
+
+*Enjoy playing Breakthrough! 🎮*
